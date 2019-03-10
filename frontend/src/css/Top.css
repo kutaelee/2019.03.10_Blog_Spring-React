@@ -1,0 +1,62 @@
+.Top {
+	width: 100%;
+	display: block;
+	z-index: 1;
+	position: fixed;
+	text-align: center;
+	background: rgba(0, 0, 0, .8);
+	border-bottom: 1px solid gray;
+	color: white;
+}
+
+#Top-active {
+	margin-bottom: 2%;
+	transition: 0.5s;
+}
+
+.Top-title {
+	padding-top: 2%;
+	margin: 0;
+	transition: 0.5s;
+	width: 100%;
+}
+
+#Top-title-active {
+	padding-top: 1%;
+	transition: 0.5s;
+	width: 30%;
+}
+
+.Top-clock {
+	text-align: right;
+	margin-right: 5%;
+	transition: 0.2s;
+}
+
+#Top-clock-active {
+	margin-top: -1.5%;
+}
+
+.Top-search {
+	display: inline-block;
+	border: 1px solid gray;
+	height: 30px;
+	border-radius: 10px;
+	background: white;
+	color: black;
+	padding: 5px 20px 5px 20px;
+	text-align:center;
+	transition: 0.5s;
+	margin-left: 76%;
+	font-size: 16px;
+	margin-bottom: 0;
+}
+#Top-search-active {
+	display:none;
+}
+.Top-search-btn {
+    padding: 8px 15px 8px 15px;
+}
+#Top-search-btn-active{
+	display: none;
+}

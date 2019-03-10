@@ -1,0 +1,10 @@
+.Content-title{
+	text-align:center;
+}
+hr{
+	background:gray;
+}
+.Content p{
+	padding-left:20px;
+	padding-top:20px;
+}
