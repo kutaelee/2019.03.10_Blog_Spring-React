@@ -1,0 +1,43 @@
+.Content{
+	width: 50%;
+	margin-left: 20%;
+	display: inline-block;
+	padding: 5%;
+	margin-top: 7%;
+
+}
+.Content-title{
+	text-align:center;
+	letter-spacing: 1px;
+}
+hr{
+	background:gray;
+}
+.Content p{
+	padding-left:20px;
+	padding-top:20px;
+}
+.Content-list-item{
+	margin-top:5%;
+	margin-left:3%;
+	width:30%;
+	text-align:center;
+	cursor: pointer;
+	box-shadow: 1px 1px 5px gray;
+	padding-bottom:1%;
+	display: inline-block;
+}
+.Content-list-item:hover{
+	border:2px solid rgb(56, 51, 45);
+	box-shadow: 2px 2px 3px gray;
+	transform: rotateZ(5deg);
+	transition:0.3s;
+}
+.Content-list-item h4{
+	font-size:1.2vw;
+	letter-spacing: 1px;
+}
+.Content-list-item img{
+	width:100%;
+	display: block;
+}

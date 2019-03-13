@@ -52,17 +52,3 @@ button:hover{
 	color:snow;
 	transition:0.3s;
 }
-#Content {
-	width: 40%;
-	margin-left: 25%;
-	display: inline-block;
-	padding: 5%;
-	height: 1500px;
-	margin-top: 10%;
-	border:2px solid gray;
-	box-shadow: 1px 1px 2px gray;
-}
-
-#Menu {
-	display: inline-block;
-}

@@ -61,12 +61,12 @@ class Menu extends Component{
 				<div className="Menu" style={{position:this.state.menuPostion,top:this.state.menuTop}}>
 				<header className="Menu-header">
 				{this.state.pinSw ? <img src={ActivePin} className="Active-pin" onClick={this.pinClick}></img> :<img src={pin} className="Menu-pin" onClick={this.pinClick}></img>}
-					<h4 className="Menu-title">목록</h4>
+					<h4 className="Menu-title">주제</h4>
 				</header>
 				<div className="Menu-body">
-				<a>예시 메뉴</a>
+				<a>예시 메뉴</a> <button>수정</button>
 				</div>
-		
+				<button className="Menu-add-btn">추가</button>
 				</div>
 				);
 	};

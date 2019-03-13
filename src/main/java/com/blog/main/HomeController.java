@@ -14,8 +14,11 @@ public class HomeController {
 	public @ResponseBody String hello() {
 		SimpleDateFormat dateformat = new SimpleDateFormat("yyyy년 MM월 dd일 a HH:mm:ss z");
 		Date date = new Date();
-
 		return dateformat.format(date) + "\n";
 	}
-
+	@GetMapping("document")
+	public String document() {
+		System.out.println("hi");
+		return "document";
+	}
 }
