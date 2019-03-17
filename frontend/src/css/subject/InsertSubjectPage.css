@@ -1,0 +1,28 @@
+.InsertSubjectPage{
+    margin-top: 11%;
+    position: absolute;
+    margin-left: 27%;
+    width:45%;
+    text-align: center;
+}
+label{
+    font-size:19px;
+    font-family: 'NanumSquareRound';
+}
+.SubjectName{
+    font-size: 18px;
+    height: 3vh;
+    border: 1px solid;
+    padding-left: 10px;
+    letter-spacing: 1px;
+    width: 13vw;
+    margin-top:5vh;
+    margin-bottom:5vh;
+}
+.InsertSubjectBtn{
+    margin-top: 5vh;
+    padding: 10px 15px 10px 15px;
+}
+.SubjectImg{
+    width: 11vw;
+}

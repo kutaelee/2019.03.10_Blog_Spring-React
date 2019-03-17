@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ <mapper namespace="subject">
+ 	
+ 	<select id="lastSubjectSeq" resultType="Integer">
+ 		select subject_seq from subject order by subject_seq desc limit 0,1
+ 	</select>
+ 	<insert id="insertSubject" parameterType="hashMap">
+ 		insert into subject(subject_name,subject_dir) values(#{subjectName},#{subjectDir})
+ 	</insert>
+ 	<select id="getSubject" resultType="hashMap">
+ 		select subject_seq,subject_name from subject
+ 	</select>
+</mapper>

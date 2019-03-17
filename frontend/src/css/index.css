@@ -27,7 +27,10 @@ p{
 a{
 	font-family: 'Nanum Barun Gothic';
 	cursor: pointer;
+	text-decoration: none;
+	color:black;
 }
+
 a:hover{
 	padding-bottom:3px;
 }

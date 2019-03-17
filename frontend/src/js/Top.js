@@ -14,7 +14,7 @@ class Top extends Component {
 	     };
 	   }
     componentDidMount() {
-        setInterval(this.Top, 250);
+        setInterval(this.Top, 1000*10);
         window.addEventListener("scroll", this.handleScroll);
 
     }

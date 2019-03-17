@@ -1,4 +1,4 @@
-.Menu{
+.Subject{
 	border:1px solid rgb(240, 47, 70);
 	border-radius: 9px;
 	box-shadow: 1px 1px 2px gray;
@@ -6,7 +6,7 @@
 	margin-left: 80%;
 	margin-top: 0;
 }
-.Menu-header{
+.Subject-header{
 	padding:1%;
 	text-align:center;
 	background:rgb(240, 47, 70);
@@ -15,21 +15,21 @@
 	font-size:25px;
 	border-radius: 7px 7px 0 0;
 }
-.Menu-body{
-	padding:2vh 2vw;
+.Subject-body{
+	padding:2vh 1vw;
 	color:black;
 }
-.Menu-body a:hover{
+.Subject-body a:hover{
 	border-bottom:2px solid rgba(255, 0, 30, 0.7);
 }
-.Menu-pin{
+.Subject-pin{
     position: absolute;
     width: 30px;
     margin-left: -50%;
 	margin-top: -12%;
 	cursor: pointer;
 }
-.Menu-pin:hover{
+.Subject-pin:hover{
 	margin-top: -7%;
 	transition: 0.5s;
 }
@@ -45,7 +45,10 @@
     margin-top: -6%;
 	transition: 0.5s;
 }
-.Menu-add-btn{
+.Subject-add-btn{
 	margin-left:2vw;
+	margin-bottom:1vh;
+}
+.Subject-list{
 	margin-bottom:1vh;
 }
