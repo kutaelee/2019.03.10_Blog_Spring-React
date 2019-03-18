@@ -61,23 +61,34 @@ class Subject extends Component{
 		axios.get('/lastsubjectseq').then(res => window.location = "/subject/"+res.data);
 	}
 	GetSubject = () =>{
-		axios.get('/getsubject').then(res=>this.setState({subjectList:res.data}));
+		axios.get('/subjectlist').then(res=>this.setState({subjectList:res.data}));
 	}
 	getDocuemnt(subject) {
 		window.location="/document/"+subject;
+	}
+	ModifySubjectPage(){
+		window.location="/subjectlist";
 	}
 	render(){
 		return (
 				<div className="Subject" style={{position:this.state.menuPostion,top:this.state.menuTop}}>
 				<header className="Subject-header">
-				{this.state.pinSw ? <img src={ActivePin} className="Active-pin" onClick={this.pinClick}></img> :<img src={pin} className="Subject-pin" onClick={this.pinClick}></img>}
+				{this.state.pinSw ? <img src={ActivePin} className="Active-pin" onClick={this.pinClick} alt="chock-pin"></img>  :<img src={pin} className="Subject-pin" onClick={this.pinClick} alt="Active-pin"></img>}
 					<h4 className="Subject-title">주제</h4>
 				</header>
 				<div className="Subject-body">
-				{this.state.subjectList ? <ul className="Subject-ul">{this.state.subjectList.map((item)=><li className="Subject-list" key={item.subject_seq}><a className="Subject-name" value={item.subject_seq} onClick={()=>this.getDocuemnt(item.subject_name)}>{item.subject_name}</a> <button className="Subject-modified-btn" id={item.subject_seq}>수정</button></li>) } </ul> : <p>주제를 불러오는중..</p>}
+				{this.state.subjectList ? <ul className="Subject-ul">
+				{
+					this.state.subjectList.map(
+						(item)=><li className="Subject-list" key={item.subject_seq}>
+						<a className="Subject-name" value={item.subject_seq} onClick={()=>this.getDocuemnt(item.subject_name)}>{item.subject_name}</a> 
+						</li>
+					) 
+				} </ul> : <p>주제를 불러오는중..</p>}
 				</div>
 				
 				<button className="Subject-add-btn" onClick={this.SubjectInsertForm}>추가</button>
+				<button className="Subject-modified-btn" onClick={this.ModifySubjectPage}>수정</button>
 				</div>
 				);
 	};

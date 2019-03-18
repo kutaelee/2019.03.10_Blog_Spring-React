@@ -2,7 +2,7 @@ import React,{Component} from 'react';
 import '../../css/main/MainContent.css';
 import imsi from '../../img/top-bg.jpg';
 import { Link } from 'react-router-dom';
-import axios from 'axios';
+
 
 class Content extends Component{
 	 state = {};

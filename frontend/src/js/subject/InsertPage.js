@@ -1,8 +1,8 @@
 import React,{Component} from 'react';
-import '../../css/subject/InsertSubjectPage.css';
+import '../../css/subject/InsertPage.css';
 import axios from 'axios';
 
-class InsertSubjectPage extends Component{
+class InsertPage extends Component{
     state = {};
 
     InserSubject(){
@@ -20,20 +20,20 @@ class InsertSubjectPage extends Component{
           }
         }).then(function(){
            alert("주제가 등록되었습니다.");
-           window.reload();
+           window.location.href="/";
           })
           .catch(function(e){
-           alert("주제등록 중 문제가 발생했습니다.");
+           alert("주제등록 중 문제가 발생했습니다."+e);
           });
         
     }
     render() {
            return (
-           <div className="InsertSubjectPage" encType="multipart/form-data" method="put">
+           <div className="InsertSubjectPage">
                <h1>주제 추가</h1>
                <hr></hr>
                <br/>
-               <form className="InsertSubjectForm">
+               <form className="InsertSubjectForm" encType="multipart/form-data" method="post">
                 <label htmlFor="SubjectName">주제명: </label><input className="SubjectName" id="SubjectName" type="text" maxLength="12"></input>          
                 <br/>
                 <label htmlFor="SubjectImg">대표이미지: </label><input className="SubjectImg" id="SubjectImg" type="file"></input>
@@ -44,4 +44,4 @@ class InsertSubjectPage extends Component{
     };
 };
 
-export default InsertSubjectPage;
+export default InsertPage;

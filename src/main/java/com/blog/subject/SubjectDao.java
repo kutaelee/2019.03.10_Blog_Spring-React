@@ -20,7 +20,18 @@ public class SubjectDao {
 		sqlsession.insert("subject.insertSubject",map);
 	}
 
-	public List<HashMap<String,Object>> getSubject() {
-		return sqlsession.selectList("subject.getSubject");
+	public List<HashMap<String,Object>> subjectlist() {
+		return sqlsession.selectList("subject.subjectList");
+	}
+	public HashMap<String,Object> subjectinfo(String seq){
+		return sqlsession.selectOne("subject.subjectInfo",seq);
+	}
+
+	public void modifySubjectName(HashMap<String,Object> map) {
+		sqlsession.update("subject.modifySubjectName",map);
+	}
+
+	public void modifySubjectAll(HashMap<String, Object> map) {
+		sqlsession.update("subject.modifySubjectAll",map);
 	}
 }

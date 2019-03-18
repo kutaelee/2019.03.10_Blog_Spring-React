@@ -1,0 +1,44 @@
+.ModifyPage{
+    width: 25%;
+    margin-left: 37%;
+    margin-top: 10%;
+    position: absolute;
+}
+.ModifyPage h1{
+    text-align: center;
+}
+.ModifyPage h4{
+    text-align: center;
+}
+.ModifySubjectForm{
+    text-align: center;
+}
+button{
+    margin-top: 3vh;
+    padding: 8px 15px 8px 15px;
+}
+.Modify-btn{
+    margin-left:33%;
+}
+.MainImg{
+    width:10vw;
+    margin-left:30%;
+}
+.MainImg:hover{
+    position: absolute;
+    margin-left:-30%;
+    width:40vw;
+    transition:0.1s;
+}
+.ModifySubject-list{
+    list-style: none;
+}
+.ModifySubject-ul{
+    text-align: center;
+    padding-left: 0;
+    margin-top: 0;
+    margin-left: -5%;
+}
+.ModifySubject-ul input{
+    margin-right:1%;
+}

@@ -41,9 +41,9 @@ class Top extends Component {
         return (
             <div className="Top">
                 <header id={"Top"+(this.state.scroll ? '-active' : '')} className="Top">
-                      <Link to="/" style={{ textDecoration: 'none',color:'white' }}>
+                      <Link to="/" id={"Top-link"+(this.state.scroll ? '-active' : '')} style={{ textDecoration: 'none',color:'white' }}>
                             <h1 id={"Top-title"+(this.state.scroll ? '-active' : '')} className="Top-title">규태의 블로그</h1>
-                     </Link>
+                     </Link><br/>
                 		<input placeholder="검색어" id={"Top-search"+(this.state.scroll ? '-active' : '')} className="Top-search" type="text"/>
                         <button id={"Top-search-btn"+(this.state.scroll ? '-active' : '')} className="Top-search-btn">검색</button>
                     <h4 id={"Top-clock"+(this.state.scroll ? '-active' : '')} className="Top-clock">{this.state.message}</h4>

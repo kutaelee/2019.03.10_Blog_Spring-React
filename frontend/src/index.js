@@ -6,7 +6,8 @@ import Subject from './js/Subject';
 import Footer from './js/Footer';
 import MainContent from './js/main/MainContent';
 import DocContent from './js/document/DocContent';
-import InsertSubjectPage from './js/subject/InsertSubjectPage'
+import SubjectInsertPage from './js/subject/InsertPage'
+import SubjectModifyPage from './js/subject/ModifyPage'
 import { BrowserRouter,Route,Switch } from "react-router-dom";
 
 import * as serviceWorker from './serviceWorker';
@@ -18,7 +19,8 @@ ReactDOM.render(
         <Route path="/" component={Subject} />
         <Route path="/" component={Footer} />
         <Switch>
-            <Route path="/subject/:name" component={InsertSubjectPage} />
+            <Route path="/subjectlist" component={SubjectModifyPage} />
+            <Route path="/subject/:name" component={SubjectInsertPage} />
             <Route path="/document/:name" component={DocContent} />
             <Route path="/" component={MainContent} />
         </Switch>   
