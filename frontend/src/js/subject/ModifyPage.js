@@ -55,15 +55,23 @@ class ModifyPage extends Component{
     back(){
         window.location.href="/subjectlist";
     }
-    deleteSubject(){
-       console.log(this.state.delList); //문제
+    deleteSubject(delList){
+        if(delList.length!=0){ 
+          if(window.confirm("주제에 등록된 글,이미지 모두 삭제됩니다.\n정말로 주제를 삭제하시겠습니까?")){
+               axios.post('/subjectdelete',{list:delList})
+                .then(()=>{alert("삭제가 완료되었습니다.");
+                window.location.reload();})
+             .catch((e)=>{alert("삭제 중 문제가 발생하였습니다."+e)});
+         }
+      }
     }
     delListPush(seq){
         let className=".checkbox"+seq;
+        
         if(document.querySelector(className).checked){
-            this.setState({delList:[this.state.delList.push(seq)]});
-        }else{
-            this.setState({delList:[this.state.delList.splice(this.state.delList.indexOf(seq),1)]});
+            this.setState(()=>this.state.delList.push(seq));
+        }else{    
+            this.setState(()=>[this.state.delList.splice(this.state.delList.indexOf(seq),1)]);
         }
     }
     render() {
@@ -93,16 +101,23 @@ class ModifyPage extends Component{
                 <div>
                       <h4>클릭 후 수정! 체크 후 삭제!</h4>
                   <br/>
+               
 				{this.state.subjectList ? <ul className="ModifySubject-ul">
 				{
 					this.state.subjectList.map(
-						(item)=><li className="ModifySubject-list" key={item.subject_seq}>
-                        <input type="checkbox" className={'checkbox'+item.subject_seq} onChange={()=>this.delListPush(item.subject_seq)} value={item.subject_seq}/>
-						<a className="Subject-name" value={item.subject_seq} onClick={()=>this.getSubjectInfo(item.subject_seq)}>{item.subject_name}</a> 
-						</li>
+                        (item)=>
+                        <div key={item.subject_seq}>  
+                            <input type="checkbox" className={'checkbox'+item.subject_seq} onChange={()=>this.delListPush(item.subject_seq)} value={item.subject_seq}/>
+                        <span className="ModifySubject-div" onClick={()=>this.getSubjectInfo(item.subject_seq)}>  
+                        <li className="ModifySubject-list" >
+						<a className="Subject-name" value={item.subject_seq} >{item.subject_name}</a> 
+						<hr/></li></span>
+                        
+                        </div>
 					) 
-                } <button className="Delete-btn" onClick={this.deleteSubject}>삭제</button> </ul>  : <p>주제를 불러오는중..</p>}
+                } <button className="Delete-btn" onClick={()=>this.deleteSubject(this.state.delList)}>삭제</button> </ul>  : <p>주제를 불러오는중..</p>}
                 </div>
+               
             }
 			</div>
         </div>

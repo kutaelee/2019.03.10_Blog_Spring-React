@@ -4,6 +4,8 @@ import java.io.File;
 import java.io.IOException;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
 
 import javax.servlet.ServletContext;
 
@@ -53,32 +55,63 @@ public class SubjectService {
 		return true;
 	}
 
-	public boolean modifySubjectAll(HashMap<String, Object> map) throws IllegalStateException, IOException {	
-		String originalpath = servletContext.getRealPath((String) map.get("dir"));
-		File oldfile = new File(originalpath);
-		String parentpath=new File((String) map.get("dir")).getParent();
+	public boolean modifySubjectAll(HashMap<String, Object> map) throws IllegalStateException, IOException {
+	
+		String parentpath = new File((String) map.get("dir")).getParent();
 		String newfilepath = servletContext.getRealPath(parentpath);
 
-		if (oldfile.exists()) {
-			if (oldfile.delete()) {
-				MultipartFile mf=(MultipartFile) map.get("img");
-				String filename =mf.getOriginalFilename();
-				filename = filename.replaceAll("#", "");
-				if (filename.length() == 0) {
-					filename = "1";
-				}
-				mf.transferTo(new File(newfilepath + "/" + filename));		
-				map.put("dir",parentpath + "/" + filename);
-				
-				sd.modifySubjectAll(map);
-				return true;
-			} else {
-				System.out.println("파일삭제 실패");
-				return false;
+		if(subjectFileDelete(map.get("dir").toString(),false)) {
+			MultipartFile mf = (MultipartFile) map.get("img");
+			String filename = mf.getOriginalFilename();
+			filename = filename.replaceAll("#", "");
+			if (filename.length() == 0) {
+				filename = "1";
 			}
-		} else {
-			System.out.println("파일이 존재하지 않습니다.");
+			mf.transferTo(new File(newfilepath + "/" + filename));
+			map.put("dir", parentpath + "/" + filename);
+
+			sd.modifySubjectAll(map);
+			return true;
+		}else {
+			//파일 삭제 실패
 			return false;
+		}
+
+
+	}
+	//파일 삭제
+	public boolean subjectFileDelete(String dir,boolean deleteparent) {
+		String originalpath = servletContext.getRealPath(dir);
+		File oldfile = new File(originalpath);
+		if (oldfile.exists()) {
+
+			if (oldfile.delete()) {
+				//주제 삭제시 폴더도 같이삭제 재귀함수이용
+				if(deleteparent) {
+					String parentpath = new File(dir).getParent();
+					subjectFileDelete(parentpath,false);
+					return true;
+				}else 
+					return true;
+				
+			} else
+				return false;
+
+		} else
+			return false;
+
+	}
+
+	public void subjectDelete(List<String> list) {
+		HashMap<String, Object> map = new HashMap<>();
+		for (int i = 0; i < list.size(); i++) {
+			map = sd.subjectinfo(list.get(i));
+			if (subjectFileDelete(map.get("subject_dir").toString(),true)) {
+				sd.subjectDelete(list.get(i));
+			} else {
+				System.out.println("삭제실패");
+			}
+
 		}
 
 	}

@@ -34,4 +34,8 @@ public class SubjectDao {
 	public void modifySubjectAll(HashMap<String, Object> map) {
 		sqlsession.update("subject.modifySubjectAll",map);
 	}
+
+	public void subjectDelete(String seq) {
+		sqlsession.delete("subjectDelete",seq);
+	}
 }

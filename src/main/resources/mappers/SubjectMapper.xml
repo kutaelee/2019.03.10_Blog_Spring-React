@@ -25,4 +25,7 @@
  	<update id="modifySubjectAll" parameterType="hashMap">
  		update subject set subject_name=#{name},subject_dir=#{dir} where subject_seq=#{seq}
  	</update>
+ 	<delete id="subjectDelete" parameterType="string">
+ 		delete from subject where subject_seq=#{seq}
+ 	</delete>
 </mapper>
