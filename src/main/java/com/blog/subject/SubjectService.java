@@ -60,7 +60,7 @@ public class SubjectService {
 		String parentpath = new File((String) map.get("dir")).getParent();
 		String newfilepath = servletContext.getRealPath(parentpath);
 
-		if(subjectFileDelete(map.get("dir").toString(),false)) {
+		if(fileDelete(map.get("dir").toString(),false)) {
 			MultipartFile mf = (MultipartFile) map.get("img");
 			String filename = mf.getOriginalFilename();
 			filename = filename.replaceAll("#", "");
@@ -80,7 +80,7 @@ public class SubjectService {
 
 	}
 	//파일 삭제
-	public boolean subjectFileDelete(String dir,boolean deleteparent) {
+	public boolean fileDelete(String dir,boolean deleteparent) {
 		String originalpath = servletContext.getRealPath(dir);
 		File oldfile = new File(originalpath);
 		if (oldfile.exists()) {
@@ -89,7 +89,7 @@ public class SubjectService {
 				//주제 삭제시 폴더도 같이삭제 재귀함수이용
 				if(deleteparent) {
 					String parentpath = new File(dir).getParent();
-					subjectFileDelete(parentpath,false);
+					fileDelete(parentpath,false);
 					return true;
 				}else 
 					return true;
@@ -106,7 +106,7 @@ public class SubjectService {
 		HashMap<String, Object> map = new HashMap<>();
 		for (int i = 0; i < list.size(); i++) {
 			map = sd.subjectinfo(list.get(i));
-			if (subjectFileDelete(map.get("subject_dir").toString(),true)) {
+			if (fileDelete(map.get("subject_dir").toString(),true)) {
 				sd.subjectDelete(list.get(i));
 			} else {
 				System.out.println("삭제실패");

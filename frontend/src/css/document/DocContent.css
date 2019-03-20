@@ -1,0 +1,118 @@
+
+.DocContent{
+	width: 35%;
+    margin-left: 27%;
+    display: inline-block;
+    margin-top: 1%;
+    box-shadow: 1px 1px 10px grey;
+    padding: 2% 5% 2% 5%;
+	min-height: 40vh;
+	margin-bottom:2%;
+}
+.DocContent-title{
+	text-align:center;
+}
+hr{
+	background:gray;
+}
+.DocContent-content{
+	padding-left:2vw;
+	padding-top:5vh;
+}
+.DocContent-regdate{
+	text-align:right;
+	font-family: 'NanumSquareRound';
+}
+.Doc-button-div{
+	text-align: right;
+    width: 72%;
+}
+.Doc-button-div button{
+    margin-top: 15%;
+}
+.Doc-modify-btn{
+	margin-top: 5vh;
+	margin-left: 40%;
+}
+.CommentWriteForm{
+	margin-bottom: 2%;
+    width: 45%;
+    margin-left: 27%;
+    box-sizing: border-box;
+    box-shadow: 1px 1px 5px grey;
+    border: 1px solid #DDD;
+    background: #FCFCFC;
+}
+.CommentWriteForm-header{
+	padding: 1% 0;
+}
+.CommentWriteForm-header label{
+	color: rgb(240, 81, 99);
+	margin-left:5%;
+}
+.CommentWriteForm label{
+	font-size:16px;
+}
+.CommentWriteForm input{
+	padding-left:5px;
+}
+.Label-name{
+	margin-left: 5%;
+}
+.Label-password{
+	margin-left: 2%;
+}
+.CommentWriteForm-content{
+    width: 80%;
+    margin: 1% 5% 1%;
+    height: 7vh;
+}
+.Comment-write-btn{
+	position: absolute;
+    margin-left: -1%;
+    letter-spacing: 2px;
+    padding: 15px 18px 15px 18px;
+    font-size: 18px;
+	margin-top: 1.5vh;
+	z-index: 0;
+}
+.Comment{
+	margin-bottom: 5%;
+	width: 45%;
+    margin-left: 27%;
+}
+.Comment-header{
+	padding-left: 1%;
+}
+.Tap{
+	width: 45%;
+    margin-left: 27%;
+	text-align: left;
+	margin-bottom: 1%;
+}
+
+.Tap span:nth-child(2){
+    margin-left: 1%;
+}
+.Tap span{
+    padding: 10px 15px;
+    border: 1px solid rgb(240, 47, 70);
+    border-radius: 15px;
+    color: rgb(240, 47, 70);
+    letter-spacing: 1px;
+	font-family: 'NanumSquareRound';
+	cursor: pointer;
+	font-weight: 600;
+}
+#Tap-btn-active{
+	color: white;
+	background:rgb(240, 47, 70);
+	transition:0.3s;
+}
+.OtherDocumentList{
+	margin-bottom:5%;
+	border:1px solid gray;
+	width: 45%;
+	margin-left: 27%;
+	height:200px;
+}

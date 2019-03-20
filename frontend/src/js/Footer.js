@@ -5,12 +5,15 @@ class Footer extends Component{
 	state ={
 			
     };
-    
+
     render(){
+        
         return (
             <div className="Footer">
+
             <div className="Link">
                 <a>깃허브</a>
+        
             </div>
             </div>
         );

@@ -4,6 +4,7 @@ import './css/index.css';
 import Top from './js/Top';
 import Subject from './js/Subject';
 import Footer from './js/Footer';
+import Navi from './js/Navi';
 import MainContent from './js/main/MainContent';
 import DocContent from './js/document/DocContent';
 import SubjectInsertPage from './js/subject/InsertPage'
@@ -17,6 +18,7 @@ ReactDOM.render(
     <div>
         <Route path="/" component={Top} />   
         <Route path="/" component={Subject} />
+        <Route path="/" component={Navi} />
         <Route path="/" component={Footer} />
         <Switch>
             <Route path="/subjectlist" component={SubjectModifyPage} />

@@ -1,33 +1,54 @@
 import React,{Component} from 'react';
-import '../../css/document/Content.css';
+import moment from 'moment';
+import CommentWriteForm from './CommentWriteForm';
+import OtherDocumentList from './OtherDocumentList';
+import 'moment/locale/ko';
+import '../../css/document/DocContent.css';
 import axios from 'axios';
 
-class Content extends Component{
-	 state = {};
-	 
+
+class DocContent extends Component{
+	 state = {document:{document_title:"",document_content:"",document_seq:"",document_parent_seq:"",document_regdate:""},
+			  tap:true};
+	 componentDidMount() {
+		this.getDocument();
+	
+	 }
+	 componentWillMount(){
+		console.log(this.state.document);
+	 }
+	 getDocument=()=>{
+		 // uri 인덱스 2=주제의 고유번호 3=문서번호
+		let path=window.location.pathname.split('/');
+		axios.post("/document",{seq:path[3]}).then(res=>this.setState({document:res.data}));
+	 }
+	 dateFormat(regdate){
+		return new moment(regdate).format('llll');
+	}
+	tapToggle=(bool)=>{
+		this.setState({tap:bool});
+	}
 	 render() {
 	        return (
-	        		<div className="Content">
-	        		<h1 className="Content-title">예시 타이틀입니다</h1>
+				<div>
+					<div className="Doc-button-div"><button>새글작성</button></div>
+	        		<div className="DocContent">
+	        		<h1 className="DocContent-title">{this.state.document.document_title}</h1>	
 	        		<hr/>
-					<p>예시내용</p>
-					<p>예시내용</p>
-					<p>예시내용</p>
-					<p>예시내용</p>
-					<p>예시내용</p>
-					<p>예시내용</p>
-					<p>예시내용</p>
-					<p>예시내용</p>
-					<p>예시내용</p>
-					<p>예시내용</p>
-					<p>예시내용</p>
-					<p>예시내용</p>
-					<p>예시내용</p><p>예시내용</p>
-
-
+					<p className="DocContent-regdate">{this.dateFormat(this.state.document.document_regdate)}</p>
+					
+					<p className="DocContent-content" dangerouslySetInnerHTML={ {__html: this.state.document.document_content} }></p>
+					<button className="Doc-modify-btn">수정</button>
+					<button className="Doc-delete-btn">삭제</button>
 	        		</div>
+					<div className="Tap">
+					<span id={"Tap-btn"+(this.state.tap ? '-active' : '')} onClick={()=>this.tapToggle(true)}>댓글</span>
+					<span id={"Tap-btn"+(this.state.tap ? '' : '-active')} onClick={()=>this.tapToggle(false)}>다른글</span>
+					</div>		
+					{this.state.tap ? <CommentWriteForm></CommentWriteForm>: <OtherDocumentList></OtherDocumentList> }
+					</div>
 	        		);
 	 };
 }
 
-export default Content;
+export default DocContent;

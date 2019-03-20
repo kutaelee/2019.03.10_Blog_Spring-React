@@ -16,8 +16,8 @@ class Subject extends Component{
 		this.state = {
 			  pinSw:false,
 			  menuPostion:'fixed',
-			  curTop:0,
-				menuTop:250
+			  curTop:250,
+			  menuTop:250
 			
 			};
 	   this.pinClick = this.pinClick.bind(this);
@@ -39,6 +39,7 @@ class Subject extends Component{
 				curTop:top+250
 			}));
 		}
+
    }
 	pinClick() {
 
@@ -57,14 +58,16 @@ class Subject extends Component{
 		}
 	};
 	SubjectInsertForm(){
+
 		//추가할 주제의 고유번호 (마지막 번호에서 1추가해서 가져옴)
 		axios.get('/lastsubjectseq').then(res => window.location = "/subject/"+res.data);
 	}
 	GetSubject = () =>{
 		axios.get('/subjectlist').then(res=>this.setState({subjectList:res.data}));
 	}
-	getDocuemnt(subject) {
-		window.location="/document/"+subject;
+	getDocuemntPage(name,seq) {
+		//주제의 첫글의 고유번호 가져옴	uri만들어서 전달 seq=서브젝트 고유번호 res.data=문서고유번호
+		axios.post('/latelyseq',{subject_seq:seq}).then(res => window.location = "/document/"+name+"/"+res.data);
 	}
 	ModifySubjectPage(){
 		window.location="/subjectlist";
@@ -81,7 +84,7 @@ class Subject extends Component{
 				{
 					this.state.subjectList.map(
 						(item)=><li className="Subject-list" key={item.subject_seq}>
-						<a className="Subject-name" value={item.subject_seq} onClick={()=>this.getDocuemnt(item.subject_name)}>{item.subject_name}</a> 
+						<a className="Subject-name" value={item.subject_seq} onClick={()=>this.getDocuemntPage(item.subject_name,item.subject_seq)}>{item.subject_name}</a> 
 						</li>
 					) 
 				} </ul> : <p>주제를 불러오는중..</p>}

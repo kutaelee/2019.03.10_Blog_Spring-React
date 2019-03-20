@@ -11,10 +11,13 @@
 
 #Top-active {
 	margin-bottom: 2%;
+	border-radius: 0px 0px 30px 30px;
 	transition: 0.5s;
 }
 #Top-link{
+	position: absolute;
 	display: inline-block;
+	margin-left: -8%;
 	transition:0.5s;
 }
 #Top-link-active{
@@ -66,5 +69,13 @@
     padding: 8px 15px 8px 15px;
 }
 #Top-search-btn-active{
+	display: none;
+}
+.Top-visitCount{
+	text-align: right;
+    font-family: 'NanumSquareRound';
+    margin: 0 5.5%;
+}
+#Top-visitCount-active{
 	display: none;
 }

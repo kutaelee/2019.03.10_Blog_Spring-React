@@ -6,5 +6,10 @@
 
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
  <mapper namespace="document">
- 
+ 	<select id="document" parameterType="string" resultType="hashMap">
+ 		select * from document where document_seq=#{seq}
+ 	</select>
+ 	<select id="latelySeq" parameterType="string" resultType="string">
+ 		select document_seq from document where document_parent_seq=#{subject_seq} order by document_seq desc limit 0,1;
+ 	</select>
 </mapper>

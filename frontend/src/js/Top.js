@@ -14,7 +14,7 @@ class Top extends Component {
 	     };
 	   }
     componentDidMount() {
-        setInterval(this.Top, 1000*10);
+        setInterval(this.Top, 900);
         window.addEventListener("scroll", this.handleScroll);
 
     }
@@ -44,6 +44,8 @@ class Top extends Component {
                       <Link to="/" id={"Top-link"+(this.state.scroll ? '-active' : '')} style={{ textDecoration: 'none',color:'white' }}>
                             <h1 id={"Top-title"+(this.state.scroll ? '-active' : '')} className="Top-title">규태의 블로그</h1>
                      </Link><br/>
+                        
+                        <p className="Top-visitCount" id={"Top-search-btn"+(this.state.scroll ? '-active' : '')}>VisitCount - Today : 0 / Total : 151</p>
                 		<input placeholder="검색어" id={"Top-search"+(this.state.scroll ? '-active' : '')} className="Top-search" type="text"/>
                         <button id={"Top-search-btn"+(this.state.scroll ? '-active' : '')} className="Top-search-btn">검색</button>
                     <h4 id={"Top-clock"+(this.state.scroll ? '-active' : '')} className="Top-clock">{this.state.message}</h4>
