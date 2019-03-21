@@ -6,5 +6,13 @@
 
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
  <mapper namespace="comment">
- 
+ 	<select id="commentList" parameterType="string" resultType="hashMap">
+ 		select comment_seq,comment_regdate,comment_writer,comment_content from comment where comment_parent_seq=#{seq}
+ 	</select>
+ 	<select id="commentCount" parameterType="string" resultType="string">
+ 		select count(*) from comment where comment_parent_seq=#{seq}
+ 	</select>
+ 	<insert id="commentWrite" parameterType="hashMap">
+ 		insert into comment(comment_writer,comment_content,comment_pw,comment_parent_seq) values(#{name},#{content},#{pw},#{parent_seq}) 
+ 	</insert>
 </mapper>

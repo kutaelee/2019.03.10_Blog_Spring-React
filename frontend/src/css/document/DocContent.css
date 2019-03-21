@@ -76,14 +76,8 @@ hr{
 	margin-top: 1.5vh;
 	z-index: 0;
 }
-.Comment{
-	margin-bottom: 5%;
-	width: 45%;
-    margin-left: 27%;
-}
-.Comment-header{
-	padding-left: 1%;
-}
+
+
 .Tap{
 	width: 45%;
     margin-left: 27%;
@@ -115,4 +109,61 @@ hr{
 	width: 45%;
 	margin-left: 27%;
 	height:200px;
+}
+.Comment-body{
+	margin-bottom: 5%;
+	width: 45%;
+	margin-left: 27%;
+	box-shadow: 1px 1px 5px gray;
+}
+.Comment-list{
+	border-bottom: 1px solid rgba(221, 4, 29,.2);
+}
+.Comment-header{
+	font-family: 'Roboto';
+	font-style: italic;
+	padding:1% 1%;
+	margin:0;
+	background:rgba(221, 4, 29,.8);
+	color:white;
+	border-top:1px solid rgb(206, 202, 202);
+	border-bottom:1px solid rgb(206, 202, 202);
+}
+.Comment-list p{
+	margin-left: 3%;
+}
+.Comment-list img{
+	cursor: pointer;
+	text-align: right;
+}
+.Comment-list img:hover{
+	transform:rotateZ(720deg);
+	transition:0.5s;
+}
+.Comment-writer{
+	display: inline-block;
+	font-family: 'NanumSquareRound';
+	font-size: 14px;
+	font-weight: 600;
+	margin-bottom:0;
+}
+.Comment-regdate{
+	display: inline-block;
+	font-family: 'Nanum Barun Gothic';
+	font-size: 14px;
+	color:gray;
+	margin-bottom:0;
+}
+.Comment-content{
+	font-size: 17px;
+	font-family: 'Roboto';
+}
+.Comment-edit{
+	margin-left:2%;
+}
+.Comment-del{
+	margin-left:0.5%;
+}
+.Comment-list:nth-child(odd){
+	background:rgba(235, 235, 235,.1);
 }

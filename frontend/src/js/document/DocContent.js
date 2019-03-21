@@ -1,6 +1,6 @@
 import React,{Component} from 'react';
 import moment from 'moment';
-import CommentWriteForm from './CommentWriteForm';
+import Comment from './Comment';
 import OtherDocumentList from './OtherDocumentList';
 import 'moment/locale/ko';
 import '../../css/document/DocContent.css';
@@ -9,19 +9,21 @@ import axios from 'axios';
 
 class DocContent extends Component{
 	 state = {document:{document_title:"",document_content:"",document_seq:"",document_parent_seq:"",document_regdate:""},
-			  tap:true};
+			  tap:true,
+			  comment:[{comment_seq:'',comment_regdate:'',comment_wirter:'',comment_content:''
+			}]
+		};
 	 componentDidMount() {
 		this.getDocument();
 	
 	 }
-	 componentWillMount(){
-		console.log(this.state.document);
-	 }
+
 	 getDocument=()=>{
 		 // uri 인덱스 2=주제의 고유번호 3=문서번호
 		let path=window.location.pathname.split('/');
 		axios.post("/document",{seq:path[3]}).then(res=>this.setState({document:res.data}));
-	 }
+		axios.post('/commentList',{seq:path[3]}).then(res=>this.setState({comment:res.data}));
+	}
 	 dateFormat(regdate){
 		return new moment(regdate).format('llll');
 	}
@@ -45,7 +47,7 @@ class DocContent extends Component{
 					<span id={"Tap-btn"+(this.state.tap ? '-active' : '')} onClick={()=>this.tapToggle(true)}>댓글</span>
 					<span id={"Tap-btn"+(this.state.tap ? '' : '-active')} onClick={()=>this.tapToggle(false)}>다른글</span>
 					</div>		
-					{this.state.tap ? <CommentWriteForm></CommentWriteForm>: <OtherDocumentList></OtherDocumentList> }
+					{this.state.tap ? <Comment CommentFromParentFunction={this.getDocument} CommentFromParent={this.state.comment}></Comment>: <OtherDocumentList></OtherDocumentList> }
 					</div>
 	        		);
 	 };

@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import '../css/Top.css';
-import axios from 'axios';
+import Clock from 'react-live-clock';
 import {Link} from 'react-router-dom';
 class Top extends Component {
 	state ={
@@ -12,19 +12,15 @@ class Top extends Component {
 	      this.state = {
 	    		dosearch:false,
 	     };
-	   }
+       }
     componentDidMount() {
-        setInterval(this.Top, 900);
         window.addEventListener("scroll", this.handleScroll);
-
     }
     componentWillUnmount(){
     	window.removeEventListener("scroll", this.handleScroll);
     }
 
-    Top = () => {
-    	axios.get('/clock').then(res => this.setState({message:res.data}));
-    };
+
     handleScroll=() =>{
     	 const top =
              (document.documentElement && document.documentElement.scrollTop) ||
@@ -48,7 +44,7 @@ class Top extends Component {
                         <p className="Top-visitCount" id={"Top-search-btn"+(this.state.scroll ? '-active' : '')}>VisitCount - Today : 0 / Total : 151</p>
                 		<input placeholder="검색어" id={"Top-search"+(this.state.scroll ? '-active' : '')} className="Top-search" type="text"/>
                         <button id={"Top-search-btn"+(this.state.scroll ? '-active' : '')} className="Top-search-btn">검색</button>
-                    <h4 id={"Top-clock"+(this.state.scroll ? '-active' : '')} className="Top-clock">{this.state.message}</h4>
+                    <h4 id={"Top-clock"+(this.state.scroll ? '-active' : '')} className="Top-clock"><Clock format={'YYYY년 Mo Do dddd A h:mm:ss zz'} ticking={true}></Clock>KST</h4>
                 </header>
             </div>
         );
