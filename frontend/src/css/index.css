@@ -49,11 +49,11 @@ button{
 	margin-left: 10px;
 	border-radius: 5px;
 	cursor: pointer;
-	letter-spacing: 1px;
+	letter-spacing: 2px;
 }
 button:hover{
 	border:1px solid rgba(221, 4, 29,1);
-	background:rgba(221, 4, 29,1);
+	background-color:rgba(221, 4, 29,1);
 	color:snow;
 	transition:0.3s;
 }

@@ -15,22 +15,10 @@ class Content extends Component{
 						<div className="Content-list">
 					<Link to="/document/a" style={{color:'black'}}>
 						<div className="Content-list-item">						
-							<img src={imsi}></img>
+							<img src={imsi} alt="a"></img>
 							<h4>최신글 제목최신글 제목최신글 제목최신글 제목</h4>
 						</div>
 						</Link>
-						<div className="Content-list-item">						
-							<img src={imsi}></img>
-							<h4>최신글 제목최신글 제목최신글 제목최신글 제목</h4>
-						</div>
-						<div className="Content-list-item">						
-							<img src={imsi}></img>
-							<h4>최신글 제목최신글 제목최신글 제목최신글 제목</h4>
-						</div>
-						<div className="Content-list-item">						
-							<img src={imsi}></img>
-							<h4>최신글 제목최신글 제목최신글 제목최신글 제목</h4>
-							</div>
 						</div>
 	        		</div>
 	        		);

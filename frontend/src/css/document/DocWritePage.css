@@ -1,0 +1,35 @@
+.DocWritePage{
+    width: 45%;
+    margin-left: 28%;
+    display: inline-block;
+    margin-top: 10%;
+}
+.DocWritePage-title{
+    text-align: center;
+}
+#toastEditor{
+    box-shadow: 1px 1px 5px gray;
+
+}
+.tui-editor-defaultUI .te-switch-button{
+    padding-left: 5%;
+    box-shadow: 1px 1px 5px gray;
+}
+.tui-editor-defaultUI .te-switch-button.active{
+    background-color: white;
+    color: rgba(240, 47, 70,.9);
+    box-shadow: 1px 1px 5px gray;
+}
+.btn_save{
+    margin-bottom:10%;
+    margin-left:45%;
+}
+.Doc-textLength{
+    text-align: right;
+}
+.title{
+    width: 98%;
+    margin-bottom: 1%;
+    height: 3vh;
+    font-size:18px;
+}

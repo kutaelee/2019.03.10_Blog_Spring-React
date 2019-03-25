@@ -9,22 +9,26 @@ class InsertPage extends Component{
         let formData = new FormData();
         const subjectName = document.querySelector('.SubjectName').value;
         const imagefile = document.querySelector('.SubjectImg');
-        formData.append("subjectName",subjectName);
-        formData.append("img", imagefile.files[0]);
-        axios.post(window.location.pathname, formData, {
-            headers: {
-             'Content-Type': 'multipart/form-data',
-             'processData': false,
-             'async': false,
-            'cache': false
-          }
-        }).then(function(){
-           alert("주제가 등록되었습니다.");
-           window.location.href="/";
-          })
-          .catch(function(e){
-           alert("주제등록 중 문제가 발생했습니다."+e);
-          });
+        if(subjectName&&imagefile.files[0]){
+          formData.append("subjectName",subjectName);
+          formData.append("img", imagefile.files[0]);
+          axios.post(window.location.pathname, formData, {
+              headers: {
+               'Content-Type': 'multipart/form-data',
+               'processData': false,
+               'async': false,
+              'cache': false
+            }
+          }).then(function(){
+             alert("주제가 등록되었습니다.");
+             window.location.href="/";
+            })
+            .catch(function(e){
+             alert("주제등록 중 문제가 발생했습니다."+e);
+            });
+        }else{
+          alert("빈값을 채워주세요!");
+        }
         
     }
     render() {

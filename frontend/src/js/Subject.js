@@ -3,6 +3,7 @@ import '../css/Subject.css';
 import pin from '../img/black-pin.png';
 import ActivePin from '../img/black-pin-active.png';
 import axios from 'axios';
+import Navi from './Navi';
 
 class Subject extends Component{
 	state ={
@@ -65,9 +66,9 @@ class Subject extends Component{
 	GetSubject = () =>{
 		axios.get('/subjectlist').then(res=>this.setState({subjectList:res.data}));
 	}
-	getDocuemntPage(name,seq) {
+	getDocuemntPage(seq) {
 		//주제의 첫글의 고유번호 가져옴	uri만들어서 전달 seq=서브젝트 고유번호 res.data=문서고유번호
-		axios.post('/latelyseq',{subject_seq:seq}).then(res => window.location = "/document/"+name+"/"+res.data);
+		axios.post('/latelyseq',{subject_seq:seq}).then(res => window.location = "/document/"+seq+"/"+res.data);
 	}
 	ModifySubjectPage(){
 		window.location="/subjectlist";
@@ -84,7 +85,7 @@ class Subject extends Component{
 				{
 					this.state.subjectList.map(
 						(item)=><li className="Subject-list" key={item.subject_seq}>
-						<a className="Subject-name" value={item.subject_seq} onClick={()=>this.getDocuemntPage(item.subject_name,item.subject_seq)}>{item.subject_name}</a> 
+						<p className="Subject-name" value={item.subject_seq} onClick={()=>this.getDocuemntPage(item.subject_seq)}>{item.subject_name}</p> 
 						</li>
 					) 
 				} </ul> : <p>주제를 불러오는중..</p>}
@@ -92,6 +93,7 @@ class Subject extends Component{
 				
 				<button className="Subject-add-btn" onClick={this.SubjectInsertForm}>추가</button>
 				<button className="Subject-modified-btn" onClick={this.ModifySubjectPage}>수정</button>
+				<Navi></Navi>
 				</div>
 				);
 	};

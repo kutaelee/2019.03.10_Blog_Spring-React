@@ -15,7 +15,9 @@ public class SubjectDao {
 	public Integer lastSubjectSeq() {
 		return sqlsession.selectOne("subject.lastSubjectSeq");
 	}
-
+	public String getSubjectSeq(String name) {
+		return sqlsession.selectOne("subject.getSubjectSeq",name);
+	}
 	public void insertSubject(HashMap<String, String> map) {
 		sqlsession.insert("subject.insertSubject",map);
 	}

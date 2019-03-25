@@ -19,7 +19,12 @@
 	padding:2vh 1vw;
 	color:black;
 }
-.Subject-body a:hover{
+.Subject-name{
+	cursor: pointer;
+	display: inline-block;
+	margin:0;
+}
+.Subject-name:hover{
 	border-bottom:2px solid rgba(255, 0, 30, 0.7);
 }
 .Subject-pin{

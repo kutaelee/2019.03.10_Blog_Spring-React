@@ -1,6 +1,7 @@
 package com.blog.document;
 
 import java.util.HashMap;
+import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,9 +16,15 @@ public class DocumentDao {
 		return sqlsession.selectOne("document",seq);
 	}
 
-	public String latelySeq(HashMap<String, String> subject_seq) {
+	public String latelySeq(String subject_seq) {
 		return sqlsession.selectOne("latelySeq",subject_seq);
 	}
 
+	public void documentWrite(HashMap<String, Object> map) {
+		sqlsession.insert("documentWrite",map);
+	}
+	public List<String> documentDirList(String parentSeq){
+		return sqlsession.selectList("documentList",parentSeq);
+	}
 	
 }

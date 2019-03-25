@@ -7,8 +7,9 @@ import Footer from './js/Footer';
 import Navi from './js/Navi';
 import MainContent from './js/main/MainContent';
 import DocContent from './js/document/DocContent';
-import SubjectInsertPage from './js/subject/InsertPage'
-import SubjectModifyPage from './js/subject/ModifyPage'
+import DocWritePage from './js/document/DocWritePage';
+import SubjectInsertPage from './js/subject/InsertPage';
+import SubjectModifyPage from './js/subject/ModifyPage';
 import { BrowserRouter,Route,Switch } from "react-router-dom";
 
 import * as serviceWorker from './serviceWorker';
@@ -18,9 +19,10 @@ ReactDOM.render(
     <div>
         <Route path="/" component={Top} />   
         <Route path="/" component={Subject} />
-        <Route path="/" component={Navi} />
+     
         <Route path="/" component={Footer} />
         <Switch>
+            <Route path="/document/*/writepage" component={DocWritePage}></Route>
             <Route path="/subjectlist" component={SubjectModifyPage} />
             <Route path="/subject/:name" component={SubjectInsertPage} />
             <Route path="/document/:name" component={DocContent} />

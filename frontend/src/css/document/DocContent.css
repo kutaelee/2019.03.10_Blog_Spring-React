@@ -11,6 +11,7 @@
 }
 .DocContent-title{
 	text-align:center;
+	word-break: break-word;
 }
 hr{
 	background:gray;
@@ -18,6 +19,10 @@ hr{
 .DocContent-content{
 	padding-left:2vw;
 	padding-top:5vh;
+	word-break: break-word;
+}
+.DocContent-content img{
+	max-width: 90%;
 }
 .DocContent-regdate{
 	text-align:right;
@@ -129,9 +134,7 @@ hr{
 	border-top:1px solid rgb(206, 202, 202);
 	border-bottom:1px solid rgb(206, 202, 202);
 }
-.Comment-list p{
-	margin-left: 3%;
-}
+
 .Comment-list img{
 	cursor: pointer;
 	text-align: right;
@@ -141,6 +144,7 @@ hr{
 	transition:0.5s;
 }
 .Comment-writer{
+	margin-left: 3%;
 	display: inline-block;
 	font-family: 'NanumSquareRound';
 	font-size: 14px;
@@ -148,6 +152,7 @@ hr{
 	margin-bottom:0;
 }
 .Comment-regdate{
+	margin-left: 2%;
 	display: inline-block;
 	font-family: 'Nanum Barun Gothic';
 	font-size: 14px;
@@ -155,6 +160,7 @@ hr{
 	margin-bottom:0;
 }
 .Comment-content{
+	margin-left: 3%;
 	font-size: 17px;
 	font-family: 'Roboto';
 }
@@ -166,4 +172,13 @@ hr{
 }
 .Comment-list:nth-child(odd){
 	background:rgba(235, 235, 235,.1);
+}
+.Doc-empty{
+	margin-top: 30vh;
+    position: absolute;
+    margin-left: 37vw;
+    text-align: center;
+}
+.Reset-btn{
+	display: none;
 }

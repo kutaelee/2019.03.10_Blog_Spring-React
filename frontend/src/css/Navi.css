@@ -1,13 +1,8 @@
 .Navi{
-    position: fixed;
-    width: 15%;
-    margin-top:28%;
-    margin-left: 80%;
+    width: 100%;
+    margin-top: 3%;
     text-align: center;
-    border:1px solid rgb(240, 47, 70);
-    box-shadow: 1px 1px 5px gray;
-    border-radius: 10px;
-    background:white;
+    border-top: 1px solid rgb(240, 47, 70);
 }
 .Navi h4{
     margin-bottom:0;

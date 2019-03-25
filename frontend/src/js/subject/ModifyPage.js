@@ -56,14 +56,16 @@ class ModifyPage extends Component{
         window.location.href="/subjectlist";
     }
     deleteSubject(delList){
-        if(delList.length!=0){ 
+        if(delList.length){ 
           if(window.confirm("주제에 등록된 글,이미지 모두 삭제됩니다.\n정말로 주제를 삭제하시겠습니까?")){
                axios.post('/subjectdelete',{list:delList})
                 .then(()=>{alert("삭제가 완료되었습니다.");
                 window.location.reload();})
              .catch((e)=>{alert("삭제 중 문제가 발생하였습니다."+e)});
          }
-      }
+      }else{
+        alert("삭제할 항목을 선택해주세요!");
+     }
     }
     delListPush(seq){
         let className=".checkbox"+seq;
@@ -84,7 +86,7 @@ class ModifyPage extends Component{
                     <div> 
                           <h4>대표 이미지를 수정하고싶지 않으시면 비워두시면 됩니다.</h4>
                           <h4>수정 전 대표 이미지</h4>
-                          <img className="MainImg"src={this.state.subjectInfo.subject_dir}></img>
+                          <img className="MainImg"src={this.state.subjectInfo.subject_dir} alt="Subject"></img>
                          <form className="ModifySubjectForm" encType="multipart/form-data" method="post">
                          <input className="SubjectSeq" type="hidden" value={this.state.subjectInfo.subject_seq}></input>
                          <input className="SubjectDir" type="hidden" value={this.state.subjectInfo.subject_dir}></input>
