@@ -26,5 +26,13 @@ public class DocumentDao {
 	public List<String> documentDirList(String parentSeq){
 		return sqlsession.selectList("documentList",parentSeq);
 	}
+
+	public void documentModify(HashMap<String, String> map) {
+		sqlsession.update("documentModify",map);
+	}
+
+	public void documentDelete(String seq) {
+		sqlsession.delete("documentDelete",seq);
+	}
 	
 }

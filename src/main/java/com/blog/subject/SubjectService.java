@@ -8,10 +8,11 @@ import java.util.List;
 
 import javax.servlet.ServletContext;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.util.ObjectUtils;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.blog.document.DocumentDao;
@@ -20,13 +21,14 @@ import com.blog.document.DocumentDao;
 @Service
 public class SubjectService {
 	@Autowired
-	private ServletContext servletContext;
+	private static ServletContext servletContext;
 	@Autowired
 	SubjectDao sd;
 	@Autowired
 	DocumentDao dd;
 	private static final String CONTENT_PATH = "/resources/content/";
-
+	private static final Logger logger = LoggerFactory.getLogger(SubjectService.class);
+	
 	public void insertSubject(HashMap<String, String> map, MultipartFile mf) throws IllegalStateException, IOException {
 		String path = servletContext.getRealPath("/resources/subjectfile/");
 		Date date = new Date();
@@ -85,7 +87,7 @@ public class SubjectService {
 	}
 
 	// 파일 삭제
-	public boolean fileDelete(String filePath, boolean deleteparent, boolean realPath) {
+	public static boolean fileDelete(String filePath, boolean deleteparent, boolean realPath) {
 
 		File oldfile = new File(filePath);
 		if (!realPath) {
@@ -118,6 +120,7 @@ public class SubjectService {
 	public void subjectDelete(List<String> list) {
 		HashMap<String, Object> map = new HashMap<>();
 		StringBuffer contentPath = new StringBuffer();
+		
 
 		// 선택된 주제 삭제
 		for (int i = 0; i < list.size(); i++) {
@@ -153,7 +156,7 @@ public class SubjectService {
 				sd.subjectDelete(list.get(i));
 				
 			} else {
-				System.out.println("삭제실패");
+				logger.error("주제 삭제 실패!");
 			}
 
 		}

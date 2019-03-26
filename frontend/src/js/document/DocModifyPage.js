@@ -11,13 +11,13 @@ import 'highlight.js/styles/github.css';
 import 'tui-color-picker/dist/tui-color-picker.min.css';
 let toastEditor;
 
-class DocWritePage extends Component{
+class DocModifyPage extends Component{
    
     state={
-        textLength:0
+        textLength:0,
+        doc:{document_title:'',document_content:'',document_seq:'',docuemnt_dir:'',document_parent_seq:''}
     }
     componentDidMount(){
-      
         toastEditor = new Editor({
             el: document.querySelector('#editSection'),
             initialEditType: 'wysiwyg', // 'markdown'
@@ -27,13 +27,22 @@ class DocWritePage extends Component{
             exts: ['colorSyntax']
         });
         window.addEventListener("keyup", this.keyupArticle);
+        this.documentInfo();
     };
    
 
     componentWillUnmount(){
         window.removeEventListener("keyup", this.keyupArticle);
     }   
-
+    documentInfo(){
+		let path=window.location.pathname.split('/');
+        axios.post("/document",{seq:path[3]}).then(res=>{
+            const text=document.querySelectorAll(".tui-editor-contents");
+            this.setState({doc:res.data});
+            text[1].innerHTML=res.data.document_content;
+            document.querySelector('.title').value=res.data.document_title;
+    });
+    }
     innerTextLength(content){
         let len=0;
         for(let i=0;i<content.length;i++){
@@ -45,7 +54,7 @@ class DocWritePage extends Component{
         const text=document.querySelectorAll(".tui-editor-contents");
         this.setState({textLength:text[1].innerText.length});
     }
-    saveArticle(){
+    saveArticle(dir,seq){
         const text=document.querySelectorAll(".tui-editor-contents");
         const title= document.querySelector('.title').value;
         if(text[1].innerText.length>2500){
@@ -55,11 +64,11 @@ class DocWritePage extends Component{
         }else{
             let path=window.location.pathname.split('/');
             const content = toastEditor.getHtml();
-            axios.post('/documentwrite',{content:content,title:title,parentSeq:path[2]})
+            axios.post('/documentmodify',{content:content,title:title,dir:dir,seq:seq})
             .then(res => {
-                alert("등록이 완료되었습니다!");
-                window.location = "/document/"+path[2]+"/"+res.data;     
-           }).catch(e=>alert("글 등록 중 에러가 발생했습니다."));
+                alert("수정이 완료되었습니다!");
+                window.location = "/document/"+path[2]+"/"+path[3];     
+           }).catch(e=>alert("글 수정 중 에러가 발생했습니다."));
         }
 
     };
@@ -75,10 +84,10 @@ class DocWritePage extends Component{
                 <div id="toastEditor">
                     <div id="editSection"></div>
                 </div>
-                <button onClick={this.saveArticle} className="btn_save">Save</button>
+                <button onClick={()=>this.saveArticle(this.state.doc.document_dir,this.state.doc.document_seq)} className="btn_save">Save</button>
             </div>
         );
     };
 }
 
-export default DocWritePage;
+export default DocModifyPage;

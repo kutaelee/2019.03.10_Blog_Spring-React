@@ -26,6 +26,7 @@ public class DocumentController {
 	public HashMap<String,Object> document(@RequestBody HashMap<String,Object> document_seq){
 		return dd.document((String)document_seq.get("seq"));
 	}
+
 	@PostMapping("latelyseq")
 	public String latelySeq (@RequestBody HashMap<String,String> map) {
 		
@@ -43,7 +44,18 @@ public class DocumentController {
 		return dd.latelySeq(parentSeq);
 	
 	}
-
+	@PostMapping("documentmodify")
+	public void documentModify (@RequestBody HashMap<String,String> map) throws IOException {
+		List<String> imgList = new ArrayList<String>();
+		String content=map.get("content");
+		imgList=getImgSrc(content);
+		
+		ds.documentModify(map,imgList);
+	}
+	@PostMapping("documentdelete")
+	public void documentDelete(@RequestBody HashMap<String,String> map){
+		ds.documentDelete(map);
+	}
 	public List<String> getImgSrc(String str) {
 
 		Pattern nonValidPattern = Pattern.compile("<img[^>]*src=[\"']?([^>\"']+)[\"']?[^>]*>");

@@ -18,4 +18,10 @@
  	<select id="documentList" parameterType="string" resultType="string">
  		select document_dir from document where document_parent_seq=#{parentSeq}
  	</select>
+ 	<update id="documentModify" parameterType="hashMap">
+ 		update document set document_title=#{title},document_content=#{content} where document_seq=#{seq}
+ 	</update>
+ 	<delete id="documentDelete" parameterType="string">
+ 		delete from document where document_seq=#{seq}
+ 	</delete>
 </mapper>
