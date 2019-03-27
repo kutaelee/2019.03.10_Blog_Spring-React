@@ -16,6 +16,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.ObjectUtils;
 
+import com.blog.subject.SubjectDao;
 import com.blog.subject.SubjectService;
 
 @Transactional
@@ -25,7 +26,9 @@ public class DocumentService {
 	private ServletContext servletContext;
 	@Autowired
 	DocumentDao dd;
-
+	@Autowired
+	SubjectDao sd;
+	
 	private static final String BASE_64_PREFIX = "data:image/";
 	private static final String CONTENT_PATH = "/resources/content/";
 
@@ -136,18 +139,75 @@ public class DocumentService {
 		if (contentFoloderList.length > 0) {
 			for (int i = 0; i < contentFoloderList.length; i++) {
 				if (i == contentFoloderList.length - 1) {
-					SubjectService.fileDelete(contentFoloderList[i].toString(), true, true);
+					fileDelete(contentFoloderList[i].toString(), true, true);
 					dd.documentDelete(map.get("seq"));
 					break;
 				}
-				SubjectService.fileDelete(contentFoloderList[i].toString(), false, true);
+				fileDelete(contentFoloderList[i].toString(), false, true);
 			}
 
 		} else {
-			SubjectService.fileDelete(realDirPath, false, true);
+			fileDelete(realDirPath, false, true);
 			dd.documentDelete(map.get("seq"));
 		}
 
 	}
+	
+	// 파일 삭제 서블릿컨텍스트 전역변수 시 널값 문제로 중복코드 작성
+		public boolean fileDelete(String filePath, boolean deleteparent, boolean realPath) {
+			File oldfile = new File(filePath);
+			if (!realPath) {
+				String originalpath = servletContext.getRealPath(filePath);
+				oldfile = new File(originalpath);
+			}
+
+			if (oldfile.exists()) {
+
+				if (oldfile.delete()) {
+					// 주제 삭제시 폴더도 같이삭제 재귀함수이용
+					if (deleteparent) {
+						String parentpath = new File(filePath).getParent();
+						if (realPath) {
+							fileDelete(parentpath, false, true);
+						} else {
+							fileDelete(parentpath, false, false);
+						}
+						return true;
+					} else
+						return true;
+
+				} else
+					return false;
+
+			} else
+				return false;
+		}
+
+		public List<HashMap<String, Object>> latelyDocumentList() {
+			 List<HashMap<String, Object>> list= new ArrayList<>();
+			 list=dd.latelyDocumentList();
+			 StringBuffer dir=new StringBuffer();
+			 StringBuffer realPath=new StringBuffer();
+			 StringBuffer imgBuffer=new StringBuffer();
+			 for(int i=0;i<list.size();i++) {
+				 dir.append(CONTENT_PATH).append(list.get(i).get("document_dir"));
+				 
+				 realPath.append(servletContext.getRealPath(dir.toString()));
+				
+				 File contentFoloder = new File(realPath.toString());
+				 File[] contentFoloderList = contentFoloder.listFiles();
+				 if(contentFoloderList.length>0) {
+					 imgBuffer.append(dir.toString()).append("/").append(contentFoloderList[0].getName());
+					 list.get(i).put("img",imgBuffer.toString());
+				 }else {			
+					list.get(i).put("img",sd.subjectinfo(list.get(i).get("document_parent_seq").toString()).get("subject_dir"));
+				 }
+				 realPath.delete(0, realPath.length());
+				 dir.delete(0, dir.length());
+				 imgBuffer.delete(0, imgBuffer.length());
+			 }
+		
+			 return list;
+		}
 
 }

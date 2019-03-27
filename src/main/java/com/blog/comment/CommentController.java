@@ -36,18 +36,44 @@ public class CommentController {
 		}
 	}
 	@PostMapping("commentWrite")
-	public boolean commentWrite(@RequestBody HashMap<String,String> param) {
-		for( String key : param.keySet()){
-			if(!StringUtils.isEmpty(param.get(key))&&!StringUtils.isBlank(param.get(key))) {
-				param.put(key,StringEscapeUtils.unescapeHtml4(param.get(key)));
+	public boolean commentWrite(@RequestBody HashMap<String,String> map) {
+		for( String key : map.keySet()){
+			if(!StringUtils.isEmpty(map.get(key))&&!StringUtils.isBlank(map.get(key))) {
+				map.put(key,StringEscapeUtils.unescapeHtml4(map.get(key)));
 			}else {
 				return false;
 			}		
 		}
-		cs.commentWrite(param);
+		cs.commentWrite(map);
 		return true;
+	}
+	
+	@PostMapping("commentModify")
+	public boolean commentModify(@RequestBody HashMap<String,String> map) {
+		for( String key : map.keySet()){
+			if(!StringUtils.isEmpty(map.get(key))&&!StringUtils.isBlank(map.get(key))) {
+				map.put(key,StringEscapeUtils.unescapeHtml4(map.get(key)));
+			}else {
+				return false;
+			}		
+		}
 		
-		
-		
+		if(cs.passwordCheck(map)) {
+			cs.commentModify(map);
+			return true;
+		}else {
+			return false;
+		}
+
+	}
+	
+	@PostMapping("commentDelete")
+	public boolean commentDelete(@RequestBody HashMap<String,String> map) {
+		if(cs.passwordCheck(map)) {
+			cs.commentDelete(map.get("seq"));
+			return true;
+		}else {
+			return false;
+		}
 	}
 }

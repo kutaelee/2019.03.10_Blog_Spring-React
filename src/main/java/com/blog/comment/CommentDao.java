@@ -23,4 +23,18 @@ public class CommentDao {
 	public void commentWrite(HashMap<String, String> param) {
 		 sqlsession.insert("commentWrite",param);
 	}
+
+	public String getPassword(String pw) {
+		return sqlsession.selectOne("comment.getPassword",pw);
+	}
+
+	public void commentModify(HashMap<String, String> map) {
+		sqlsession.update("commentModify",map);
+	}
+
+	public void commentDelete(String seq) {
+		sqlsession.delete("commentDelete",seq);
+	}
+
+
 }

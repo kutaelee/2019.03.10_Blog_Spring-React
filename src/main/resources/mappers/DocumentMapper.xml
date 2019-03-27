@@ -10,7 +10,7 @@
  		select * from document where document_seq=#{seq}
  	</select>
  	<select id="latelySeq" parameterType="string" resultType="string">
- 		select document_seq from document where document_parent_seq=#{subject_seq} order by document_seq desc limit 0,1;
+ 		select document_seq from document where document_parent_seq=#{subject_seq} order by document_seq desc limit 0,1
  	</select>
  	<insert id="documentWrite" parameterType="hashMap">
  		insert into document(document_title,document_content,document_parent_seq,document_dir) values(#{title},#{content},#{parent_seq},#{dir})
@@ -24,4 +24,7 @@
  	<delete id="documentDelete" parameterType="string">
  		delete from document where document_seq=#{seq}
  	</delete>
+ 	<select id="latelyDocumentList" resultType="hashMap">
+ 		select * from document order by document_seq desc limit 0,9
+ 	</select>
 </mapper>

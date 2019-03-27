@@ -9,7 +9,9 @@ import 'moment/locale/ko';
 class Comment extends Component{
    state={
         count:'0',
-        parent_seq:''
+        parent_seq:'',
+        modifySw:'',
+        deleteSw:''
    }
    componentDidMount(){
         this.commentCount();
@@ -61,15 +63,66 @@ class Comment extends Component{
            alert("비어있는 값이 있습니다.");
        }
     }
+    modifyCommentForm=(seq)=>{
+        this.setState({modifySw:seq});
+    }
+    commentModify=(seq)=>{
+
+        const content=document.querySelector('.Modify-content').value;
+        const pw=document.querySelector('#modify-password').value;
+        if(this.commentTest("name",pw,content)){
+        axios.post('/commentModify',{seq:seq,content:content,pw:pw}).then(res=>{
+            if(res.data){
+                 alert("댓글이 성공적으로 수정되었습니다.");          
+                this.props.CommentFromParentFunction();
+                this.setState({modifySw:''});
+              }else{
+                alert("비밀번호가 틀립니다.");
+              }
+         }).catch(e=>"댓글 수정 중 문제발생!");
+        }else{
+            alert("빈값이 있습니다.");
+        }
+    }
+    modifyCancel=()=>{
+        this.setState({modifySw:''});
+    }
+    deleteCancel=()=>{
+        this.setState({deleteSw:''});
+    }
+    commentDelete=(seq)=>{
+        const pw=document.querySelector('#delete-password').value;
+
+        if(window.confirm("댓글을 삭제하면 돌이킬 수 없습니다!\n그래도 삭제하시겠어요?")){
+            if(this.commentTest("name",pw,"content")){
+            axios.post('/commentDelete',{seq:seq,pw:pw}).then(res=>{
+                if(res.data){
+                    alert("성공적으로 삭제되었습니다!");         
+                    this.props.CommentFromParentFunction();
+                    this.setState({deleteSw:''});
+                }else{
+                    alert("비밀번호가 틀립니다.");
+                }
+            }).catch(e=>alert("댓글 삭제 중 문제발생!"));
+            
+        }else{
+                alert("비밀번호를 채워주세요!");
+            }
+        }
+    }
+    deleteCommentForm=(seq)=>{
+        this.setState({deleteSw:seq});
+    }
+
 render(){
     
     return(
         <div>
         <form className="CommentWriteForm">	
         <p className="CommentWriteForm-header"><label>★ </label>댓글 작성</p>
-        <label htmlFor="name" className="Label-name">닉네임: </label><input type="text" id="comment-name" placeholder="홍길동"></input>
-        <label htmlFor="password" className="Label-password">비밀번호: </label>	<input type="password" id="comment-password" placeholder="●●●●●●"></input>
-        <textarea className="CommentWriteForm-content" id="comment-content"></textarea>
+        <label htmlFor="name" className="Label-name">닉네임: </label><input type="text" id="comment-name" placeholder="홍길동" maxLength='25'></input>
+        <label htmlFor="password" className="Label-password">비밀번호: </label>	<input type="password" id="comment-password" placeholder="●●●●●●" maxLength='20'></input>
+        <textarea className="CommentWriteForm-content" id="comment-content" maxLength='250'></textarea>
         <input type="reset" className="Reset-btn"></input>
         <button type="button" className="Comment-write-btn" onClick={this.commentWrite}>등록</button>
         
@@ -81,13 +134,25 @@ render(){
             
            {
 					this.props.CommentFromParent.map(
-						(item,index)=><div className="Comment-list" key={item.comment_seq} >
+						(item,index)=><div className="Comment-list" key={item.comment_seq} id={"cl-"+item.comment_seq}>
 						<p className="Comment-writer">{item.comment_writer}</p>
                         <p className="Comment-regdate">{this.dateFormat(item.comment_regdate)}</p>
-                        <img className="Comment-edit" src={editIcon} alt="Edit icon"/>
-                        <img className="Comment-del" src={delIcon} alt="Delete icon"/>
-                        <p className="Comment-content">{item.comment_content}</p> 
-                  
+                        {!this.state.modifySw ?<img className="Comment-edit" onClick={()=>this.modifyCommentForm(item.comment_seq)} src={editIcon} alt="Edit icon"/> :""}
+                        {!this.state.modifySw ? <img className="Comment-del" onClick={()=>this.deleteCommentForm(item.comment_seq)} src={delIcon} alt="Delete icon"/> : ""}
+                      
+                        {this.state.deleteSw===item.comment_seq ?   <div> <label htmlFor="password" className="Label-delete-password">비밀번호: </label>	
+                        <input type="password" id="delete-password" placeholder="●●●●●●" maxLength='20'></input>
+                        <button className="Modify-cancel-btn" onClick={this.deleteCancel}>취소</button> 
+                        <button className="Comment-delete-btn" onClick={()=>this.commentDelete(item.comment_seq)}>삭제</button>
+                        </div>: "" }
+
+                        {this.state.modifySw===item.comment_seq ? 
+                        <div> <label htmlFor="password" className="Label-modify-password">비밀번호: </label>	
+                        <input type="password" id="modify-password" placeholder="●●●●●●" maxLength='20'></input>
+                        <button className="Modify-cancel-btn" onClick={this.modifyCancel}>취소</button>
+                        <textarea className='Modify-content' defaultValue={item.comment_content} maxLength='250'></textarea>
+                        <button className="Comment-Modify-btn" onClick={()=>this.commentModify(item.comment_seq)}>수정</button>
+                        </div> :  <p className="Comment-content">{item.comment_content} </p> }
                         </div>
 					) 
 			}

@@ -21,7 +21,7 @@ import com.blog.document.DocumentDao;
 @Service
 public class SubjectService {
 	@Autowired
-	private static ServletContext servletContext;
+	private ServletContext servletContext;
 	@Autowired
 	SubjectDao sd;
 	@Autowired
@@ -87,8 +87,7 @@ public class SubjectService {
 	}
 
 	// 파일 삭제
-	public static boolean fileDelete(String filePath, boolean deleteparent, boolean realPath) {
-
+	public boolean fileDelete(String filePath, boolean deleteparent, boolean realPath) {
 		File oldfile = new File(filePath);
 		if (!realPath) {
 			String originalpath = servletContext.getRealPath(filePath);

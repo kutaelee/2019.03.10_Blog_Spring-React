@@ -163,6 +163,8 @@ hr{
 	margin-left: 3%;
 	font-size: 17px;
 	font-family: 'Roboto';
+	word-break: break-word;
+	white-space:pre
 }
 .Comment-edit{
 	margin-left:2%;
@@ -181,4 +183,41 @@ hr{
 }
 .Reset-btn{
 	display: none;
+}
+.Modify-content{
+	width: 80%;
+	height: 5vh;
+	margin-top: 1%;
+	margin-left: 3%;
+	font-size: 17px;
+	margin-bottom:1%;
+}
+.Comment-Modify-btn{
+	position: absolute;
+	margin-top: 0.5%;
+    padding: 13px 15px;
+}
+.Label-modify-password{
+	margin-left:3%;
+}
+.Label-delete-password{
+	margin-left:3%;
+}
+#modify-password{
+	margin-top:3%;
+	font-size: 16px;
+	padding-left:1%;
+}
+#delete-password{
+	margin-top:3%;
+	font-size: 16px;
+	padding-left:1%;
+}
+.Modify-cancel-btn{
+	margin-top:0;
+	padding: 5px 10px;
+}
+.Comment-delete-btn{
+	margin-top:0;
+	padding: 5px 10px;
 }

@@ -34,5 +34,9 @@ public class DocumentDao {
 	public void documentDelete(String seq) {
 		sqlsession.delete("documentDelete",seq);
 	}
+
+	public List<HashMap<String, Object>> latelyDocumentList() {
+		return sqlsession.selectList("latelyDocumentList");
+	}
 	
 }

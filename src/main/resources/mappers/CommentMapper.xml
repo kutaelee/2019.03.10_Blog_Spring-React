@@ -15,4 +15,13 @@
  	<insert id="commentWrite" parameterType="hashMap">
  		insert into comment(comment_writer,comment_content,comment_pw,comment_parent_seq) values(#{name},#{content},#{pw},#{parent_seq}) 
  	</insert>
+ 	<select id="getPassword" parameterType="string" resultType="string">
+ 		select comment_pw from comment where comment_seq=#{pw}
+ 	</select>
+ 	<update id="commentModify" parameterType="hashMap">
+ 		update comment set comment_content=#{content},comment_regdate=now() where comment_seq=#{seq}
+ 	</update>
+ 	<delete id="commentDelete" parameterType="string">
+ 		delete from comment where comment_seq=#{seq}
+ 	</delete>
 </mapper>
