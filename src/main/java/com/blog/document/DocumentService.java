@@ -51,7 +51,7 @@ public class DocumentService {
 	public void documentWrite(String content, List<String> img, String title, String parentSeq) throws IOException {
 		Date date = new Date();
 		String realPath = servletContext.getRealPath(CONTENT_PATH);
-		String folderName = title + date.getTime();
+		String folderName =""+ date.getTime();
 		String backPath = parentSeq + "/" + folderName;
 
 		// 주제명 상위폴더 생성
@@ -183,9 +183,7 @@ public class DocumentService {
 				return false;
 		}
 
-		public List<HashMap<String, Object>> latelyDocumentList() {
-			 List<HashMap<String, Object>> list= new ArrayList<>();
-			 list=dd.latelyDocumentList();
+		public List<HashMap<String, Object>> latelyDocumentList(List<HashMap<String, Object>> list) {
 			 StringBuffer dir=new StringBuffer();
 			 StringBuffer realPath=new StringBuffer();
 			 StringBuffer imgBuffer=new StringBuffer();
@@ -193,7 +191,6 @@ public class DocumentService {
 				 dir.append(CONTENT_PATH).append(list.get(i).get("document_dir"));
 				 
 				 realPath.append(servletContext.getRealPath(dir.toString()));
-				
 				 File contentFoloder = new File(realPath.toString());
 				 File[] contentFoloderList = contentFoloder.listFiles();
 				 if(contentFoloderList.length>0) {

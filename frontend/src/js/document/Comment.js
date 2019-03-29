@@ -1,10 +1,11 @@
 import React,{Component} from 'react';
 import moment from 'moment';
+import 'moment/locale/ko';
 import delIcon from '../../img/icon/delete-16.jpg';
 import editIcon from '../../img/icon/edit-16.jpg';
 import * as Scroll from 'react-scroll';
 import axios from 'axios';
-import 'moment/locale/ko';
+
 
 class Comment extends Component{
    state={
@@ -15,15 +16,18 @@ class Comment extends Component{
    }
    componentDidMount(){
         this.commentCount();
-       
    }
+
  dateFormat(regdate){
 		return new moment(regdate).startOf().fromNow();
     }
     commentCount=()=>{
         let path=window.location.pathname.split('/');
         this.setState({parent_seq:path[3]});
-        axios.post('/commentCount',{seq:path[3]}).then(res=>this.setState({count:res.data}));      
+        axios.post('/commentCount',{seq:path[3]}).then(res=>{
+            this.setState({count:res.data})
+            this.props.pagingCount(res.data);
+        });      
     }
 
     commentTest(name,pw,content){
@@ -67,7 +71,6 @@ class Comment extends Component{
         this.setState({modifySw:seq});
     }
     commentModify=(seq)=>{
-
         const content=document.querySelector('.Modify-content').value;
         const pw=document.querySelector('#modify-password').value;
         if(this.commentTest("name",pw,content)){
@@ -114,6 +117,7 @@ class Comment extends Component{
         this.setState({deleteSw:seq});
     }
 
+
 render(){
     
     return(
@@ -152,11 +156,11 @@ render(){
                         <button className="Modify-cancel-btn" onClick={this.modifyCancel}>취소</button>
                         <textarea className='Modify-content' defaultValue={item.comment_content} maxLength='250'></textarea>
                         <button className="Comment-Modify-btn" onClick={()=>this.commentModify(item.comment_seq)}>수정</button>
-                        </div> :  <p className="Comment-content">{item.comment_content} </p> }
+                        </div> :  <p className="Comment-content">{item.comment_content} </p> }          
                         </div>
 					) 
 			}
- 
+
            
         </div>
         </div>

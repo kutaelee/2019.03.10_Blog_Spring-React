@@ -24,7 +24,7 @@ public class DocumentDao {
 		sqlsession.insert("documentWrite",map);
 	}
 	public List<String> documentDirList(String parentSeq){
-		return sqlsession.selectList("documentList",parentSeq);
+		return sqlsession.selectList("documentDirList",parentSeq);
 	}
 
 	public void documentModify(HashMap<String, String> map) {
@@ -38,5 +38,7 @@ public class DocumentDao {
 	public List<HashMap<String, Object>> latelyDocumentList() {
 		return sqlsession.selectList("latelyDocumentList");
 	}
-	
+	public List<HashMap<String, Object>> sameSubjectDocumentList(HashMap<String,String> map){
+		return sqlsession.selectList("sameSubjectDocumentList",map);
+	}
 }

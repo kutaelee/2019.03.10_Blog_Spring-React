@@ -6,8 +6,8 @@
 
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
  <mapper namespace="comment">
- 	<select id="commentList" parameterType="string" resultType="hashMap">
- 		select comment_seq,comment_regdate,comment_writer,comment_content from comment where comment_parent_seq=#{seq}
+ 	<select id="commentList" parameterType="hashMap" resultType="hashMap">
+ 		select comment_seq,comment_regdate,comment_writer,comment_content from comment where comment_parent_seq=#{seq} limit #{index},10
  	</select>
  	<select id="commentCount" parameterType="string" resultType="string">
  		select count(*) from comment where comment_parent_seq=#{seq}

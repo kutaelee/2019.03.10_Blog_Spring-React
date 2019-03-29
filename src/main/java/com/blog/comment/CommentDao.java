@@ -12,12 +12,12 @@ public class CommentDao {
 	@Autowired
 	private SqlSession sqlsession;
 	
-	public List<HashMap<String,Object>> commentList(String seq){
-		return sqlsession.selectList("commentList",seq);
+	public List<HashMap<String,Object>> commentList(HashMap<String, Object> map){
+		return sqlsession.selectList("commentList",map);
 	}
 
-	public String commentCount(String seq) {
-		return sqlsession.selectOne("commentCount",seq);
+	public String commentCount(Object object) {
+		return sqlsession.selectOne("commentCount",object);
 	}
 
 	public void commentWrite(HashMap<String, String> param) {

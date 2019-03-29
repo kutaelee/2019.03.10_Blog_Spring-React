@@ -40,7 +40,6 @@ public class DocumentController {
 		String title=map.get("title");
 		String parentSeq=map.get("parentSeq");
 		imgList=getImgSrc(content);
-		
 		ds.documentWrite(content,imgList,title,parentSeq);
 		return dd.latelySeq(parentSeq);
 	
@@ -67,9 +66,19 @@ public class DocumentController {
 		}
 		return result;
 	}
-	
+	//전체 최신글 목록
 	@GetMapping("latelydocumentlist")
 	public List<HashMap<String,Object>> latelyDocumentList() {
-		return ds.latelyDocumentList();
+		List<HashMap<String, Object>> list= new ArrayList<>();
+		list=dd.latelyDocumentList();
+		return ds.latelyDocumentList(list);
+	}
+	
+	//주제별 최신글목록
+	@PostMapping("samesubjectdocumentlist")
+	public List<HashMap<String,Object>> sameSubjectDocumentList(@RequestBody HashMap<String,String> map){
+		List<HashMap<String, Object>> list= new ArrayList<>();
+		list=dd.sameSubjectDocumentList(map);
+		return ds.latelyDocumentList(list);
 	}
 }

@@ -25,12 +25,7 @@ button{
     width:10vw;
     margin-left:30%;
 }
-.MainImg:hover{
-    position: absolute;
-    margin-left:-30%;
-    width:40vw;
-    transition:0.1s;
-}
+
 .ModifySubject-list{
     list-style: none;
     display: contents;

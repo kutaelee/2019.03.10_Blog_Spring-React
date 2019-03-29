@@ -33,17 +33,26 @@ class Subject extends Component{
 
 	handleScroll=() =>{
 		if(!this.state.pinSw){
-		const top =
-			(document.documentElement && document.documentElement.scrollTop) ||
-			document.body.scrollTop;
-			this.setState(()=>({
-				curTop:top+250
-			}));
+		 const top =
+		 	(document.documentElement && document.documentElement.scrollTop) ||
+		 	document.body.scrollTop;
+		const topOffset=document.querySelector('.Top').offsetTop;
+			if(top===0){
+				this.setState(()=>({
+					menuTop:topOffset+250,
+					curTop:250
+				}));
+			}else{
+				this.setState(()=>({
+					menuTop:topOffset+100,
+					curTop:top+100
+				}));
+			}
 		}
 
    }
 	pinClick() {
-
+		const topOffset=document.querySelector('.Top').offsetTop;
 		if(!this.state.pinSw){
 			this.setState(() =>({
 				menuPostion:'absolute',
@@ -53,7 +62,7 @@ class Subject extends Component{
 		}else{
 			this.setState(() =>({
 				menuPostion:'fixed',
-				menuTop:250,
+				menuTop:topOffset+100,
 				pinSw:!this.state.pinSw
 			}));
 		}
@@ -75,7 +84,7 @@ class Subject extends Component{
 	}
 	render(){
 		return (
-				<div className="Subject" style={{position:this.state.menuPostion,top:this.state.menuTop}}>
+				<div className="Subject" style={{position:this.state.menuPostion,top:this.state.menuTop,transition:"0.5s"}}>
 				<header className="Subject-header">
 				{this.state.pinSw ? <img src={ActivePin} className="Active-pin" onClick={this.pinClick} alt="chock-pin"></img>  :<img src={pin} className="Subject-pin" onClick={this.pinClick} alt="Active-pin"></img>}
 					<h4 className="Subject-title">주제</h4>

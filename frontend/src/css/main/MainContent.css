@@ -19,7 +19,7 @@ hr{
 	margin-top:5%;
 	margin-left:3%;
 	width:30%;
-	height:38vh;
+	height:44vh;
 	text-align:center;
 	cursor: pointer;
 	box-shadow: 1px 1px 5px gray;
@@ -39,10 +39,19 @@ hr{
 }
 .Content-list-item img{
 	width:100%;
-	height:70%;
+	height:60%;
 	display: block;
 }
 .Content-list-item p{
 	font-size:14px;
 	color:gray;
+}
+.Content-title{
+	padding: 0px 10%;
+    word-break: break-word;
+}
+.Content-title h4{
+    height: auto;
+    position: relative;
+    display: grid;
 }

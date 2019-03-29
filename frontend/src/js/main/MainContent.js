@@ -2,7 +2,6 @@ import React,{Component} from 'react';
 import '../../css/main/MainContent.css';
 import moment from 'moment';
 import 'moment/locale/ko';
-import { Link } from 'react-router-dom';
 import axios from 'axios';
 
 class Content extends Component{
@@ -15,12 +14,15 @@ class Content extends Component{
 		return new moment(regdate).format('llll');
 	}
 	titleFormat(title){
-		if(title.length>10){
-			let str=title.substring(0,10);
+		if(title.length>55){
+			let str=title.substring(0,55);
 			return str+" ...";
 		}else{
 			return title;
 		}
+	}
+	selectDoc=(parentSeq,seq)=>{
+		window.location.href="/document/"+parentSeq+"/"+seq;
 	}
 	 render() {
 	        return (
@@ -31,14 +33,14 @@ class Content extends Component{
 						{this.state.latelyDocumentList ? <div className="Content-list" >
 						{
 						this.state.latelyDocumentList.map(	
-						(item)=><Link to={"/document/"+item.document_parent_seq+"/"+item.document_seq} style={{color:'black'}} key={item.document_seq}>
-						<div className="Content-list-item" >						
+						(item)=>
+						<div className="Content-list-item" onClick={()=>this.selectDoc(item.document_parent_seq,item.document_seq)} key={item.document_seq}>						
 							<img src={item.img} alt={item.document_title}></img>
 							<p>{this.dateFormat(item.document_regdate)}</p>		
+							<div className="Content-title">
 							<h4>{this.titleFormat(item.document_title)}</h4>
-										
+							</div>		
 						</div>
-						</Link>
 						)} </div> : "최신글 불러오는중.."}
 	        		</div>
 	        		);

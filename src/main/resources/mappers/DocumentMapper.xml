@@ -15,7 +15,7 @@
  	<insert id="documentWrite" parameterType="hashMap">
  		insert into document(document_title,document_content,document_parent_seq,document_dir) values(#{title},#{content},#{parent_seq},#{dir})
  	</insert>
- 	<select id="documentList" parameterType="string" resultType="string">
+ 	<select id="documentDirList" parameterType="string" resultType="string">
  		select document_dir from document where document_parent_seq=#{parentSeq}
  	</select>
  	<update id="documentModify" parameterType="hashMap">
@@ -26,5 +26,8 @@
  	</delete>
  	<select id="latelyDocumentList" resultType="hashMap">
  		select * from document order by document_seq desc limit 0,9
+ 	</select>
+ 	<select id="sameSubjectDocumentList" parameterType="hashMap" resultType="hashMap">
+ 		select * from document where document_parent_seq=#{parentSeq} and document_seq not in(#{seq}) order by document_seq desc 
  	</select>
 </mapper>

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ <mapper namespace="Visit">
+ 	<update id="visit">
+ 		update visit set visit_today=visit_today+1,visit_total=visit_total+1
+ 	</update>
+ 	<select id="visitCount" resultType="hashMap">
+ 		select * from visit
+ 	</select>
+ 	<update id="todayReset">
+ 		update visit set visit_today=0
+ 	</update>
+</mapper>
