@@ -41,4 +41,13 @@ public class DocumentDao {
 	public List<HashMap<String, Object>> sameSubjectDocumentList(HashMap<String,String> map){
 		return sqlsession.selectList("sameSubjectDocumentList",map);
 	}
+
+	public List<HashMap<String, Object>> searchDocument(HashMap<String, Object> map) {
+
+		return sqlsession.selectList("searchDocument",map);
+	}
+
+	public String searchCount(String keyword) {
+		return sqlsession.selectOne("searchCount",keyword);
+	}
 }

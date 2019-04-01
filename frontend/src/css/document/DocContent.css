@@ -214,19 +214,19 @@ hr{
 	margin-top:0;
 	padding: 5px 10px;
 }
-.Comment-paging{
+.Paging{
     text-align: center;
 	padding: 2% 0;
 	margin-bottom: 5%;
 }
-.Comment-paging button{
+.Paging button{
 	margin-top:0;
 	padding:3px;
 }
-.Comment-left-btn{
+.Paging-left-btn{
 	margin-right: 5px;
 }
-.Comment-paging a{
+.Paging a{
     margin-left: 5px;
     font-size: 17px;
 	margin-right: 5px;

@@ -10,6 +10,7 @@ import DocWritePage from './js/document/DocWritePage';
 import DocModifyPage from './js/document/DocModifyPage';
 import SubjectInsertPage from './js/subject/InsertPage';
 import SubjectModifyPage from './js/subject/ModifyPage';
+import Search from './js/search/Search';
 import { BrowserRouter,Route,Switch } from "react-router-dom";
 
 import * as serviceWorker from './serviceWorker';
@@ -22,11 +23,12 @@ ReactDOM.render(
      
         <Route path="/" component={Footer} />
         <Switch>
-            <Route path="/document/*/writepage" component={DocWritePage}></Route>
-            <Route path="/document/*/*/modifypage" component={DocModifyPage}></Route>
+            <Route path="/document/*/writepage" component={DocWritePage}/>
+            <Route path="/document/*/*/modifypage" component={DocModifyPage}/>
             <Route path="/subjectlist" component={SubjectModifyPage} />
             <Route path="/subject/:name" component={SubjectInsertPage} />
             <Route path="/document/:name" component={DocContent} />
+            <Route path="/search/*" component={Search}/>
             <Route path="/" component={MainContent} />
         </Switch>   
     </div>

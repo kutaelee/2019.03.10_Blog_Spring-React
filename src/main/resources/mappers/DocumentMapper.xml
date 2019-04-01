@@ -30,4 +30,10 @@
  	<select id="sameSubjectDocumentList" parameterType="hashMap" resultType="hashMap">
  		select * from document where document_parent_seq=#{parentSeq} and document_seq not in(#{seq}) order by document_seq desc 
  	</select>
+ 	<select id="searchDocument" parameterType="hashMap" resultType="hashMap">
+ 		select document_seq,document_parent_seq,document_regdate,document_title from document where document_title like CONCAT('%', #{keyword}, '%') or document_content like CONCAT('%', #{keyword}, '%') limit #{index},10 
+ 	</select>
+ 	 <select id="searchCount" parameterType="string" resultType="string">
+ 		select count(*) from document where document_title like CONCAT('%', #{keyword}, '%') or document_content like CONCAT('%', #{keyword}, '%') 
+ 	</select>
 </mapper>

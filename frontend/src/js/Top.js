@@ -36,7 +36,17 @@ class Top extends Component {
     visitCount=()=>{
         axios.get('/visitcount').then(res=>this.setState({visitCount:res.data}));
     }
-    
+    search=()=>{
+        let keyword=document.querySelector('.Top-search').value;
+        keyword=keyword.replace(/^\s*/,"");
+        keyword=keyword.trim();
+
+        if(keyword.length<=0 || !keyword){
+            alert("검색어를 입력해주세요!");  
+        }else{
+            window.location.href="/search/"+keyword;
+        }
+    }
     render() {
         return (
             <div className="Top">
@@ -46,8 +56,8 @@ class Top extends Component {
                      </Link><br/>
                         
                         <p className="Top-visitCount" id={"Top-search-btn"+(this.state.scroll ? '-active' : '')}>VisitCount - Today : {this.state.visitCount.visit_today} / Total :  {this.state.visitCount.visit_total}</p>
-                		<input placeholder="검색어" id={"Top-search"+(this.state.scroll ? '-active' : '')} className="Top-search" type="text"/>
-                        <button id={"Top-search-btn"+(this.state.scroll ? '-active' : '')} className="Top-search-btn">검색</button>
+                		<input placeholder="검색어" id={"Top-search"+(this.state.scroll ? '-active' : '')} className="Top-search" type="text" maxLength="50"/>
+                        <button id={"Top-search-btn"+(this.state.scroll ? '-active' : '')} className="Top-search-btn" onClick={this.search}>검색</button>
                     <h4 id={"Top-clock"+(this.state.scroll ? '-active' : '')} className="Top-clock"><Clock format={'YYYY년 Mo Do dddd A h:mm:ss zz'} ticking={true}></Clock>KST</h4>
                 </header>
             </div>

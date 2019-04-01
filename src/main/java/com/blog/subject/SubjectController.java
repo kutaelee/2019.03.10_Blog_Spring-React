@@ -79,4 +79,11 @@ public class SubjectController {
 		List<String> list=map.get("list");
 		ss.subjectDelete(list);
 	}
+	@PostMapping("subjectname")
+	public List<HashMap<String,Object>> subjectName(@RequestBody List<HashMap<String,Object>> list) {
+		for(HashMap<String,Object> map: list) {
+			map.put("subject_name",sd.subjectName((Integer)map.get("document_parent_seq")));
+		}
+		return list;
+	}
 }

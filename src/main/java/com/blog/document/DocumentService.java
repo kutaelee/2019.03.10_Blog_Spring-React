@@ -38,6 +38,7 @@ public class DocumentService {
 			return Base64.getDecoder().decode(imageString.substring(str[0].length() + 1));
 		} else
 			throw new IllegalStateException("it is not base 64 string");
+	
 	}
 
 	public boolean isBase64(String imageString) {
@@ -67,9 +68,11 @@ public class DocumentService {
 
 		realPath += backPath;
 		for (int i = 0; i < img.size(); i++) {
+			if (isBase64(img.get(i))) {
 			byte[] data = decodeBase64ToBytes(img.get(i));
 			Files.write(new File(realPath + "/" + date.getTime() + i + ".jpg").toPath(), data);
 			content = content.replace(img.get(i), CONTENT_PATH + backPath + "/" + date.getTime() + +i + ".jpg");
+			}
 		}
 		HashMap<String, Object> map = new HashMap<>();
 		map.put("content", content);

@@ -58,10 +58,15 @@ class DocContent extends Component{
 	pagingCount=(count)=>{
 		this.setState({commentCount:count});
 		let arr=[];
-		let pageCount=Math.floor(count/10);
+		let pageCount=0;
+		if(count%10===0){
+			pageCount=Math.floor(count/10);
+		}else{
+			pageCount=Math.floor(count/10)+1;
+		}
 		let i=1;
 		if(pageCount>10&&pageCount%10!=0){
-			 i=Math.floor(pageCount/10)*10;
+			 i=Math.floor(pageCount/10)*10+1;
 		}else if(pageCount>10&&pageCount%10==0){
 			i=Math.floor(pageCount/10)*10-9;
 		}
@@ -97,31 +102,44 @@ class DocContent extends Component{
 				this.setState({curPageNum:pageCount});
 				this.setState({commentPageNumber:arr});
 				this.contentListPage(pageCount+"");
-			}
+			}else{
+				this.setState({curPageNum:1});
+				this.contentListPage(1+"");
+		}
 	}
 	rightPaging=(count)=>{
-		let	maxCount=	Math.floor(this.state.commentCount/10);
-		if(count%10!=0){
-			count=(count-count%10)+10;
-		}else{
-			count=(count-count%10);
-		}
-		if(count<maxCount){
-				let arr=[];
-				let mul=Math.floor(count/10);
-				let j=10;
-				let i=j*mul+1;
-				let pageCount=i+9;
-				if(i+9>maxCount){
-					pageCount=maxCount;
-				}		
-				for(i;i<=pageCount;i++){
-					arr.push(i);
-				}
-				this.setState({curPageNum:pageCount-9});
-				this.setState({commentPageNumber:arr});
-				this.contentListPage(pageCount-9+"");
+		let	maxCount=0;
+			if(Math.floor(this.state.commentCount%10===0)){
+					maxCount=Math.floor(this.state.commentCount/10);
+			}else{
+					maxCount=Math.floor(this.state.commentCount/10)+1;
 			}
+	
+	if(count%10!=0){
+		count=(count-count%10)+10;
+	}else{
+		count=(count-count%10);
+	}
+	if(count<maxCount){
+			let arr=[];
+							let mul=Math.floor(count/10);
+			let j=10;
+							let i=j*mul+1;
+							this.setState({curPageNum:i});
+							this.contentListPage(i+"");
+			let pageCount=i+9;
+			if(i+9>maxCount){
+				pageCount=maxCount;
+			}		
+			for(i;i<=pageCount;i++){
+				arr.push(i);
+							}
+			this.setState({commentPageNumber:arr});
+
+		}else{
+			this.setState({curPageNum:maxCount});
+			this.contentListPage(maxCount+"");
+	}
 	}
 	 dateFormat(regdate){
 		return new moment(regdate).format('llll');
@@ -164,16 +182,16 @@ class DocContent extends Component{
 					<span id={"Tap-btn"+(this.state.tap ? '' : '-active')} onClick={()=>this.tapToggle(false)}>다른글</span>
 					</div>		
 					{this.state.tap ? <div><Comment pagingCount={this.pagingCount} CommentFromParentFunction={this.getDocument} CommentFromParent={this.state.comment}></Comment>
-					         <div className="Comment-paging">
-							 <button className="Comment-left-btn" onClick={()=>this.leftPaging(this.state.curPageNum)}>◀</button>
+					         <div className="Paging">
+							 <button className="Paging-left-btn" onClick={()=>this.leftPaging(this.state.curPageNum)}>◀</button>
 							 {this.state.commentPageNumber.map((item)=><a className="Comment-pageNumber" id={"pageNum"+item} onClick={()=>this.contentListPage(item+"")} style={{color: item===this.state.curPageNum ? "red" : "black" }} key={item}>{item}</a>)}
-							 <button className="Comment-right-btn" onClick={()=>this.rightPaging(this.state.curPageNum)}>▶</button>
+							 <button className="Paging-right-btn" onClick={()=>this.rightPaging(this.state.curPageNum)}>▶</button>
 							 </div> </div>: <OtherDocumentList></OtherDocumentList> }
 					</div>:this.state.docSw ? <div className="Doc-empty">
 						<h1>등록된 글이 없습니다!</h1>
 						<h1>새로운 글을 등록해주세요!</h1>
 						<button onClick={this.documentWritePage}>새글작성</button>					
-						</div> :""}
+						</div> : <div className="Doc-empty">	<h1 className="Document_loading">글 불러오는중...</h1> </div>}
 					
 					</div>
 					

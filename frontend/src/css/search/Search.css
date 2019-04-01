@@ -1,0 +1,53 @@
+.Search{
+    display: inline-block;
+    margin-top: 10%;
+    margin-left: 27%;
+    width: 47%;
+}
+.Search-body{
+    border-top: 1px solid gray;
+    border-left: 1px solid gray;
+    border-right: 1px solid gray;
+}
+.Result-table{
+    width: 100%;
+    border-collapse: collapse;
+}
+.Search-head{
+    background: rgb(241, 54, 76);
+    margin: 0;
+    padding: 2%;
+    color: white;
+    font-weight: 500;
+}
+th{
+    border-bottom:1px solid gray;
+    padding:1% 0;
+    font-family: 'NanumSquareRound';
+}
+td{
+    text-align: center;
+    border-bottom:1px solid gray;
+    padding:1.5% 0;
+    font-family: 'NanumSquareRound';
+}
+.Title-head{
+    width:60%;
+}
+.Regadate-head{
+    width:15%;
+}
+.Result-list{
+    cursor: pointer;
+}
+.Result-list:hover{
+    border:2px solid red;
+}
+.Search-empty{
+    margin-top: 20%;
+    margin-left: 5%;
+}
+.Search-loading{
+    margin-top: 20%;
+    margin-left: 15%;
+}

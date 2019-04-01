@@ -19,6 +19,9 @@
  	<select id="subjectInfo" parameterType="string" resultType="hashMap">
  		select * from subject where subject_seq=#{seq}
  	</select>
+ 	<select id="subjectName" parameterType="integer" resultType="string">
+ 		select subject_name from subject where subject_seq=#{seq}
+ 	</select>
  	<update id="modifySubjectName" parameterType="hashMap">
  		update subject set subject_name=#{name} where subject_seq=#{seq}
  	</update>

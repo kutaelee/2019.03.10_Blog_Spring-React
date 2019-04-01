@@ -8,11 +8,13 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.util.ObjectUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.blog.subject.SubjectController;
 import com.blog.subject.SubjectDao;
 
 @RestController
@@ -21,7 +23,8 @@ public class DocumentController {
 	DocumentDao dd;
 	@Autowired
 	DocumentService ds;
-
+	@Autowired
+	SubjectController sc;
 	
 	@PostMapping("document")
 	public HashMap<String,Object> document(@RequestBody HashMap<String,Object> document_seq){
@@ -80,5 +83,28 @@ public class DocumentController {
 		List<HashMap<String, Object>> list= new ArrayList<>();
 		list=dd.sameSubjectDocumentList(map);
 		return ds.latelyDocumentList(list);
+	}
+	@PostMapping("searchdocument")
+	public List<HashMap<String,Object>> searchDocument(@RequestBody HashMap<String,Object> map){	
+		if (!ObjectUtils.isEmpty(map)) {
+			if (ObjectUtils.isEmpty(map.get("page"))) {	
+					map.put("index", 0);	
+					List<HashMap<String,Object>> list=dd.searchDocument(map);
+					list=sc.subjectName(list);
+				return list;
+			} else {
+				int index=Integer.parseInt((String) map.get("page"))-1;
+				map.put("index",index*10);
+				List<HashMap<String,Object>> list=dd.searchDocument(map);
+				list=sc.subjectName(list);
+				return list;
+			}
+		} else {
+			return null;
+		}
+	}
+	@PostMapping("searchcount")
+	public String searchCount(@RequestBody HashMap<String,Object> map){	
+		return dd.searchCount((String)map.get("keyword"));
 	}
 }

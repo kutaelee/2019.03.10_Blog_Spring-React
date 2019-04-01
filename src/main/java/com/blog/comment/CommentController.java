@@ -23,14 +23,15 @@ public class CommentController {
 		if (!ObjectUtils.isEmpty(map)) {
 			if (ObjectUtils.isEmpty(map.get("page"))) {
 				Integer count = Integer.parseInt(commentCount(map));
-				if (count/10 == 0 || count== 10) {
+				if (count/10 == 0 || count<= 10) {
 					map.put("index", 0);
 				}else {
 					map.put("index", count/10*10);
 				}
 				return cd.commentList(map);
 			} else {
-				map.put("index",Integer.parseInt((String) map.get("page"))*10);
+				int index=Integer.parseInt((String) map.get("page"))-1;
+				map.put("index",index*10);
 				return cd.commentList(map);
 			}
 		} else {

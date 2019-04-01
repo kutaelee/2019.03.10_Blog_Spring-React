@@ -40,4 +40,7 @@ public class SubjectDao {
 	public void subjectDelete(String seq) {
 		sqlsession.delete("subjectDelete",seq);
 	}
+	public String subjectName(Integer seq) {
+		return sqlsession.selectOne("subjectName",seq);
+	}
 }
