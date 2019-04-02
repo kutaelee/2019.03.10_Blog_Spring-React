@@ -14,17 +14,25 @@ class DocContent extends Component{
 			  docSw:false,
 			  commentPageNumber:[1],
 				curPageNum:1,
-				commentCount:0
+				commentCount:0,
+				login:false
 			
 		};
 	 componentDidMount() {
 		this.getDocument();
+		this.loginSessionCheck();
 	 }
 
 	 documentWritePage=()=>{
 		
 		window.location.href="/document/"+path[2]+"/writepage";
 	 }
+	 loginSessionCheck=()=>{
+		axios.get("/loginsessioncheck").then(res=>{
+				if(res.data)
+						this.setState({login:true});
+		}).catch(e=>alert("세션체크 중 문제발생!"));
+}
 	 getDocument=()=>{
 		 // uri 인덱스 2=주제명 3=문서번호
 	
@@ -166,15 +174,20 @@ class DocContent extends Component{
 					
 					{this.state.document.document_title ? 
 					<div>
-					<div className="Doc-button-div"><button onClick={this.documentWritePage}>새글작성</button></div>
+					<div className="Doc-button-div">
+					{this.state.login ? <button onClick={this.documentWritePage}>새글작성</button> : "" }</div>
 	        		<div className="DocContent">
 	        		<h1 className="DocContent-title" dangerouslySetInnerHTML={ {__html: this.state.document.document_title} }></h1>	
 	        		<hr/>
 					<p className="DocContent-regdate">{this.dateFormat(this.state.document.document_regdate)}</p>
 					
 					<p className="DocContent-content" dangerouslySetInnerHTML={ {__html: this.state.document.document_content} }></p>
+					{this.state.login ? 
+					<div>
 					<button className="Doc-modify-btn" onClick={this.documentModifyPage}>수정</button>
 					<button className="Doc-delete-btn" onClick={()=>this.documentDelete(this.state.document.document_seq,this.state.document.document_dir)}>삭제</button>
+						</div>
+					: ""}
 					</div>
 
 					<div className="Tap">

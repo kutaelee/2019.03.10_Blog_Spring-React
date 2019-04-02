@@ -4,6 +4,9 @@ import './css/index.css';
 import Top from './js/Top';
 import Subject from './js/Subject';
 import Footer from './js/Footer';
+import LoginBox from './js/LoginBox';
+import ModifyLink from './js/ModifyLink';
+import AddLink from './js/AddLink';
 import MainContent from './js/main/MainContent';
 import DocContent from './js/document/DocContent';
 import DocWritePage from './js/document/DocWritePage';
@@ -14,13 +17,13 @@ import Search from './js/search/Search';
 import { BrowserRouter,Route,Switch } from "react-router-dom";
 
 import * as serviceWorker from './serviceWorker';
-
+  
 ReactDOM.render(
 (<BrowserRouter>
     <div>
-        <Route path="/" component={Top} />   
+        <Route path="/" component={Top} /> 
+        <Route path="/" component={LoginBox} /> 
         <Route path="/" component={Subject} />
-     
         <Route path="/" component={Footer} />
         <Switch>
             <Route path="/document/*/writepage" component={DocWritePage}/>
@@ -29,6 +32,8 @@ ReactDOM.render(
             <Route path="/subject/:name" component={SubjectInsertPage} />
             <Route path="/document/:name" component={DocContent} />
             <Route path="/search/*" component={Search}/>
+            <Route path="/modifylink" component={ModifyLink}/>
+            <Route path="/addlink" component={AddLink}/>
             <Route path="/" component={MainContent} />
         </Switch>   
     </div>

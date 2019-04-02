@@ -14,7 +14,7 @@
 .ModifySubjectForm{
     text-align: center;
 }
-button{
+.ModifyBody button{
     margin-top: 3vh;
     padding: 8px 15px 8px 15px;
 }

@@ -1,0 +1,33 @@
+.ModifyLink{
+    display: inline-block;
+    margin-top:12%;
+    width:55%;
+    margin-left:20%;
+    box-shadow: 1px 1px 5px gray;
+}
+.ModifyLink h1{
+    text-align: center;
+}
+.ModifyLink h4{
+    text-align: center;
+}
+.ModifyLink button{
+    margin-left:48%;
+    margin-bottom:2vh;
+}
+.ModifyLink-table{
+    border-collapse: collapse;
+    margin-left: 10%;
+    width:80%;
+    margin-bottom:3vh;
+    text-align: center;
+}
+.check{
+    width:10%;
+}
+.name{
+    width:30%;
+}
+.address{
+    width:30%;
+}

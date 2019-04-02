@@ -18,17 +18,19 @@ class Subject extends Component{
 			  pinSw:false,
 			  menuPostion:'fixed',
 			  curTop:250,
-			  menuTop:250
-			
+			  menuTop:250,
+			  login:false
+		
 			};
 	   this.pinClick = this.pinClick.bind(this);
 	 };
 	 componentDidMount() {
-				this.GetSubject();
-				window.addEventListener("scroll", this.handleScroll);
+		this.loginSessionCheck();
+		this.GetSubject();
+		window.addEventListener("scroll", this.handleScroll);
     }
     componentWillUnmount(){
-			window.removeEventListener("scroll", this.handleScroll);
+		window.removeEventListener("scroll", this.handleScroll);
 	}
 
 	handleScroll=() =>{
@@ -82,9 +84,16 @@ class Subject extends Component{
 	ModifySubjectPage(){
 		window.location="/subjectlist";
 	}
+	loginSessionCheck=()=>{
+        axios.get("/loginsessioncheck").then(res=>{
+            if(res.data)
+                this.setState({login:true});
+        }).catch(e=>alert("세션체크 중 문제발생!"));
+    }
 	render(){
 		return (
 				<div className="Subject" style={{position:this.state.menuPostion,top:this.state.menuTop,transition:"0.5s"}}>
+		
 				<header className="Subject-header">
 				{this.state.pinSw ? <img src={ActivePin} className="Active-pin" onClick={this.pinClick} alt="chock-pin"></img>  :<img src={pin} className="Subject-pin" onClick={this.pinClick} alt="Active-pin"></img>}
 					<h4 className="Subject-title">주제</h4>
@@ -99,9 +108,12 @@ class Subject extends Component{
 					) 
 				} </ul> : <p>주제를 불러오는중..</p>}
 				</div>
-				
+				{this.state.login ?  
+				<div>
 				<button className="Subject-add-btn" onClick={this.SubjectInsertForm}>추가</button>
 				<button className="Subject-modified-btn" onClick={this.ModifySubjectPage}>수정</button>
+				</div>
+					: ""}
 				<Navi></Navi>
 				</div>
 				);

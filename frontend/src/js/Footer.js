@@ -13,7 +13,6 @@ class Footer extends Component{
 
             <div className="Link">
                 <a href="http://">깃허브</a>
-        
             </div>
             </div>
         );

@@ -32,8 +32,9 @@ hr{
 	text-align: right;
     width: 72%;
 }
-.Doc-button-div button{
-    margin-top: 15%;
+.Doc-button-div{
+	display: inline-block;
+    margin-top: 10%;
 }
 .Doc-modify-btn{
 	margin-top: 5vh;
@@ -81,8 +82,6 @@ hr{
 	margin-top: 1.5vh;
 	z-index: 0;
 }
-
-
 .Tap{
 	width: 45%;
     margin-left: 27%;

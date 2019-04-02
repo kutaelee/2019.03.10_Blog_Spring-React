@@ -1,0 +1,42 @@
+.LoginBox{
+    position: fixed;
+    width: 15%;
+    box-shadow: 2px 2px 3px gray;
+    margin-left:2%;
+}
+.Login-head {
+    text-align: right;
+    background:rgb(240, 47, 70);
+    color:white;
+    margin: 0;
+    cursor: pointer;
+}
+.Login-head a{
+    margin-left: 35%;
+    margin-right: 2%;
+    color: white;
+
+}
+.Login-body{
+    display:none;
+    text-align: center;
+    margin-top: 1vh;
+}
+.Login-body input{
+    width:7vw;
+    padding-left:2%;
+}
+.Login-btn{
+    margin-top:1vh;
+    margin-bottom:1vh;
+}
+.Logout-body{
+    text-align:center;
+}
+.Logout-body h4{
+    cursor: unset;
+    text-align: center;
+}
+.Logout-body button{
+    margin-top:1vh;
+}

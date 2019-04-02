@@ -6,5 +6,10 @@
 
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
  <mapper namespace="member">
- 
+ 	<insert id="memberInsert" parameterType="hashMap">
+ 		insert into member(member_id,member_pw) values(#{id},#{pw})
+ 	</insert>
+ 	<select id="userInfo" parameterType="string" resultType="string">
+ 		select member_pw from member where member_id=#{id}
+ 	</select>
 </mapper>
