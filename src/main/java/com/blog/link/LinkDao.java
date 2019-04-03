@@ -24,4 +24,14 @@ public class LinkDao {
 		return sqlsession.selectList("allLinkList");
 	}
 
+	public void modifyLink(HashMap<String, String> link) {
+		sqlsession.update("modifyLink",link);
+	}
+
+	public void linkDelete(String seq) {
+		sqlsession.delete("linkDelete",seq);
+	}
+	public Integer listNum(HashMap<String,Object> map) {
+		return sqlsession.selectOne("listNum",map);
+	}
 }

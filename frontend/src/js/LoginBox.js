@@ -79,7 +79,7 @@ class LoginBox extends Component {
                  
             <h4 className="Login-head">관리자 메뉴</h4>
             <button onClick={this.addLink}>링크추가</button>
-            <button onClick={this.modifyLink}>링크수정</button>
+            <button onClick={this.modifyLink}>링크관리</button>
             <button onClick={this.logout}>로그아웃</button> 
   
             </div>:

@@ -21,12 +21,26 @@ public class LinkController {
 		return ld.tagLinkList(map.get("tag"));
 	}
 	@PostMapping("addLink")
-	public boolean addLink(@RequestBody HashMap<String,String> map) {
-		ls.addLink(map);	
+	public boolean addLink(@RequestBody HashMap<String, List<String>> map) {
+		ls.addLink(map);
 		return true;
 	}
 	@GetMapping("alllinklist")
 	public List<HashMap<String,Object>> allLinkList(){
 		return ld.allLinkList();
+	}
+	@PostMapping("modifylink")
+	public boolean modifyLink(@RequestBody HashMap<String, List<String>> map) {
+		ls.modifyLink(map);
+		return true;
+	}
+	@PostMapping("linkdelete")
+	public boolean linkDelete(@RequestBody HashMap<String, List<String>> map) {
+		ls.linkDelete(map);
+		return true;
+	}
+	@PostMapping("listnum")
+	public Integer listNum(@RequestBody HashMap<String,Object> map) {
+		return ld.listNum(map);
 	}
 }

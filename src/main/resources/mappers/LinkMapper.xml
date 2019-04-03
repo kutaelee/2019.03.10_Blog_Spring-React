@@ -15,4 +15,23 @@
  	<select id="allLinkList" resultType="hashMap">
  		select * from link
  	</select>
+ 	<update id="modifyLink"  parameterType="hashMap">
+ 		update link set link_name=#{name},link_address=#{address},link_info=#{info} where link_seq=#{seq}
+ 	</update>
+ 	<delete id="linkDelete" parameterType="string">
+ 		delete from link where link_seq=#{seq}
+ 	</delete>
+ 	<select id="listNum" parameterType="hashMap" resultType="integer">
+ 		SELECT rn
+  		FROM (SELECT @rn := @rn + 1 rn
+             , a.*
+          FROM (SELECT *
+                  FROM document
+                 WHERE document_parent_seq = #{parent}
+                ) a
+             , (SELECT @rn := 0) b
+             order by document_seq desc
+        ) c
+ 		WHERE document_seq = #{seq}
+ 	</select>
 </mapper>

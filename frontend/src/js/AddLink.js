@@ -20,35 +20,25 @@ class AddLink extends Component{
         const name=document.querySelectorAll(".link_name");
         const address=document.querySelectorAll(".link_address");
         const info=document.querySelectorAll(".link_info");
-        let arr=[];
+        let nameArray=[];
+        let addrArray=[];
+        let infoArray=[];
         for(let i=0;i<name.length;i++){
             if(!name[i].value||!address[i].value||!info[i].value){ 
                 alert("공란을 채워주세요!");
                 break;
             }
-            arr.push({
-                name:name[i].value,
-                address:address[i].value,
-                info:info[i].value
-            });
+            nameArray.push(name[i].value);
+            addrArray.push(address[i].value);
+            infoArray.push(info[i].value);
         }
-        let linkName,linkAddress,linkInfo;
-        for(let i=0;i<arr.length;i++){
-            linkName=arr[i].name;
-            linkAddress=arr[i].address;
-            linkInfo=arr[i].info;
-            axios.post("/addLink",{name:linkName,address:linkAddress,info:linkInfo}).then(res=>
+        axios.post("/addLink",{name:nameArray,address:addrArray,info:infoArray}).then(res=>
                 {
                     if(res.data){
-                        if(i+1===arr.length){
-                            alert("링크 추가가 완료되었습니다!");
-                            window.location.reload();
-                        }
-                    }
-            }).catch(e=>alert(linkName+" 링크추가 시 문제가 발생했습니다."));
-        }
-       
-        
+                         alert("링크 추가가 완료되었습니다!");
+                         window.location.reload();
+                }
+            }).catch(e=>alert("링크추가 시 문제가 발생했습니다.")); 
     }   
     render(){
         

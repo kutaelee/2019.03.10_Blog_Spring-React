@@ -4,7 +4,9 @@ import axios from 'axios';
 
 class ModifyLink extends Component{
 	state ={
-        linkList:[{link_seq:'',link_name:'',link_address:'',link_info:'',link_tag:''}]
+        linkList:[{link_seq:'',link_name:'',link_address:'',link_info:'',link_tag:''}],
+        delList:[]
+       
     };
     componentDidMount(){
         this.getLink();
@@ -12,12 +14,59 @@ class ModifyLink extends Component{
     getLink=()=>{
         axios.get("/alllinklist").then(res=>this.setState({linkList:res.data}));
     }
+  
+    delListPush=(seq)=>{
+        let className=".checkbox"+seq;
+        
+        if(document.querySelector(className).checked){
+            this.setState(()=>this.state.delList.push(seq));
+        }else{    
+            this.setState(()=>[this.state.delList.splice(this.state.delList.indexOf(seq),1)]);
+        }
+    }
+    linkDelete=()=>{
+        axios.post("/linkdelete",{list:this.state.delList}).then(res=>{
+            if(res.data){
+                alert("링크 삭제완료!");
+                window.location.reload();
+            }
+        }).catch(e=>alert("링크 삭제중 문제발생!"));
+    }
+    linkModify=()=>{
+        const linkList=this.state.linkList;
+        let name=[];
+        let address=[];
+        let info=[];
+        let seq=[];
+        let linkSeq;
+        let checkboxSW=false;
+        for(let i=0;i<linkList.length;i++){
+            linkSeq=linkList[i].link_seq;
+            if(document.querySelector(".checkbox"+linkSeq).checked){
+                checkboxSW=true;  
+                seq.push(linkSeq);
+                name.push(document.getElementById("name"+linkSeq).value);
+                address.push(document.getElementById("addr"+linkSeq).value);
+                info.push(document.getElementById("info"+linkSeq).value);
+            }
+        }
+        if(checkboxSW){
+            axios.post("/modifylink",{seq:seq,name:name,address:address,info:info}).then(res=>{
+                if(res.data){
+                    alert("수정이 완료되었습니다.");
+                    window.location.reload();
+                }
+            }).catch(e=>alert("링크 수정중 문제발생!"));
+        }else{
+            alert("체크된 리스트가 한개도 없습니다.");
+        }
+     }
     render(){
         
         return (
             <div className="ModifyLink">
-                <h1>링크 수정</h1>
-                <h4>체크박스를 클릭한 리스트만 수정리스트에 포함됩니다.</h4>
+                <h1>링크 관리</h1>
+                <h4>체크박스를 클릭한 리스트만 수정/삭제에 포함됩니다.</h4>
                 <hr></hr>
                 <table className="ModifyLink-table">
                 <tbody>
@@ -31,17 +80,18 @@ class ModifyLink extends Component{
                 {
 					this.state.linkList.map(
 						(item)=>
-                    <tr>
-                        <td><input type="checkbox"></input></td>
-                        <td><input type="text" defaultValue={item.link_name}></input></td>                      
-                        <td><input type="text" defaultValue={item.link_address}></input></td>
-                        <td><input type="text" defaultValue={item.link_info}></input></td>
+                    <tr key={item.link_seq}>
+                        <td><input type="checkbox" className={"checkbox"+item.link_seq} onClick={()=>this.delListPush(item.link_seq)}></input></td>
+                        <td><input type="text" defaultValue={item.link_name} id={"name"+item.link_seq}></input></td>                      
+                        <td><input type="text" defaultValue={item.link_address} id={"addr"+item.link_seq}></input></td>
+                        <td><input type="text" defaultValue={item.link_info} id={"info"+item.link_seq}></input></td>
                         <td>{item.link_tag}</td>
                     </tr>
                     )}
                 </tbody>
                 </table>
-                <button className="Link-modify-btn">수정</button>
+                <button className="Link-modify-btn" onClick={this.linkModify}>수정</button>
+                <button className="Link-delete-btn" onClick={this.linkDelete}>삭제</button>
              </div>
             );
         };

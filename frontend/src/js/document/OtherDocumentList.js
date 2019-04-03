@@ -17,6 +17,7 @@ class OtherDocumentList extends Component{
         }
     }
     componentDidMount(){
+        this.setState({margin:this.props.margin});
         this.sameSubjectDocument();
         this.subjectInfo();
     }

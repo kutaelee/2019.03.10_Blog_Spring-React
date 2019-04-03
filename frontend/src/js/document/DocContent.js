@@ -15,7 +15,8 @@ class DocContent extends Component{
 			  commentPageNumber:[1],
 				curPageNum:1,
 				commentCount:0,
-				login:false
+				login:false,
+				margin:0
 			
 		};
 	 componentDidMount() {
@@ -39,15 +40,23 @@ class DocContent extends Component{
 		axios.post("/document",{seq:path[3]}).then(res=> {
 			if(res.data.document_title){
 				this.setState({document:res.data});
+				axios.post("/listnum",{parent:res.data.document_parent_seq,seq:res.data.document_seq})
+				.then(res=>
+					{		
+						if(res.data>1){
+							this.setState({margin:200+(res.data-1)*190*-1 })
+					}		
+					}).catch(e=>alert("리스트번호 가져오던 중 문제발생!"));
 			}else{
 				this.setState({docSw:true});
 			}
 				
-			});
+			}).catch(e=>alert("문서 가져오던 중 문제발생!"));
 		this.contentListPage();
 	}
 
-	
+	//주제에서 몇번째인지 확인 후 마진 줄때 사용
+
 	contentListPage(page)
     {
 		axios.post('/commentList',{seq:path[3],page:page}).then(res=>this.setState({comment:res.data}));
@@ -199,7 +208,7 @@ class DocContent extends Component{
 							 <button className="Paging-left-btn" onClick={()=>this.leftPaging(this.state.curPageNum)}>◀</button>
 							 {this.state.commentPageNumber.map((item)=><a className="Comment-pageNumber" id={"pageNum"+item} onClick={()=>this.contentListPage(item+"")} style={{color: item===this.state.curPageNum ? "red" : "black" }} key={item}>{item}</a>)}
 							 <button className="Paging-right-btn" onClick={()=>this.rightPaging(this.state.curPageNum)}>▶</button>
-							 </div> </div>: <OtherDocumentList></OtherDocumentList> }
+							 </div> </div>: <OtherDocumentList margin={this.state.margin}></OtherDocumentList> }
 					</div>:this.state.docSw ? <div className="Doc-empty">
 						<h1>등록된 글이 없습니다!</h1>
 						<h1>새로운 글을 등록해주세요!</h1>

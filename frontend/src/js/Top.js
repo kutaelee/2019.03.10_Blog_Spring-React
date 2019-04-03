@@ -10,17 +10,21 @@ class Top extends Component {
 
 	      this.state = {
                 dosearch:false,
-                visitCount:{visit_today:'',visit_total:''}
+                visitCount:{visit_today:'',visit_total:''},
+                linkList:[{link_seq:'',link_name:'',link_address:''}]
 	     };
        }
     componentDidMount() {
         window.addEventListener("scroll", this.handleScroll);
         this.visitCount();
+        this.getTopLink();
     }
     componentWillUnmount(){
     	window.removeEventListener("scroll", this.handleScroll);
     }
-
+    getTopLink=()=>{
+        axios.post("/taglinklist",{tag:"top"}).then(res=>this.setState({linkList:res.data}));
+    }
 
     handleScroll=() =>{
     	 const top =
@@ -54,7 +58,7 @@ class Top extends Component {
         
                 <header id={"Top"+(this.state.scroll ? '-active' : '')} className="Top">
                       <Link to="/" id={"Top-link"+(this.state.scroll ? '-active' : '')} style={{ textDecoration: 'none',color:'white' }}>
-                            <h1 id={"Top-title"+(this.state.scroll ? '-active' : '')} className="Top-title">규태의 블로그</h1>
+                            <h1 id={"Top-title"+(this.state.scroll ? '-active' : '')} className="Top-title">{this.state.linkList[0].link_name}</h1>
                      </Link><br/>
                         <p className="Top-visitCount" id={"Top-search-btn"+(this.state.scroll ? '-active' : '')}>VisitCount - Today : {this.state.visitCount.visit_today} / Total :  {this.state.visitCount.visit_total}</p>
                 		<input placeholder="검색어" id={"Top-search"+(this.state.scroll ? '-active' : '')} className="Top-search" type="text" maxLength="50"/>
