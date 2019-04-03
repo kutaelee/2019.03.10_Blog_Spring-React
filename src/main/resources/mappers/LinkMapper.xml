@@ -6,5 +6,13 @@
 
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
  <mapper namespace="link">
- 
+ 	<select id="tagLinkList" parameterType="string" resultType="hashMap">
+ 		select * from link where link_tag=#{tag}
+ 	</select>
+ 	<insert id="addLink" parameterType="hashMap">
+ 		insert into link(link_name,link_address,link_info,link_tag) values(#{name},#{address},#{info},"footer")
+ 	</insert>
+ 	<select id="allLinkList" resultType="hashMap">
+ 		select * from link
+ 	</select>
 </mapper>

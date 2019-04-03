@@ -4,6 +4,7 @@
     width:55%;
     margin-left:20%;
     box-shadow: 1px 1px 5px gray;
+    margin-bottom: 10vh;
 }
 .ModifyLink h1{
     text-align: center;
@@ -17,17 +18,23 @@
 }
 .ModifyLink-table{
     border-collapse: collapse;
-    margin-left: 10%;
-    width:80%;
+    margin-left: 5%;
+    width:90%;
     margin-bottom:3vh;
     text-align: center;
+}
+.ModifyLink-table input{
+    width:90%;
 }
 .check{
     width:10%;
 }
 .name{
-    width:30%;
+    width:10%;
 }
 .address{
     width:30%;
+}
+.information{
+    width:25%;
 }

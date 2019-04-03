@@ -29,5 +29,6 @@
 	<context:component-scan base-package="com.blog.subject" />
 	<context:component-scan base-package="com.blog.comment" />
 	<context:component-scan base-package="com.blog.member" />
+	<context:component-scan base-package="com.blog.link" />
 	<task:annotation-driven />
 </beans:beans>
