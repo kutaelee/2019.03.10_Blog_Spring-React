@@ -12,7 +12,7 @@
 }
 .Other-list{
     width: 140px;
-    height: 250px;
+    height: 25vh;
     box-shadow: 1px 1px 3px grey;
     text-align: center;
     background: whitesmoke;
@@ -51,7 +51,7 @@
 }
 .Other-list img{
     margin-top:10%;
-    width: 80%;
+    width: 90%;
     height: 50%;
 }
 .Other-list p{
@@ -71,4 +71,47 @@
 .OtherDocumentList h1{
     margin-top: 17%;
     text-align: center
+}
+
+@media(max-width:1280px){
+    .OtherDocumentList{
+        height: 50vh;
+    }
+    .Other-list{
+        height: 30vh;
+        width:110px;
+    }
+    .Other-list-div
+    {
+        width: 9999px;
+        text-align: left;
+        height: 100%;
+        padding-left: 81px;
+        padding-top:1vh;
+    }
+    .Other-list p{
+        font-size:.9vw;
+    }
+    .Other-list b{
+        font-size: .9vw;
+    }
+    .Left-button-div{
+        display: inline-block;
+        margin-top: 11%;
+        margin-left:1%;
+        position: absolute;
+    }
+    .Right-button-div{
+        display: inline-block;
+        margin-top: 11%;
+        margin-left: 40%;
+        position: absolute;
+    }
+    .Other-title-div h4{
+        font-size:1.2vw;
+    }
+    .OtherDocumentList h1{
+        font-size:1.5vw;
+        margin-top: 20%;
+    }
 }

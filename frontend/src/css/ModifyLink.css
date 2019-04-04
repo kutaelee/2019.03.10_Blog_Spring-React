@@ -38,3 +38,16 @@
 .information{
     width:25%;
 }
+@media(max-width:1280px){
+    .ModifyLink{
+        margin-top: 13%;
+    }
+    .Link-modify-btn{
+        margin-left:42%;
+    }
+}
+@media(max-width:1024px){
+    .ModifyLink{
+        margin-top: 17%;
+    }
+}

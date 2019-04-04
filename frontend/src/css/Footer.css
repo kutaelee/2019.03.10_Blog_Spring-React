@@ -18,3 +18,12 @@
 .Footer a:hover{
     border-bottom:2px solid white;
 }
+@media(max-width:1280px){
+    .Footer{
+        height: 8vh;
+        margin-top:93vh;
+    }
+	.Footer a{
+        font-size:1vw;
+    }
+}

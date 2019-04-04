@@ -58,3 +58,31 @@
 	margin-bottom:1vh;
 }
 
+@media(max-width:1280px){
+    .Subject-add-btn{
+        margin-left:1.8vw;
+	}
+}
+@media(max-width:1024px){
+	.Subject-header{
+		font-size: 18px;
+	 }
+	 .Subject-body{
+		padding: 1vh 0vw;
+	 }
+	 .Subject-name{
+		 font-size:1.2vw;
+	 }
+	 .Subject-add-btn{
+		font-size:13px;
+		padding: 6px 9px;
+	 }
+	 .Subject-modified-btn{
+		font-size:13px;
+		padding: 6px 9px;
+	 }
+	 .Navi button{
+		font-size:13px;
+		padding: 6px 9px;
+	 }
+}

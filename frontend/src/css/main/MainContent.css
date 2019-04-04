@@ -55,3 +55,11 @@ hr{
     position: relative;
     display: grid;
 }
+@media(max-width:1280px){
+	.Content-list-item h4{
+		font-size:.8vw;
+	}
+	.Content-list-item p{
+		font-size:.9vw;
+	}
+}

@@ -235,3 +235,53 @@ hr{
 	font-weight: 1000;
 	color:red;
 }
+@media(max-width:1280px){
+	.Doc-button-div{
+		margin-top:27vh;
+	}
+	.Comment-write-btn{
+		font-size:1.1vw;
+		padding: 8px 10px;
+	}
+	.Comment-Modify-btn{
+		padding: 11px 12px;
+	}
+	.CommentWriteForm label{
+		font-size:1vw;
+	}
+	.CommentWriteForm-header{
+		font-size:1vw;
+	}
+	.Tap span{
+		padding: 7px 10px;
+		font-size:1.3vw;
+	}
+	.Doc-empty{
+		margin-top: 28vh;
+		margin-left: 31vw;
+	}
+	.DocContent{
+		min-height: 20vh;
+	}
+	.title{
+		font-size: 1.3vw;
+	}
+	.DocContent button{
+		padding:5px 10px;
+		font-size:1.4vw;
+	}
+	.CommentWriteForm input{
+		font-size:1.2vw;
+	}
+	.Doc-button-div button{
+		padding:5px 10px;
+		font-size:1.4vw;
+	}
+	.Comment-body p{
+		font-size:1.3vw;
+	}
+	.Comment-body img{
+		max-width: 13px;
+	}
+
+}

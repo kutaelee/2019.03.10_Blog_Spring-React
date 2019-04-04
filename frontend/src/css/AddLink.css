@@ -37,3 +37,13 @@
 .address{
     width:30%;
 }
+@media(max-width:1280px){
+    .AddLink{
+        margin-top: 15%;
+    }
+}
+@media(max-width:1024px){
+    .AddLink{
+        margin-top: 17%;
+    }
+}

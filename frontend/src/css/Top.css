@@ -79,3 +79,27 @@
 #Top-visitCount-active{
 	display: none;
 }
+@media(max-width:1024px){
+	.Top-title{
+		font-size: 2vw;
+		margin-top: 7vh;
+	}
+	.Top-search{
+	 	margin-left:67%;
+	 }
+	 .Top-visitCount{
+		 font-size:1.3vw;
+	 }
+	 .Top-clock{
+		font-size:1.3vw; 
+	 }
+	 .Top-search{
+		border-radius: 5px;
+		padding: 0px;
+		font-size: 13px;
+	 }
+	 .Top-search-btn{
+		padding: 5px 10px;
+		font-size: 1.3vw;
+	 }
+}
