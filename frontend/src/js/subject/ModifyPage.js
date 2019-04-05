@@ -10,7 +10,16 @@ class ModifyPage extends Component{
     };
 
     componentDidMount() {
+        this.loginSessionCheck();
         this.getSubject();
+    }
+    loginSessionCheck=()=>{
+        axios.get("/loginsessioncheck").then(res=>{
+            if(!res.data){
+                alert("로그인 후 이용가능 합니다.");
+                window.history.back();
+            }
+        }).catch(e=>alert("세션체크 중 문제발생!"));
     }
     modifySubject(){
         let formData = new FormData();
@@ -34,7 +43,7 @@ class ModifyPage extends Component{
             if(res.data){
                 alert("수정이 완료되었습니다.");
             }else{
-                alert("수정 중 문제가 발생했습니다.");
+                alert("권한이 없습니다.");
             }
          
            window.location.href="/subjectlist";
@@ -59,9 +68,12 @@ class ModifyPage extends Component{
         if(delList.length){ 
           if(window.confirm("주제에 등록된 글,이미지 모두 삭제됩니다.\n정말로 주제를 삭제하시겠습니까?")){
                axios.post('/subjectdelete',{list:delList})
-                .then(()=>{alert("삭제가 완료되었습니다.");
-                window.location.reload();})
-             .catch((e)=>{alert("삭제 중 문제가 발생하였습니다."+e)});
+                .then(res=>{
+                    if(res.data){
+                        alert("삭제가 완료되었습니다.");
+                        window.location.reload();
+                    }
+            }).catch((e)=>{alert("삭제 중 문제가 발생하였습니다."+e)});
          }
       }else{
         alert("삭제할 항목을 선택해주세요!");
@@ -112,7 +124,7 @@ class ModifyPage extends Component{
                             <input type="checkbox" className={'checkbox'+item.subject_seq} onChange={()=>this.delListPush(item.subject_seq)} value={item.subject_seq}/>
                         <span className="ModifySubject-div" onClick={()=>this.getSubjectInfo(item.subject_seq)}>  
                         <li className="ModifySubject-list" >
-						<a className="Subject-name" value={item.subject_seq} >{item.subject_name}</a> 
+						<p className="Subject-name" value={item.subject_seq} >{item.subject_name}</p> 
 						<hr/></li></span>
                         
                         </div>

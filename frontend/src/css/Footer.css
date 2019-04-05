@@ -13,6 +13,7 @@
     margin-right: 10vw;
 }
 .Footer a{
+    margin-right:2%;
     color:white;
 }
 .Footer a:hover{
@@ -25,13 +26,14 @@
     }
 	.Footer a{
         font-size:1vw;
+        margin-right:2%;
     }
 }
-@media(max-width:1280px){
+@media(max-width:600px){
     .Footer{
-        margin-top: 60vh;
+        margin-top: 73vh;
     }
-    .Link a{
+    .Footer a{
         font-size:3vw;
         margin-right:2%;
     }

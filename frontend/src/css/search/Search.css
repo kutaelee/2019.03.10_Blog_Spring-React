@@ -51,6 +51,15 @@ td{
     margin-top: 20%;
     margin-left: 15%;
 }
+.Search-pageNumber{
+    cursor: pointer;
+    font-family: 'NanumSquareRound';
+    margin-right:1%;
+    margin-left:1%;
+}
+.Paging{
+    margin-bottom:12%;
+}
 @media(max-width:1280px){
 	.Search{
         margin-top: 15%;

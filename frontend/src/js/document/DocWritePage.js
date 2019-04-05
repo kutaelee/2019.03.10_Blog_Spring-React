@@ -17,19 +17,26 @@ class DocWritePage extends Component{
         textLength:0
     }
     componentDidMount(){
-      
+        this.loginSessionCheck();
         toastEditor = new Editor({
             el: document.querySelector('#editSection'),
             initialEditType: 'wysiwyg', // 'markdown'
             previewStyle: 'vertical',
-            height:'auto',
-            minHeight: '550px',            
+            height:'600px',
+            minHeight: '600px',            
             exts: ['colorSyntax']
         });
         window.addEventListener("keyup", this.keyupArticle);
     };
    
-
+    loginSessionCheck=()=>{
+        axios.get("/loginsessioncheck").then(res=>{
+            if(!res.data){
+                alert("로그인 후 이용가능 합니다.");
+                window.history.back();
+            }
+        }).catch(e=>alert("세션체크 중 문제발생!"));
+      }
     componentWillUnmount(){
         window.removeEventListener("keyup", this.keyupArticle);
     }   
@@ -57,14 +64,18 @@ class DocWritePage extends Component{
             const content = toastEditor.getHtml();
             axios.post('/documentwrite',{content:content,title:title,parentSeq:path[2]})
             .then(res => {
-                alert("등록이 완료되었습니다!");
-                window.location = "/document/"+path[2]+"/"+res.data;     
+                if(res.data!=null){
+                    alert("등록이 완료되었습니다!");
+                    window.location = "/document/"+path[2]+"/"+res.data;  
+                }else{
+                    alert("권한이 없습니다.");
+                }           
            }).catch(e=>alert("글 등록 중 에러가 발생했습니다."));
         }
 
     };
     cancelClick=()=>{
-        if(window.confirm("작성하신 내용을 저장하지 않고 페이지를 나갑니다\n 그래도 괜찮으시겠습니까?")){
+        if(window.confirm("작성하신 내용을 저장하지 않고 페이지를 나갑니다\n그래도 괜찮으시겠습니까?")){
             window.history.back();
         }
     }

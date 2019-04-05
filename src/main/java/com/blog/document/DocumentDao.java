@@ -11,7 +11,7 @@ import org.springframework.stereotype.Repository;
 public class DocumentDao {
 	@Autowired
 	private SqlSession sqlsession;
-	//네임스페이스 생략했는데 그냥 됨 알아볼 필요있음
+	//유일한 id는 네임스페이스 생략해도 되고 중복되면 에러발생함
 	public HashMap<String, Object> document(String seq) {
 		return sqlsession.selectOne("document",seq);
 	}

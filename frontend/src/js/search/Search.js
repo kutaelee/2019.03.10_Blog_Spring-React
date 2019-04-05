@@ -3,7 +3,7 @@ import '../../css/search/Search.css';
 import axios from 'axios';
 import moment from 'moment';
 import 'moment/locale/ko';
-const path=window.location.pathname.split('/');
+const url=new URL(window.location.href);
 class Search extends Component{
 	state ={
             resultDoc:[{document_seq:'',document_title:'',document_parent_seq:'',document_regdate:'',subject_name:''}],
@@ -18,7 +18,7 @@ class Search extends Component{
         this.searchCount();
     }
     keywordCheck=()=>{
-        return decodeURI(path[2]);
+        return url.searchParams.get("keyword");
     }
     dateFormat(regdate){
         return moment(regdate).format('ll');
@@ -30,7 +30,7 @@ class Search extends Component{
 
     contentListPage(page)
     {
-        let keyword=decodeURI(path[2]);
+        let keyword=url.searchParams.get("keyword");
         axios.post('/searchdocument',{keyword:keyword,page:page}).then(res=>this.setState({resultDoc:res.data,searchSw:true}));
         page*=1;
         if(!page){
@@ -47,7 +47,7 @@ class Search extends Component{
 		}
 	}
     searchCount=()=>{
-        let keyword=decodeURI(path[2]);
+        let keyword=url.searchParams.get("keyword");
         axios.post("/searchcount",{keyword:keyword}).then(res=>{
             this.setState({searchCount:res.data});
             this.pagingCount(res.data);     
@@ -75,7 +75,7 @@ class Search extends Component{
 	leftPaging=(count)=>{
 
 		if(count>10){
-			if(count%10==0){
+			if(count%10===0){
 				count=(count-count%10)-11;
 			}else{
 				count=(count-count%10)-10;
@@ -108,7 +108,7 @@ class Search extends Component{
             maxCount=Math.floor(this.state.searchCount/10)+1;
         }
 		
-		if(count%10!=0){
+		if(count%10!==0){
 			count=(count-count%10)+10;
 		}else{
 			count=(count-count%10);
@@ -164,7 +164,7 @@ class Search extends Component{
             </div>
             <div className="Paging">
                    <button className="Paging-left-btn" onClick={()=>this.leftPaging(this.state.curPageNum)}>◀</button>
-                   {this.state.searchPageNumber.map((item)=><a className="Search-pageNumber" id={"pageNum"+item} onClick={()=>this.contentListPage(item+"")} style={{color: item===this.state.curPageNum ? "red" : "black" }} key={item}>{item}</a>)}
+                   {this.state.searchPageNumber.map((item)=><b className="Search-pageNumber" id={"pageNum"+item} onClick={()=>this.contentListPage(item+"")} style={{color: item===this.state.curPageNum ? "red" : "black" }} key={item}>{item}</b>)}
                   <button className="Paging-right-btn" onClick={()=>this.rightPaging(this.state.curPageNum)}>▶</button>
             </div> 
             </div>

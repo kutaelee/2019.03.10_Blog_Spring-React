@@ -3,6 +3,8 @@ package com.blog.comment;
 import java.util.HashMap;
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.ObjectUtils;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -23,15 +25,15 @@ public class CommentController {
 		if (!ObjectUtils.isEmpty(map)) {
 			if (ObjectUtils.isEmpty(map.get("page"))) {
 				Integer count = Integer.parseInt(commentCount(map));
-				if (count/10 == 0 || count<= 10) {
+				if (count / 10 == 0 || count <= 10) {
 					map.put("index", 0);
-				}else {
-					map.put("index", count/10*10);
+				} else {
+					map.put("index", count / 10 * 10);
 				}
 				return cd.commentList(map);
 			} else {
-				int index=Integer.parseInt((String) map.get("page"))-1;
-				map.put("index",index*10);
+				int index = Integer.parseInt((String) map.get("page")) - 1;
+				map.put("index", index * 10);
 				return cd.commentList(map);
 			}
 		} else {
@@ -49,7 +51,11 @@ public class CommentController {
 	}
 
 	@PostMapping("commentWrite")
-	public boolean commentWrite(@RequestBody HashMap<String, String> map) {
+	public boolean commentWrite(@RequestBody HashMap<String, String> map, HttpSession session) {
+		if (session.getAttribute("login") != null) {
+			map.put("name", "관리자");
+			map.put("pw", "1234");
+		}
 		for (String key : map.keySet()) {
 			if (!StringUtils.isEmpty(map.get(key)) && !StringUtils.isBlank(map.get(key))) {
 				map.put(key, StringEscapeUtils.unescapeHtml4(map.get(key)));
@@ -57,12 +63,17 @@ public class CommentController {
 				return false;
 			}
 		}
+
 		cs.commentWrite(map);
 		return true;
 	}
 
 	@PostMapping("commentModify")
-	public boolean commentModify(@RequestBody HashMap<String, String> map) {
+	public boolean commentModify(@RequestBody HashMap<String, String> map, HttpSession session) {
+		if (session.getAttribute("login") != null) {
+			map.put("name", "관리자");
+			map.put("pw", "1234");
+		}
 		for (String key : map.keySet()) {
 			if (!StringUtils.isEmpty(map.get(key)) && !StringUtils.isBlank(map.get(key))) {
 				map.put(key, StringEscapeUtils.unescapeHtml4(map.get(key)));
@@ -71,7 +82,7 @@ public class CommentController {
 			}
 		}
 
-		if (cs.passwordCheck(map)) {
+		if (cs.passwordCheck(map) || session.getAttribute("login") != null) {
 			cs.commentModify(map);
 			return true;
 		} else {
@@ -81,8 +92,8 @@ public class CommentController {
 	}
 
 	@PostMapping("commentDelete")
-	public boolean commentDelete(@RequestBody HashMap<String, String> map) {
-		if (cs.passwordCheck(map)) {
+	public boolean commentDelete(@RequestBody HashMap<String, String> map, HttpSession session) {
+		if (cs.passwordCheck(map) || session.getAttribute("login") != null) {
 			cs.commentDelete(map.get("seq"));
 			return true;
 		} else {

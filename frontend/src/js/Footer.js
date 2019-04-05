@@ -19,7 +19,7 @@ class Footer extends Component{
 
             <div className="Link">
             {this.state.linkList.map(
-						(item)=><a href={item.link_address} target="_blank" key={item.link_seq}>{item.link_name}</a>
+						(item)=><a href={item.link_address}  target = "blank" rel="noopener noreferrer" key={item.link_seq}>{item.link_name}</a>
             )}
             </div>
             </div>

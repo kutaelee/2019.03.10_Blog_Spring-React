@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.ObjectUtils;
@@ -58,31 +59,42 @@ public class SubjectController {
 	}
 
 	@PostMapping("subjectmodify")
-	public boolean subjectModify(MultipartHttpServletRequest req) throws IllegalStateException, IOException {
-		if (ObjectUtils.isEmpty(req.getFile("img"))) {
-			HashMap<String, Object> map = new HashMap<>();
-			map.put("name", req.getParameter("subjectName"));
-			map.put("seq", req.getParameter("seq"));
-			return ss.modifySubjectName(map);
+	public boolean subjectModify(MultipartHttpServletRequest req, HttpSession session)
+			throws IllegalStateException, IOException {
+		if (session.getAttribute("login") != null) {
+			if (ObjectUtils.isEmpty(req.getFile("img"))) {
+				HashMap<String, Object> map = new HashMap<>();
+				map.put("name", req.getParameter("subjectName"));
+				map.put("seq", req.getParameter("seq"));
+				return ss.modifySubjectName(map);
+			} else {
+				HashMap<String, Object> map = new HashMap<>();
+				map.put("name", req.getParameter("subjectName"));
+				map.put("seq", req.getParameter("seq"));
+				map.put("dir", req.getParameter("dir"));
+				map.put("img", req.getFile("img"));
+				return ss.modifySubjectAll(map);
+			}
 		} else {
-			HashMap<String, Object> map = new HashMap<>();
-			map.put("name", req.getParameter("subjectName"));
-			map.put("seq", req.getParameter("seq"));
-			map.put("dir", req.getParameter("dir"));
-			map.put("img", req.getFile("img"));
-			return ss.modifySubjectAll(map);
+			return false;
 		}
 	}
-	
+
 	@PostMapping("subjectdelete")
-	public void subjectDelete(@RequestBody HashMap<String, List<String>> map) {
-		List<String> list=map.get("list");
-		ss.subjectDelete(list);
+	public boolean subjectDelete(@RequestBody HashMap<String, List<String>> map, HttpSession session) {
+		if (session.getAttribute("login") != null) {
+			List<String> list = map.get("list");
+			ss.subjectDelete(list);
+			return true;
+		} else {
+			return false;
+		}
 	}
+
 	@PostMapping("subjectname")
-	public List<HashMap<String,Object>> subjectName(@RequestBody List<HashMap<String,Object>> list) {
-		for(HashMap<String,Object> map: list) {
-			map.put("subject_name",sd.subjectName((Integer)map.get("document_parent_seq")));
+	public List<HashMap<String, Object>> subjectName(@RequestBody List<HashMap<String, Object>> list) {
+		for (HashMap<String, Object> map : list) {
+			map.put("subject_name", sd.subjectName((Integer) map.get("document_parent_seq")));
 		}
 		return list;
 	}

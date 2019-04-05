@@ -44,11 +44,10 @@ class Top extends Component {
         let keyword=document.querySelector('.Top-search').value;
         keyword=keyword.replace(/^\s*/,"");
         keyword=keyword.trim();
-
         if(keyword.length<=0 || !keyword){
             alert("검색어를 입력해주세요!");  
         }else{
-            window.location.href="/search/"+keyword;
+            window.location.href="/search?keyword="+encodeURIComponent(keyword);
         }
     }
 

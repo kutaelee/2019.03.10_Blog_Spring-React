@@ -22,11 +22,11 @@
 }
 .Cancel-btn{
     margin-top: 5%;
-    margin-left:35%;
+    margin-left:38%;
 }
 .Save-btn{
     margin-bottom:10%;
-    margin-left:5%;
+    margin-left:3%;
 }
 .Doc-textLength{
     text-align: right;
@@ -36,6 +36,10 @@
     margin-bottom: 1%;
     height: 3vh;
     font-size:18px;
+}
+.tui-popup-color .te-apply-button{
+    color: black;
+    bottom: 137px;
 }
 @media(max-width:1280px){
     .DocWritePage{

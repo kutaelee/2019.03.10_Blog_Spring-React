@@ -5,6 +5,17 @@ import axios from 'axios';
 class InsertPage extends Component{
     state = {};
 
+    componentDidMount() {
+      this.loginSessionCheck();
+  }
+    loginSessionCheck=()=>{
+      axios.get("/loginsessioncheck").then(res=>{
+          if(!res.data){
+              alert("로그인 후 이용가능 합니다.");
+              window.history.back();
+          }
+      }).catch(e=>alert("세션체크 중 문제발생!"));
+    }
     InserSubject(){
         let formData = new FormData();
         const subjectName = document.querySelector('.SubjectName').value;

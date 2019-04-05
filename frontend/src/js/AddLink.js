@@ -6,7 +6,15 @@ class AddLink extends Component{
 			
     };
     componentDidMount(){
-       
+        this.loginSessionCheck();
+    }
+    loginSessionCheck=()=>{
+        axios.get("/loginsessioncheck").then(res=>{
+            if(!res.data){
+                alert("로그인 후 이용가능 합니다.");
+                window.history.back();
+            }
+        }).catch(e=>alert("세션체크 중 문제발생!"));
     }
     addList=()=>{
         const str="<tr>"+
@@ -37,7 +45,9 @@ class AddLink extends Component{
                     if(res.data){
                          alert("링크 추가가 완료되었습니다!");
                          window.location.reload();
-                }
+                    }else{
+                        alert("권한이 없습니다.");
+                    }
             }).catch(e=>alert("링크추가 시 문제가 발생했습니다.")); 
     }   
     render(){

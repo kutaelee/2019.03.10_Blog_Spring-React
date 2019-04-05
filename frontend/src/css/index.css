@@ -59,3 +59,11 @@ button:hover{
 	color:snow;
 	transition:0.3s;
 }
+@media(max-width:600px){
+	input{
+		border:1px solid gray;
+	}
+	textarea{
+		border:1px solid gray;
+	}
+}

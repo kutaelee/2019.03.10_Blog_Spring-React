@@ -41,10 +41,10 @@ class LoginBox extends Component {
     loginToggle=()=>{
         if(document.querySelector('.Login-body').style.display==='block'){
             document.querySelector('.Login-body').style.display='none';
-            document.querySelector('.Login-head a').innerText='▼';
+            document.querySelector('.Login-head b').innerText='▼';
         }else{
             document.querySelector('.Login-body').style.display='block';
-            document.querySelector('.Login-head a').innerText='▲';
+            document.querySelector('.Login-head b').innerText='▲';
         }
 		
     }
@@ -97,7 +97,7 @@ class LoginBox extends Component {
   
             </div>:
             <div>
-           <h4 className="Login-head" onClick={this.loginToggle}>로그인<a>▼</a></h4> 
+           <h4 className="Login-head" onClick={this.loginToggle}>로그인<b>▼</b></h4> 
               <div className="Login-body">
               <label htmlFor="Login-id">아이디</label><br/> <input type="text" id="Login-id" placeholder="ID" maxLength="20"></input><br/>
               <label htmlFor="Login-pw">비밀번호</label> <br/><input type="password" id="Login-pw" placeholder="●●●●" maxLength="20"></input><br/>

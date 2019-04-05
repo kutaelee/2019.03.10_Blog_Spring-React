@@ -31,10 +31,11 @@ ReactDOM.render(
             <Route path="/subjectlist" component={SubjectModifyPage} />
             <Route path="/subject/:name" component={SubjectInsertPage} />
             <Route path="/document/:name" component={DocContent} />
-            <Route path="/search/*" component={Search}/>
+            <Route path="/search" component={Search}/>
             <Route path="/modifylink" component={ModifyLink}/>
             <Route path="/addlink" component={AddLink}/>
             <Route path="/" component={MainContent} />
+           
         </Switch>   
     </div>
 </BrowserRouter>), document.getElementById('root')

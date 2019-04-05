@@ -82,9 +82,9 @@ class DocContent extends Component{
 			pageCount=Math.floor(count/10)+1;
 		}
 		let i=1;
-		if(pageCount>10&&pageCount%10!=0){
+		if(pageCount>10&&pageCount%10!==0){
 			 i=Math.floor(pageCount/10)*10+1;
-		}else if(pageCount>10&&pageCount%10==0){
+		}else if(pageCount>10&&pageCount%10===0){
 			i=Math.floor(pageCount/10)*10-9;
 		}
 		if(pageCount===0){
@@ -99,7 +99,7 @@ class DocContent extends Component{
 	leftPaging=(count)=>{
 
 		if(count>10){
-			if(count%10==0){
+			if(count%10===0){
 				count=(count-count%10)-11;
 			}else{
 				count=(count-count%10)-10;
@@ -132,7 +132,7 @@ class DocContent extends Component{
 					maxCount=Math.floor(this.state.commentCount/10)+1;
 			}
 	
-	if(count%10!=0){
+	if(count%10!==0){
 		count=(count-count%10)+10;
 	}else{
 		count=(count-count%10);
@@ -172,10 +172,16 @@ class DocContent extends Component{
 		if(window.confirm("문서와 이미지가 모두 삭제되며 돌이킬 수 없습니다.\n정말로 문서를 삭제하시겠습니까?")){
 		
 			axios.post("/documentdelete",{seq:seq,dir:dir})
-			.then(()=>axios.post('/latelyseq',{subject_seq:path[2]})
-			.then(res =>{alert("삭제가 완료되었습니다!"); window.location = "/document/"+path[2]+"/"+res.data }))
-			.catch(e=>alert("글 삭제 중 문제발생!"));
-		}
+			.then(()=>axios.post('/latelyseq',{subject_seq:path[2]}))
+			.then(res =>{
+				if(res.data){
+					alert("삭제가 완료되었습니다!");
+					window.location = "/document/"+path[2]+"/"+res.data;	
+				}else{
+					alert("권한이 없습니다");
+				}
+				}).catch(e=>alert("글 삭제 중 문제발생!"));
+			}
 		}
 	 render() {
 	        return (
@@ -206,13 +212,12 @@ class DocContent extends Component{
 					{this.state.tap ? <div><Comment pagingCount={this.pagingCount} CommentFromParentFunction={this.getDocument} CommentFromParent={this.state.comment}></Comment>
 					         <div className="Paging">
 							 <button className="Paging-left-btn" onClick={()=>this.leftPaging(this.state.curPageNum)}>◀</button>
-							 {this.state.commentPageNumber.map((item)=><a className="Comment-pageNumber" id={"pageNum"+item} onClick={()=>this.contentListPage(item+"")} style={{color: item===this.state.curPageNum ? "red" : "black" }} key={item}>{item}</a>)}
+							 {this.state.commentPageNumber.map((item)=><b className="Comment-pageNumber" id={"pageNum"+item} onClick={()=>this.contentListPage(item+"")} style={{color: item===this.state.curPageNum ? "red" : "black" }} key={item}>{item}</b>)}
 							 <button className="Paging-right-btn" onClick={()=>this.rightPaging(this.state.curPageNum)}>▶</button>
 							 </div> </div>: <OtherDocumentList margin={this.state.margin}></OtherDocumentList> }
 					</div>:this.state.docSw ? <div className="Doc-empty">
-						<h1>등록된 글이 없습니다!</h1>
-						<h1>새로운 글을 등록해주세요!</h1>
-						<button onClick={this.documentWritePage}>새글작성</button>					
+						<h1>해당하는 글이 없습니다.</h1>
+						{this.state.login ?	<button onClick={this.documentWritePage}>새글작성</button>	:""}		
 						</div> : <div className="Doc-empty">	<h1 className="Document_loading">글 불러오는중...</h1> </div>}
 					
 					</div>

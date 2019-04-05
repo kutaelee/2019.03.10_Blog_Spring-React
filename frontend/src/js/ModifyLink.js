@@ -9,12 +9,22 @@ class ModifyLink extends Component{
        
     };
     componentDidMount(){
+        this.loginSessionCheck();
         this.getLink();
     }
     getLink=()=>{
         axios.get("/alllinklist").then(res=>this.setState({linkList:res.data}));
     }
-  
+
+    loginSessionCheck=()=>{
+        axios.get("/loginsessioncheck").then(res=>{
+            if(!res.data){
+                alert("로그인 후 이용가능 합니다.");
+                window.history.back();
+            }
+        }).catch(e=>alert("세션체크 중 문제발생!"));
+    }
+
     delListPush=(seq)=>{
         let className=".checkbox"+seq;
         
@@ -29,6 +39,8 @@ class ModifyLink extends Component{
             if(res.data){
                 alert("링크 삭제완료!");
                 window.location.reload();
+            }else{
+                alert("권한이 없습니다.");
             }
         }).catch(e=>alert("링크 삭제중 문제발생!"));
     }
@@ -55,6 +67,8 @@ class ModifyLink extends Component{
                 if(res.data){
                     alert("수정이 완료되었습니다.");
                     window.location.reload();
+                }else{
+                    alert("권한이 없습니다.");
                 }
             }).catch(e=>alert("링크 수정중 문제발생!"));
         }else{

@@ -11,7 +11,7 @@ import org.springframework.stereotype.Repository;
 public class CommentDao {
 	@Autowired
 	private SqlSession sqlsession;
-	
+	//유일한 id는 네임스페이스 생략해도 되고 중복되면 에러발생함
 	public List<HashMap<String,Object>> commentList(HashMap<String, Object> map){
 		return sqlsession.selectList("commentList",map);
 	}
