@@ -5,6 +5,7 @@
 	width: 15%;
 	margin-left: 80%;
 	margin-top: 0;
+	position: fixed;
 }
 .Subject-header{
 	padding:1%;
@@ -85,4 +86,51 @@
 		font-size:13px;
 		padding: 6px 9px;
 	 }
+}
+@media(max-width:600px){
+	.Subject{
+		position: relative;
+		width:90%;
+		margin-left: 5%;
+		margin-bottom: 5%;
+	}
+	.Subject-header{
+		font-size: 5vw;
+	 }
+	 .Subject-name{
+		font-size:5vw;
+		width:100%;
+	}
+	.Subject-btn-div{
+		 text-align: center;
+	}
+	.Subject-add-btn{
+		font-size:4vw;
+		padding:8px 10px;
+	 }
+	 .Subject-modified-btn{
+		font-size:4vw;
+		padding:8px 10px;
+		margin-top:0;
+	 }
+
+	 .Navi h4{
+		font-size:2vw;
+	 }
+	 .Navi button{
+	    font-size: 1.5vw;
+  		padding: 3px 4px;
+	 }
+	 .Subject-body{
+		padding:0 1vw;
+	}
+	.Subject-toggle-btn{
+		position: absolute;
+		margin-left: 35%;
+		font-size: 5vw;
+  		margin-top: 2vh;
+  		background: transparent;
+ 	  	border: none;
+	}
+
 }

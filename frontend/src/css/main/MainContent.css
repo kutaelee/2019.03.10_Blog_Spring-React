@@ -63,3 +63,20 @@ hr{
 		font-size:.9vw;
 	}
 }
+@media(max-width:600px){
+	.Content{
+		margin-top: 45%;
+		width: 85%;
+		margin-left: 2%;
+	}
+	.Content-title h4{
+		font-size:5vw;
+	}
+	.Content-list-item{
+		width:95%;
+		height: 45vh;
+	}
+	.Content-list-item p{
+		font-size:3vw;
+	}
+}

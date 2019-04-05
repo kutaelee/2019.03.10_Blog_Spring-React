@@ -27,3 +27,12 @@
         font-size:1vw;
     }
 }
+@media(max-width:1280px){
+    .Footer{
+        margin-top: 60vh;
+    }
+    .Link a{
+        font-size:3vw;
+        margin-right:2%;
+    }
+}

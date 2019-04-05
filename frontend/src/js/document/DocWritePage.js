@@ -63,7 +63,11 @@ class DocWritePage extends Component{
         }
 
     };
-
+    cancelClick=()=>{
+        if(window.confirm("작성하신 내용을 저장하지 않고 페이지를 나갑니다\n 그래도 괜찮으시겠습니까?")){
+            window.history.back();
+        }
+    }
     render(){
         return(
             <div className="DocWritePage">
@@ -75,7 +79,8 @@ class DocWritePage extends Component{
                 <div id="toastEditor">
                     <div id="editSection"></div>
                 </div>
-                <button onClick={this.saveArticle} className="btn_save">Save</button>
+                <button className="Cancel-btn" onClick={()=>this.cancelClick()}>취소</button>
+                <button onClick={this.saveArticle} className="Save-btn">등록</button>
             </div>
         );
     };

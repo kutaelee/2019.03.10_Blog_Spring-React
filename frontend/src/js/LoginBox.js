@@ -8,11 +8,24 @@ class LoginBox extends Component {
         top:250
     }
     componentDidMount() {
+        if(this.widthCheck()){
+            window.addEventListener("scroll", this.handleScroll);
+        }else{
+            this.setState({top:150});
+        }
         this.loginSessionCheck();
-        window.addEventListener("scroll", this.handleScroll);
+      
     }
     componentWillUnmount(){
-    window.removeEventListener("scroll", this.handleScroll);
+        if(this.widthCheck()){
+          window.removeEventListener("scroll", this.handleScroll);
+        }
+    }
+    widthCheck=()=>{
+        if(document.body.clientWidth>600)
+            return true;
+        else
+            return false;   
     }
     handleScroll=() =>{
         const top =

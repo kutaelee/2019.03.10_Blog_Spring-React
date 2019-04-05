@@ -47,3 +47,23 @@
         margin-top: 17%;
     }
 }
+@media(max-width:600px){
+    .AddLink{
+        margin-top: 50%;
+        width: 95%;
+        margin-left: 2%;
+    }
+    .AddLink h4{
+        font-size:3vw;
+    }
+    .AddLink-table{
+        width:98%;
+        margin-left:1%;
+    }
+    .AddLink-tbody input{
+        width:100%;
+    }
+    .AddLink-submit{
+        margin-left:41.5%;
+    }
+}

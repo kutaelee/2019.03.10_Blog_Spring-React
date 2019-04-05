@@ -56,3 +56,13 @@ td{
         margin-top: 15%;
     }
 }
+@media(max-width:600px){
+	.Search{
+        margin-top: 42%;
+        width: 98%;
+        margin-left: 1%;
+    }
+    td{
+        font-size: 3vw;
+    }
+}

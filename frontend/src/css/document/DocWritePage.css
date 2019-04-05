@@ -20,9 +20,13 @@
     color: rgba(240, 47, 70,.9);
     box-shadow: 1px 1px 5px gray;
 }
-.btn_save{
+.Cancel-btn{
+    margin-top: 5%;
+    margin-left:35%;
+}
+.Save-btn{
     margin-bottom:10%;
-    margin-left:45%;
+    margin-left:5%;
 }
 .Doc-textLength{
     text-align: right;
@@ -43,5 +47,13 @@
     }
     .tui-editor-defaultUI .te-mode-switch{
         height: 80%;
+    }
+}
+@media(max-width:600px){
+    .DocWritePage{
+        width: 98%;
+        margin-left: 1%;
+        margin-top: 40%;
+        margin-bottom: 15%;
     }
 }

@@ -40,3 +40,30 @@
 .Logout-body button{
     margin-top:1vh;
 }
+@media(max-width:600px){
+    .LoginBox{
+        position: relative;
+        width: 90%;
+        margin-left:5%;
+    }
+    .Login-head{
+        padding:2vh 0;
+        font-size: 5vw;
+    }
+    .Login-body label{
+        font-size: 4vw;
+    }
+    .Login-body input {
+        width: 50%;
+        padding-left: 1%;
+        font-size:3vw;
+    }
+    .Login-btn{
+        font-size: 3vw;
+        padding: 10px 15px;
+    }
+    .Logout-body button{
+        font-size: 4vw;
+        padding: 8px 10px;
+    }
+}

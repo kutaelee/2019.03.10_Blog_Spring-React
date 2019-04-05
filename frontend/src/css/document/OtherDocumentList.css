@@ -115,3 +115,31 @@
         margin-top: 20%;
     }
 }
+@media(max-width:600px){
+    .OtherDocumentList{
+        width: 90%;
+        margin-left:5%;
+        height: 40vh;
+    }
+    .Left-button-div{
+        margin-top: 33%;
+    }
+    .Right-button-div{
+        margin-top: 33%;
+        margin-left: 76%;
+    }
+    .Other-list{
+        height: 20vh;
+        width: 110px;
+        margin-top: 6vh;
+    }
+    .Other-title-div h4{
+        font-size:3vw;
+    }
+    .Other-list p{
+        font-size:2vw;
+    }
+    .Other-list b{
+        font-size:3vw;
+    }
+}

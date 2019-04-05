@@ -285,3 +285,70 @@ hr{
 	}
 
 }
+@media(max-width:600px){
+	.DocContent{
+		width:85%;
+		margin-left:2%;
+	}
+	.Doc-button-div{
+		margin-top: 23vh;
+	}
+	.CommentWriteForm{
+		width: 90%;
+		margin-left: 5%;
+	}
+	.Tap{
+		margin-top:5%;
+		margin-left: 5%;
+		margin-bottom: 4%;
+	}
+	.Tap span{
+		padding: 8px 10px;
+		font-size: 3vw;
+	}
+	.Comment-body{
+		width:90%;
+		margin-left:5%;
+	}
+	.CommentWriteForm-content{
+		width:70%;
+		height: 5vh;
+	}
+	.Comment-write-btn {
+		font-size: 4vw;
+		padding: 8px 10px;
+	}
+	.Comment-body p{
+		font-size:4vw;
+	}
+	.CommentWriteForm-header{
+		font-size:4vw;
+	}
+	.CommentWriteForm label {
+		font-size: 3vw;
+	}
+	.CommentWriteForm input{
+		font-size: 3vw;
+		width:30%;
+	}
+	.Doc-button-div{
+		width:95%;
+	}
+	.Doc-button-div button{
+		padding: 8px 15px;
+		font-size: 4vw;
+	}
+	.DocContent button{
+		padding: 8px 10px;
+		font-size: 4vw;
+	}
+	.Paging{
+		margin-bottom:20%;
+	}
+	#modify-password{
+		width:30%;
+	}
+	.Modify-content{
+		width: 70%;
+	}
+}

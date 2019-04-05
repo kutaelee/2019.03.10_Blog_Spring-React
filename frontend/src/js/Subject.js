@@ -8,7 +8,8 @@ import Navi from './Navi';
 class Subject extends Component{
 	state ={
 		menuPostion:null,
-		subjectList:[{subject_name:"a",subject_seq:"1"}]
+		subjectList:[{subject_name:"a",subject_seq:"1"}],
+		mobile:false
 	};
 
 	constructor(props) {
@@ -16,23 +17,35 @@ class Subject extends Component{
 	
 		this.state = {
 			  pinSw:false,
-			  menuPostion:'fixed',
+			  menuPostion:null,
 			  curTop:170,
 			  menuTop:170,
 			  login:false
-		
 			};
 	   this.pinClick = this.pinClick.bind(this);
 	 };
 	 componentDidMount() {
 		this.loginSessionCheck();
 		this.GetSubject();
-		window.addEventListener("scroll", this.handleScroll);
-    }
-    componentWillUnmount(){
-		window.removeEventListener("scroll", this.handleScroll);
-	}
+		if(this.widthCheck()){
+			window.addEventListener("scroll", this.handleScroll);
+		}else{
+			this.setState({mobile:true});
+			document.querySelector('.Subject-body').style.display="none";
+		}
 
+    }
+    componentWillUnmount(){		
+		if(this.widthCheck()){
+		window.removeEventListener("scroll", this.handleScroll);
+		}
+	}
+  widthCheck=()=>{
+		if(document.body.clientWidth>600)
+				return true;
+		else
+				return false;   
+	}
 	handleScroll=() =>{
 		if(!this.state.pinSw){
 		 const top =
@@ -54,6 +67,7 @@ class Subject extends Component{
 
    }
 	pinClick() {
+		if(this.widthCheck()){
 		const topOffset=document.querySelector('.Top').offsetTop;
 		if(!this.state.pinSw){
 			this.setState(() =>({
@@ -67,8 +81,9 @@ class Subject extends Component{
 				menuTop:topOffset+100,
 				pinSw:!this.state.pinSw
 			}));
+			}
 		}
-	};
+	}
 	SubjectInsertForm(){
 
 		//추가할 주제의 고유번호 (마지막 번호에서 1추가해서 가져옴)
@@ -89,14 +104,28 @@ class Subject extends Component{
             if(res.data)
                 this.setState({login:true});
         }).catch(e=>alert("세션체크 중 문제발생!"));
-    }
+		}
+		subjectToggle=()=>{
+			let btn=document.querySelector('.Subject-toggle-btn');
+			if(btn){
+				if(document.querySelector('.Subject-body').style.display==='block'){
+					document.querySelector('.Subject-body').style.display='none';
+					btn.innerText='▼';
+			}else{
+					document.querySelector('.Subject-body').style.display='block';
+					btn.innerText='▲';
+				}
+			}
+		
+	}
 	render(){
 		return (
 				<div className="Subject" style={{position:this.state.menuPostion,top:this.state.menuTop,transition:"0.5s"}}>
 		
 				<header className="Subject-header">
-				{this.state.pinSw ? <img src={ActivePin} className="Active-pin" onClick={this.pinClick} alt="chock-pin"></img>  :<img src={pin} className="Subject-pin" onClick={this.pinClick} alt="Active-pin"></img>}
-					<h4 className="Subject-title">주제</h4>
+				{this.state.mobile ? <button className="Subject-toggle-btn" onClick={()=>this.subjectToggle()}>▼</button> :
+				this.state.pinSw ? <img src={ActivePin} className="Active-pin" onClick={this.pinClick} alt="chock-pin"></img>  :<img src={pin} className="Subject-pin" onClick={this.pinClick} alt="Active-pin"></img>
+				}	<h4 className="Subject-title">주제</h4>
 				</header>
 				<div className="Subject-body">
 				{this.state.subjectList ? <ul className="Subject-ul">
@@ -109,12 +138,12 @@ class Subject extends Component{
 				} </ul> : <p>주제를 불러오는중..</p>}
 				</div>
 				{this.state.login ?  
-				<div>
+				<div className="Subject-btn-div">
 				<button className="Subject-add-btn" onClick={this.SubjectInsertForm}>추가</button>
 				<button className="Subject-modified-btn" onClick={this.ModifySubjectPage}>수정</button>
 				</div>
 					: ""}
-				<Navi></Navi>
+				{this.state.mobile ? "" : <Navi></Navi>}
 				</div>
 				);
 	};

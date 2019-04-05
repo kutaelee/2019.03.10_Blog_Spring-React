@@ -4,6 +4,7 @@
     margin-left: 37%;
     margin-top: 10%;
     position: absolute;
+
 }
 .ModifyPage h1{
     text-align: center;
@@ -59,5 +60,28 @@
     .ModifyPage{
         margin-top:15%;
         margin-bottom:10vh;
+    }
+}
+@media(max-width:600px){
+    .ModifyPage{
+      width: 98%;
+      margin-left: 1%;
+      margin-top: 44%;
+      box-shadow: 1px 1px 5px grey; 
+   }
+   .ModifyBody button{
+      padding: 8px 15px;
+      font-size: 4vw;
+      margin-bottom: 5%;
+   }
+   .MainImg {
+      width: 43vw;
+      margin-left: 30%;
+    }
+    .SubjectImg {
+        width:55vw;
+    }
+    .SubjectName{
+        width:55vw;
     }
 }
