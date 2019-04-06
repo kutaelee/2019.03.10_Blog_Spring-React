@@ -15,7 +15,8 @@ class DocModifyPage extends Component{
    
     state={
         textLength:0,
-        doc:{document_title:'',document_content:'',document_seq:'',docuemnt_dir:'',document_parent_seq:''}
+        doc:{document_title:'',document_content:'',document_seq:'',docuemnt_dir:'',document_parent_seq:''},
+        textMaxLength:2500
     }
     componentDidMount(){
         this.loginSessionCheck();
@@ -67,7 +68,7 @@ class DocModifyPage extends Component{
     saveArticle(dir,seq){
         const text=document.querySelectorAll(".tui-editor-contents");
         const title= document.querySelector('.title').value;
-        if(text[1].innerText.length>2500){
+        if(text[1].innerText.length>this.state.textMaxLength){
             alert("글자 수 제한은 2500자 입니다.");
         }else if(title.length<=0){
             alert("제목은 필수 입니다.");
@@ -96,7 +97,7 @@ class DocModifyPage extends Component{
             <div className="DocWritePage">
             <div className="DocWritePage-title">
               
-                <p className="Doc-textLength">텍스트 제한: {this.state.textLength} / 2500자</p>
+                <p className="Doc-textLength">텍스트 제한: {this.state.textLength} / {this.state.textMaxLength}자</p>
                 <input type="text" className="title" placeholder="제목" maxLength="100"></input>
             </div>
                 <div id="toastEditor">

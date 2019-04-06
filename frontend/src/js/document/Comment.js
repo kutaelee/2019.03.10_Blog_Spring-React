@@ -14,7 +14,8 @@ class Comment extends Component{
         modifySw:'',
         deleteSw:'',
         login:false,
-        allSw:false
+        allSw:false,
+        loginInfoText:'관리자는 입력할 필요가 없습니다.'
    }
    componentDidMount(){
         this.commentCount();
@@ -156,7 +157,7 @@ render(){
         <label htmlFor="name" className="Label-name">닉네임: </label> 
         {this.state.login ? <b className="Admin-info">관리자</b>:<input type="text" id="comment-name" placeholder="홍길동" maxLength='25'></input>}
         <label htmlFor="password" className="Label-password">비밀번호: </label>	
-        {this.state.login ? <b className="Admin-info">관리자는 비밀번호가 필요없습니다.</b>:<input type="password" id="comment-password" placeholder="●●●●●●" maxLength='20'></input>}
+        {this.state.login ? <b className="Admin-info">{this.state.loginInfoText}</b>:<input type="password" id="comment-password" placeholder="●●●●●●" maxLength='20'></input>}
         <textarea className="CommentWriteForm-content" id="comment-content" maxLength='250'></textarea>
         <input type="reset" className="Reset-btn"></input>
         <button type="button" className="Comment-write-btn" onClick={this.commentWrite}>등록</button>
@@ -175,14 +176,14 @@ render(){
                         {!this.state.allSw ?<img className="Comment-edit" onClick={()=>this.modifyCommentForm(item.comment_seq)} src={editIcon} alt="Edit icon"/> :""}
                         {!this.state.allSw ? <img className="Comment-del" onClick={()=>this.deleteCommentForm(item.comment_seq)} src={delIcon} alt="Delete icon"/> : ""}
                       
-                        {this.state.deleteSw===item.comment_seq ?   <div> {this.state.login ? <b className="Admin-info" id="admin-info">관리자는 비밀번호가 필요없습니다.</b> : <span><label htmlFor="password" className="Label-delete-password">비밀번호: </label>	
+                        {this.state.deleteSw===item.comment_seq ?   <div> {this.state.login ? <b className="Admin-info" id="admin-info">{this.state.loginInfoText}</b> : <span><label htmlFor="password" className="Label-delete-password">비밀번호: </label>	
                         <input type="password" id="delete-password" placeholder="●●●●●●" maxLength='20'></input></span> }
                         <button className="Modify-cancel-btn" onClick={this.deleteCancel}>취소</button> 
                         <button className="Comment-delete-btn" onClick={()=>this.commentDelete(item.comment_seq)}>삭제</button>                
                         </div>: "" }
 
                         {this.state.modifySw===item.comment_seq ? 
-                        <div> {this.state.login ? <b className="Admin-info" id="admin-info">관리자는 비밀번호가 필요없습니다.</b> : <span><label htmlFor="password" className="Label-modify-password">비밀번호: </label>	
+                        <div> {this.state.login ? <b className="Admin-info" id="admin-info">{this.state.loginInfoText}</b> : <span><label htmlFor="password" className="Label-modify-password">비밀번호: </label>	
                         <input type="password" id="modify-password" placeholder="●●●●●●" maxLength='20'></input> </span>}
                         <button className="Modify-cancel-btn" onClick={this.modifyCancel}>취소</button><br/>
                         <textarea className='Modify-content' defaultValue={item.comment_content} maxLength='250'></textarea>
