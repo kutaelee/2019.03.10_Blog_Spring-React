@@ -172,13 +172,18 @@ class DocContent extends Component{
 		if(window.confirm("문서와 이미지가 모두 삭제되며 돌이킬 수 없습니다.\n정말로 문서를 삭제하시겠습니까?")){
 		
 			axios.post("/documentdelete",{seq:seq,dir:dir})
-			.then(()=>axios.post('/latelyseq',{subject_seq:path[2]}))
-			.then(res =>{
+			.then(res=>
+				{
+					if(res.data){
+						alert("삭제가 완료되었습니다!");
+					}else{
+						alert("권한이 없습니다");
+					}
+			}).then(()=>axios.post('/latelyseq',{subject_seq:path[2]})).then(res =>{
 				if(res.data){
-					alert("삭제가 완료되었습니다!");
 					window.location = "/document/"+path[2]+"/"+res.data;	
 				}else{
-					alert("권한이 없습니다");
+					window.location = "/document/"+path[2]+"/";
 				}
 				}).catch(e=>alert("글 삭제 중 문제발생!"));
 			}

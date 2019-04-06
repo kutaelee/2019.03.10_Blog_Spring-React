@@ -255,9 +255,13 @@ hr{
 }
 .DocContent th{
 	border:1px solid gray;
+    background: rgb(240, 47, 70);
+	color: white;
+	letter-spacing: 1px;
 }
 .DocContent td{
 	border:1px solid gray;
+	letter-spacing: 1px;
 }
 .DocContent a{
 	color:-webkit-link;

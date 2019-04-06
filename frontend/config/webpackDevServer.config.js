@@ -80,7 +80,8 @@ module.exports = function(proxy, allowedHost) {
       // See https://github.com/facebook/create-react-app/issues/387.
       disableDotRule: true,
     },
-    public: allowedHost,
+    //public: allowedHost,
+    public:'kutaelee.iptime.org',
     proxy,
     before(app, server) {
       if (fs.existsSync(paths.proxySetup)) {

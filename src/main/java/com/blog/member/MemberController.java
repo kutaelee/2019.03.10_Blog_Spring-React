@@ -19,6 +19,8 @@ public class MemberController {
 	MemberDao md;
 	@Autowired
 	BCryptPasswordEncoder passwordEncoder;
+	@Autowired
+	MemberService ms;
 	
 	@PostMapping("login")
 	public boolean login(@RequestBody HashMap<String, String> map,HttpSession session) {

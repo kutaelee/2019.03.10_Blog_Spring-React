@@ -18,8 +18,8 @@ class Subject extends Component{
 		this.state = {
 			  pinSw:false,
 			  menuPostion:null,
-			  curTop:170,
-			  menuTop:170,
+			  curTop:190,
+			  menuTop:190,
 			  login:false
 			};
 	   this.pinClick = this.pinClick.bind(this);
@@ -54,8 +54,8 @@ class Subject extends Component{
 		const topOffset=document.querySelector('.Top').offsetTop;
 			if(top===0){
 				this.setState(()=>({
-					menuTop:topOffset+170,
-					curTop:170
+					menuTop:topOffset+190,
+					curTop:190
 				}));
 			}else{
 				this.setState(()=>({

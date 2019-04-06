@@ -8,7 +8,7 @@ class Content extends Component{
 	 state = {latelyDocumentList:[{document_seq:'',document_title:'',document_parent_seq:'',img:'',document_regdate:''}]};
 
 	 componentDidMount(){
-		axios.get('latelydocumentlist').then(res=>this.setState({latelyDocumentList:res.data}));
+		axios.get('/latelydocumentlist').then(res=>this.setState({latelyDocumentList:res.data}));
 	 }
 	 dateFormat(regdate){
 		return new moment(regdate).format('llll');

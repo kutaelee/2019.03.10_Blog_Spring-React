@@ -18,7 +18,7 @@ class AddLink extends Component{
     }
     addList=()=>{
         const str="<tr>"+
-        '<td><input type="text" placeholder="링크이름" max-length="50" class="link_name"></input></td>'+                     
+        '<td><input type="text" placeholder="링크이름" max-length="20" class="link_name"></input></td>'+                     
         '<td><input type="text" placeholder="연결될 주소" max-length="150" class="link_address"></input></td>'+
         '<td><input type="text" placeholder="링크 설명" max-length="250" class="link_info"></input></td>'+
     "</tr>";
@@ -66,7 +66,7 @@ class AddLink extends Component{
                 </tr>
         
                     <tr>
-                        <td><input type="text" placeholder="링크이름" maxLength="50" className="link_name"></input></td>                      
+                        <td><input type="text" placeholder="링크이름" maxLength="20" className="link_name"></input></td>                      
                         <td><input type="text" placeholder="연결될 주소" maxLength="150" className="link_address"></input></td>
                         <td><input type="text" placeholder="링크 설명" maxLength="250" className="link_info"></input></td>
                     </tr>

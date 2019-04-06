@@ -96,9 +96,9 @@ class ModifyLink extends Component{
 						(item)=>
                     <tr key={item.link_seq}>
                         <td><input type="checkbox" className={"checkbox"+item.link_seq} onClick={()=>this.delListPush(item.link_seq)}></input></td>
-                        <td><input type="text" defaultValue={item.link_name} id={"name"+item.link_seq}></input></td>                      
-                        <td><input type="text" defaultValue={item.link_address} id={"addr"+item.link_seq}></input></td>
-                        <td><input type="text" defaultValue={item.link_info} id={"info"+item.link_seq}></input></td>
+                        <td><input type="text" defaultValue={item.link_name} id={"name"+item.link_seq} maxLength="20"></input></td>                      
+                        <td><input type="text" defaultValue={item.link_address} id={"addr"+item.link_seq} maxLength="150"></input></td>
+                        <td><input type="text" defaultValue={item.link_info} id={"info"+item.link_seq} maxLength="250"></input></td>
                         <td>{item.link_tag}</td>
                     </tr>
                     )}
