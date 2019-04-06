@@ -4,7 +4,7 @@
 
 > Spring과 react를 결합해서 만들었습니다.
 
-> [데모사이트](http://developerblog.shop/) {: target="_blank"}
+> [데모사이트](http://developerblog.shop/){:target="_blank"}
 
 ### 주요기능
 * 게시판 CRUD
