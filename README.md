@@ -28,12 +28,12 @@
 ### 문제해결
 
 * 처음에 npm과 node 버전을 낮은 버전으로 진행하였는데 npm install이 너무 느리고 완료되지 못했음
- ** npm과 node 업그레이드 후 문제 해결
+  ** npm과 node 업그레이드 후 문제 해결
 * npm eject의 경우 복사본 문제가 발생하였음
- ** npm i -f 로 강제 eject 진행하여 강제로 진행하여 해결하였음
+  ** npm i -f 로 강제 eject 진행하여 강제로 진행하여 해결하였음
 * npm build의 경우 너무 낮은 메모리의 인스턴스를 빌려서 사용하다보니 node의 메모리 증식문제 때문에 완료하지 못하고 에러가 발생함
- ** sudo npm run build -g increase-memory-limit 로 메모리를 제한하여 해결하였음
+  ** sudo npm run build -g increase-memory-limit 로 메모리를 제한하여 해결하였음
 * ip로 외부접속은 되었으나 도메인으로는 invalid host header가 발생하며 접속이 되지 않는 문제
- ** webpackDevServer.config.js에 public을 도메인주소로 변경하여 문제 해결
+  ** webpackDevServer.config.js에 public을 도메인주소로 변경하여 문제 해결
 * /static/js 404 에러가 계속해서 발생했음
- ** webpack.config.js 의 ('webpack-dev-server/client')에 + '?http://0.0.0.0:3000', 를 추가 함으로 해결
+  ** webpack.config.js 의 ('webpack-dev-server/client')에 + '?http://0.0.0.0:3000', 를 추가 함으로 해결
