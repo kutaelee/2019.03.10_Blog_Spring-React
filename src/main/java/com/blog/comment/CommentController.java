@@ -70,6 +70,8 @@ public class CommentController {
 
 	@PostMapping("commentModify")
 	public boolean commentModify(@RequestBody HashMap<String, String> map, HttpSession session) {
+		
+		//pw는 사용하지않으나 not null 제약조건 때문에 임의의 값 
 		if (session.getAttribute("login") != null) {
 			map.put("name", "관리자");
 			map.put("pw", "1234");
