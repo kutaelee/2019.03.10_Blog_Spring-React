@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8" />
+<link rel="shortcut icon" href="http://developerblog.shop/favicon.ico" />
+<meta
+name="viewport"
+content="width=device-width, initial-scale=1, shrink-to-fit=no"
+/>
+
+<link rel="manifest" href="http://developerblog.shop/manifest.json" />
+<meta name="google-site-verification" content="L4Z66a-L-K4ayXOPo7zOJV6MbyE_uBfKA6dCw-vAIes" />
+<meta name="naver-site-verification" content="6a4d03b2bf76c4a2342bce431a663a586fd62fba"/>
+<title>규태의 블로그</title>
+</head>
+<body>
+<div id="root"></div>
+
+<script src="http://developerblog.shop/static/js/bundle.js"></script><script src="http://developerblog.shop/static/js/0.chunk.js"></script><script src="http://developerblog.shop/static/js/main.chunk.js"></script></body>
+
+</html>
