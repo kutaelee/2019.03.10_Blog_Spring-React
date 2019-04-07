@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 @Transactional
-@Repository
+@Service
 public class CommentService {
 	@Autowired
 	CommentDao cd;
