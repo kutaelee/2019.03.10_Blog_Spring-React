@@ -5,7 +5,20 @@
 > Spring과 react를 결합해서 만들었습니다.
 
 > [데모사이트](http://developerblog.shop/)
-
+### 개발환경
+ * frontend 관련
+   * react,node,npm
+ * backend 관련
+   * spring,mysql,mybatis,tomcat
+ * 운영체제
+   * windows
+### 배포환경
+ * 클라우드 컴퓨팅
+   * 토스트클라우드
+ * 서버
+   * node에 proxy 설정을 통해 tomcat과 통신
+ * DB
+   * mysql 5.6
 ### 주요기능
 * 게시판 CRUD
 * 로그인 세션,비밀번호 암호화
