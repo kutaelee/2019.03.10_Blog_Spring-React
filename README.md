@@ -5,6 +5,8 @@
 > Spring과 react를 결합해서 만들었습니다.
 
 > [데모사이트](http://developerblog.shop/)
+
+---
 ### 개발환경
  * frontend 관련
    * react,node,npm
@@ -12,6 +14,8 @@
    * spring,mysql,mybatis,tomcat
  * 운영체제
    * windows
+
+---
 ### 배포환경
  * 클라우드 컴퓨팅
    * 토스트클라우드
@@ -19,6 +23,8 @@
    * node에 proxy 설정을 통해 tomcat과 통신
  * DB
    * mysql 5.6
+
+---
 ### 주요기능
 * 게시판 CRUD
 * 로그인 세션,비밀번호 암호화
@@ -30,6 +36,7 @@
 * 주제에 포함된 다른글 슬라이더
 * 리액트 시계와 방문자수 스케쥴러 적용
 
+---
 ### 배포과정
 
 * 토스트클라우드에 인스턴스 생성
@@ -38,6 +45,7 @@
 * package.json install 후 eject 와 build 진행
 * 도메인 A레코드로 연결 
 
+---
 ### 문제해결
 
 * 처음에 npm과 node 버전을 낮은 버전으로 진행하였는데 npm install이 너무 느리고 완료되지 못했음
@@ -50,3 +58,4 @@
   * webpackDevServer.config.js에 public을 도메인주소로 변경하여 문제 해결
 * /static/js 404 에러가 계속해서 발생했음
   * webpack.config.js 의 ('webpack-dev-server/client')에 + '?http://0.0.0.0:3000', 를 추가 함으로 해결
+---
