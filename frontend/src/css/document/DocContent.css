@@ -1,7 +1,7 @@
 
 .DocContent{
-	width: 35%;
-    margin-left: 27%;
+	width: 40%;
+    margin-left: 24%;
     display: inline-block;
     margin-top: 1%;
     box-shadow: 1px 1px 10px grey;
@@ -17,10 +17,8 @@ hr{
 	background:gray;
 }
 .DocContent-content{
-	padding-left:2vw;
-	padding-top:5vh;
-	word-break: break-word;
-	margin-bottom:5vh;
+    word-break: break-word;
+    padding: 1vh;
 }
 .DocContent-content img{
 	max-width: 90%;
@@ -274,6 +272,7 @@ hr{
 code{
 	background:whitesmoke;
 	display: block;
+	white-space: pre-line;
 }
 @media(max-width:1280px){
 	.Doc-button-div{

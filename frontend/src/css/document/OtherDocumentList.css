@@ -36,6 +36,7 @@
 .Other-title-div h4{
     margin:0;
     color:white;
+    display: inline-block;
 }
 .Left-button-div{
     display: inline-block;
@@ -72,7 +73,14 @@
     margin-top: 17%;
     text-align: center
 }
-
+.List-option-btn{
+    padding: 8px;
+    margin: 0 2%;
+    background: rgba(86, 77, 77,.8);
+}
+.List-option-btn:hover{
+    background: rgb(86, 77, 77);
+}
 @media(max-width:1280px){
     .OtherDocumentList{
         height: 50vh;
@@ -141,5 +149,9 @@
     }
     .Other-list b{
         font-size:3vw;
+    }
+    .OtherDocumentList h1{
+        font-size: 3vw;
+        margin-top: 34%;
     }
 }

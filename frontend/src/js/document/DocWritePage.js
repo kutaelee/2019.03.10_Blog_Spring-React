@@ -85,14 +85,14 @@ class DocWritePage extends Component{
             <div className="DocWritePage">
             <div className="DocWritePage-title">
               
-                <p className="Doc-textLength">텍스트 제한: {this.state.textLength} / {this.this.state.textMaxLength}자</p>
+                <p className="Doc-textLength">텍스트 제한: {this.state.textLength} / {this.state.textMaxLength}자</p>
                 <input type="text" className="title" placeholder="제목" maxLength="100"></input>
             </div>
                 <div id="toastEditor">
                     <div id="editSection"></div>
                 </div>
                 <button className="Cancel-btn" onClick={()=>this.cancelClick()}>취소</button>
-                <button onClick={this.saveArticle} className="Save-btn">등록</button>
+                <button onClick={()=>this.saveArticle()} className="Save-btn">등록</button>
             </div>
         );
     };

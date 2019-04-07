@@ -13,7 +13,9 @@ class OtherDocumentList extends Component{
 		this.state = {
             subjectName:'',
             otherDocumentList:[{document_seq:'',document_title:'',document_parent_seq:'',img:'',document_regdate:''}],
-            margin:0
+            margin:0,
+            listSw:false,
+            listOption:'리스트 형식으로 보기'
         }
     }
     componentDidMount(){
@@ -60,6 +62,9 @@ class OtherDocumentList extends Component{
     render(){
         return(
             <div className="OtherDocumentList">
+            <div className="Other-title-div"> <h4>{this.state.subjectName} 주제에 등록된 다른 글</h4>  <button className="List-option-btn">{this.state.listOption}</button></div>
+             {this.state.otherDocumentList[0] ?
+             <div>
                 <div className="Left-button-div">
                 <button className="Left-btn"  onClick={()=>this.leftSlide(this.state.margin)}>◀</button>
                 </div>
@@ -67,11 +72,9 @@ class OtherDocumentList extends Component{
                 <button className="Right-btn" onClick={()=>this.rightSlide(this.state.margin)}>▶</button>
                 </div>
                
-                <div className="Other-title-div"> <h4>{this.state.subjectName} 주제에 등록된 다른 글</h4></div>
-                {this.state.otherDocumentList[0] ?
               <div className="Other-list-div" style={{marginLeft:this.state.margin,transition:"0.3s"}}>
-             
-                  {this.state.otherDocumentList.map(	
+              {this.state.listSw ? "" :
+                  this.state.otherDocumentList.map(	
                         (item)=>
                 <span className="Other-list" onClick={()=>this.moveOtherPage(item.document_parent_seq,item.document_seq)} key={item.document_seq}>
                     <img src={item.img} alt={item.document_title} />
@@ -80,11 +83,11 @@ class OtherDocumentList extends Component{
                     <b>{this.titleFormat(item.document_title)} </b>
                     </div>
                 </span>
-         
-              ) }
-              
+          
+                )  
+              }
              
-              </div>:<h1>주제에 등록된 다른 글이 없습니다.</h1>
+              </div> </div>:<h1>주제에 등록된 다른 글이 없습니다.</h1>
                     }
             </div>
         );
