@@ -42,7 +42,7 @@ class OtherDocumentList extends Component{
         }
     }
     rightSlide(margin){
-        if(margin>=-190*(this.state.otherDocumentList.length-3) && this.state.otherDocumentList.length>3){
+        if(margin>=-190*(this.state.otherDocumentList.length-2) && this.state.otherDocumentList.length>2){
             if(margin===0){
                 this.setState({margin:this.state.margin-200});
             }else{

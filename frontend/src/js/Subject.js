@@ -33,12 +33,21 @@ class Subject extends Component{
 			this.setState({mobile:true});
 			document.querySelector('.Subject-body').style.display="none";
 		}
-
-    }
+	}
     componentWillUnmount(){		
 		if(this.widthCheck()){
 		window.removeEventListener("scroll", this.handleScroll);
 		}
+	}
+	selectSubject=(seq)=>{
+		const path=window.location.pathname.split('/');
+		seq+='';
+		if(path[2]===''||path[2]===null){
+			return 'black';
+		}
+		if(path[2]===seq){
+			return 'red';
+    }
 	}
   widthCheck=()=>{
 		if(document.body.clientWidth>600)
@@ -132,7 +141,7 @@ class Subject extends Component{
 				{
 					this.state.subjectList.map(
 						(item)=><li className="Subject-list" key={item.subject_seq}>
-						<p className="Subject-name" value={item.subject_seq} onClick={()=>this.getDocuemntPage(item.subject_seq)}>{item.subject_name}</p> 
+						<p className="Subject-name" value={item.subject_seq} onClick={()=>this.getDocuemntPage(item.subject_seq)} style={{color:this.selectSubject(item.subject_seq)}}>{item.subject_name}</p> 
 						</li>
 					) 
 				} </ul> : <p>주제를 불러오는중..</p>}

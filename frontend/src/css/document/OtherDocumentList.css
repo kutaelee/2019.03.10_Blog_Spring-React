@@ -40,13 +40,13 @@
 }
 .Left-button-div{
     display: inline-block;
-    margin-top: 9%;
+    margin-top: 7%;
     margin-left:1%;
     position: absolute;
 }
 .Right-button-div{
     display: inline-block;
-    margin-top: 9%;
+    margin-top: 7%;
     margin-left: 42%;
     position: absolute;
 }
