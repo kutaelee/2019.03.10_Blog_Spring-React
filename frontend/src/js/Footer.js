@@ -22,6 +22,7 @@ class Footer extends Component{
 						(item)=><a href={item.link_address}  target = "blank" rel="noopener noreferrer" key={item.link_seq}>{item.link_name}</a>
             )}
             </div>
+
             </div>
         );
     };

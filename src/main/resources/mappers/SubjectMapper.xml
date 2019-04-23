@@ -34,4 +34,5 @@
  	<select id="getSubjectSeq" parameterType="string" resultType="string">
  		select subject_seq from subject where subject_name=#{name}
  	</select>
+
 </mapper>

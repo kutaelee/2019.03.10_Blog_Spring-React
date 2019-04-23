@@ -31,7 +31,8 @@
 }
 @media(max-width:600px){
     .Footer{
-        margin-top: 73vh;
+        position: relative;
+        margin-top: 1vh;
     }
     .Footer a{
         font-size:3vw;

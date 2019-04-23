@@ -26,7 +26,7 @@ class Subject extends Component{
 	 };
 	 componentDidMount() {
 		this.loginSessionCheck();
-		this.GetSubject();
+		this.getSubject();
 		if(this.widthCheck()){
 			window.addEventListener("scroll", this.handleScroll);
 		}else{
@@ -84,12 +84,12 @@ class Subject extends Component{
 			}
 		}
 	}
-	SubjectInsertForm(){
+	subjectInsertForm(){
 
 		//추가할 주제의 고유번호 (마지막 번호에서 1추가해서 가져옴)
 		axios.get('/lastsubjectseq').then(res => window.location = "/subject/"+res.data);
 	}
-	GetSubject = () =>{
+	getSubject = () =>{
 		axios.get('/subjectlist').then(res=>this.setState({subjectList:res.data}));
 	}
 	getDocuemntPage(seq) {
@@ -122,8 +122,8 @@ class Subject extends Component{
 		return (
 				<div className="Subject" style={{position:this.state.menuPostion,top:this.state.menuTop,transition:"0.5s"}}>
 		
-				<header className="Subject-header">
-				{this.state.mobile ? <button className="Subject-toggle-btn" onClick={()=>this.subjectToggle()}>▼</button> :
+				<header className="Subject-header" onClick={()=>this.subjectToggle()}>
+				{this.state.mobile ? <button className="Subject-toggle-btn">▼</button> :
 				this.state.pinSw ? <img src={ActivePin} className="Active-pin" onClick={this.pinClick} alt="chock-pin"></img>  :<img src={pin} className="Subject-pin" onClick={this.pinClick} alt="Active-pin"></img>
 				}	<h4 className="Subject-title">주제</h4>
 				</header>
@@ -139,7 +139,7 @@ class Subject extends Component{
 				</div>
 				{this.state.login ?  
 				<div className="Subject-btn-div">
-				<button className="Subject-add-btn" onClick={this.SubjectInsertForm}>추가</button>
+				<button className="Subject-add-btn" onClick={this.subjectInsertForm}>추가</button>
 				<button className="Subject-modified-btn" onClick={this.ModifySubjectPage}>수정</button>
 				</div>
 					: ""}

@@ -35,14 +35,25 @@ class ModifyLink extends Component{
         }
     }
     linkDelete=()=>{
-        axios.post("/linkdelete",{list:this.state.delList}).then(res=>{
-            if(res.data){
-                alert("링크 삭제완료!");
-                window.location.reload();
-            }else{
-                alert("권한이 없습니다.");
+        let delList=this.state.delList;
+        let sw=true;
+        delList.map((item)=>{
+            if(item===0){
+                alert("top 링크는 블로그 제목이므로 삭제할 수 없습니다.");
+                return sw=false;
             }
-        }).catch(e=>alert("링크 삭제중 문제발생!"));
+            return null;
+        });
+        if(sw){
+            axios.post("/linkdelete",{list:delList}).then(res=>{
+                if(res.data){
+                    alert("링크 삭제완료!");
+                    window.location.reload();
+                }else{
+                    alert("권한이 없습니다.");
+                }
+            }).catch(e=>alert("링크 삭제중 문제발생!"));
+        }
     }
     linkModify=()=>{
         const linkList=this.state.linkList;
@@ -85,7 +96,7 @@ class ModifyLink extends Component{
                 <table className="ModifyLink-table">
                 <tbody>
                 <tr>
-                    <th className="check">체크</th>
+                    <th className="check">선택</th>
                     <th className="name">이름</th>
                     <th className="address">연결될 주소</th>
                     <th className="information">설명</th>
@@ -95,7 +106,7 @@ class ModifyLink extends Component{
 					this.state.linkList.map(
 						(item)=>
                     <tr key={item.link_seq}>
-                        <td><input type="checkbox" className={"checkbox"+item.link_seq} disabled={item.link_tag==='top' ? "disabled" : ""}onClick={()=>this.delListPush(item.link_seq)}></input></td>                    
+                        <td><input type="checkbox" className={"checkbox"+item.link_seq} onClick={()=>this.delListPush(item.link_seq)}></input></td>                    
                         <td><input type="text" defaultValue={item.link_name} id={"name"+item.link_seq} maxLength="20"></input></td>                      
                         <td><input type="text" defaultValue={item.link_address} id={"addr"+item.link_seq} maxLength="150"></input></td>
                         <td><input type="text" defaultValue={item.link_info} id={"info"+item.link_seq} maxLength="250"></input></td>

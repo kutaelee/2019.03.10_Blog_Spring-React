@@ -43,4 +43,5 @@ public class SubjectDao {
 	public String subjectName(Integer seq) {
 		return sqlsession.selectOne("subjectName",seq);
 	}
+
 }

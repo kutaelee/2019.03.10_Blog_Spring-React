@@ -5,21 +5,38 @@ import 'moment/locale/ko';
 import axios from 'axios';
 
 class Content extends Component{
-	 state = {latelyDocumentList:[{document_seq:'',document_title:'',document_parent_seq:'',img:'',document_regdate:''}]};
+	 state = {
+		 latelyDocumentList:[{document_seq:'',document_title:'',document_parent_seq:'',img:'',document_regdate:''}],
+		 subjectList:[{subject_name:'',subject_seq:''}]
+		};
 
 	 componentDidMount(){
 		axios.get('/latelydocumentlist').then(res=>this.setState({latelyDocumentList:res.data}));
+		this.getSubject();
+	 }
+	 subjectNameFormat(seq){
+		 let name="";
+			 this.state.subjectList.map((item)=>{
+				if(item.subject_seq===seq){
+					return name=item.subject_name;
+				}
+				return null;
+			 });
+			 return "[ "+name+" ]";		
 	 }
 	 dateFormat(regdate){
 		return new moment(regdate).format('llll');
 	}
 	titleFormat(title){
-		if(title.length>55){
-			let str=title.substring(0,55);
+		if(title.length>50){
+			let str=title.substring(0,50);
 			return str+" ...";
 		}else{
 			return title;
 		}
+	}
+	getSubject(){
+		axios.get('/subjectlist').then(res=>this.setState({subjectList:res.data}));
 	}
 	selectDoc=(parentSeq,seq)=>{
 		window.location.href="/document/"+parentSeq+"/"+seq;
@@ -37,6 +54,7 @@ class Content extends Component{
 						<div className="Content-list-item" onClick={()=>this.selectDoc(item.document_parent_seq,item.document_seq)} key={item.document_seq}>						
 							<img src={item.img} alt={item.document_title}></img>
 							<p>{this.dateFormat(item.document_regdate)}</p>		
+							<h5>{this.subjectNameFormat(item.document_parent_seq)}</h5>	
 							<div className="Content-title">
 							<h4>{this.titleFormat(item.document_title)}</h4>
 							</div>		

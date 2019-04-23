@@ -62,7 +62,7 @@ class OtherDocumentList extends Component{
     render(){
         return(
             <div className="OtherDocumentList">
-            <div className="Other-title-div"> <h4>{this.state.subjectName} 주제에 등록된 다른 글</h4>  <button className="List-option-btn">{this.state.listOption}</button></div>
+            <div className="Other-title-div"> <h4>{this.state.subjectName} 주제에 등록된 다른 글</h4> </div>
              {this.state.otherDocumentList[0] ?
              <div>
                 <div className="Left-button-div">

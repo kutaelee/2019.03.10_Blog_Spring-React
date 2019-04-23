@@ -53,7 +53,14 @@ hr{
 .Content-title h4{
     height: auto;
     position: relative;
-    display: grid;
+	display: grid;
+	font-size:90%;
+}
+h5{
+	font-family: 'NanumSquareRound';
+	letter-spacing:1px;
+	color: rgba(0, 0, 0,.7);
+	font-size:80%;
 }
 @media(max-width:1280px){
 	.Content-list-item h4{
@@ -70,11 +77,11 @@ hr{
 		margin-left: 2%;
 	}
 	.Content-title h4{
-		font-size:5vw;
+		font-size:4vw;
 	}
 	.Content-list-item{
 		width:95%;
-		height: 45vh;
+		height: 47vh;
 	}
 	.Content-list-item p{
 		font-size:3vw;

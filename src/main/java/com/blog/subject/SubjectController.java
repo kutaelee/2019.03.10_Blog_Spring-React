@@ -98,4 +98,5 @@ public class SubjectController {
 		}
 		return list;
 	}
+
 }
