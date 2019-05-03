@@ -20,8 +20,30 @@ class Comment extends Component{
    componentDidMount(){
         this.commentCount();
         this.loginSessionCheck();
+        document.querySelector('.CommentWriteForm').addEventListener("keyup",this.handleWriteFormKeyUp);
    }
-
+   componentWillMount(){
+        window.removeEventListener("keyup",this.handleWriteFormKeyUp);
+   }
+   strTrim=(keyword)=>{
+        keyword=keyword.replace(/^\s*/,"");
+        keyword=keyword.trim();
+        return keyword;
+   }
+   handleWriteFormKeyUp=(e)=>{
+       const id=document.getElementById('comment-name');
+       const content=document.getElementById('comment-content');
+       const pw=document.getElementById('comment-password');
+       if(e.keyCode===13){
+            if(!this.strTrim(id.value)){
+                id.focus();
+            }else if(!this.strTrim(pw.value)){
+                pw.focus();
+            }else if(!this.strTrim(content.value)){
+                content.focus();
+            }
+       }
+   }
    loginSessionCheck=()=>{
     axios.get("/loginsessioncheck").then(res=>{
         if(res.data){
@@ -146,7 +168,6 @@ class Comment extends Component{
         this.setState({allSw:true});
         this.setState({deleteSw:seq});
     }
-
 
 render(){
     

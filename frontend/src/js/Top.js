@@ -16,16 +16,23 @@ class Top extends Component {
        }
     componentDidMount() {
         window.addEventListener("scroll", this.handleScroll);
+        document.querySelector('.Top-search').addEventListener("keydown",this.handleSearch);
         this.visitCount();
         this.getTopLink();
     }
     componentWillUnmount(){
-    	window.removeEventListener("scroll", this.handleScroll);
+        window.removeEventListener("scroll", this.handleScroll);
+        document.querySelector('.Top-search').removeEventListener("keydown",this.handleSearch);
     }
     getTopLink=()=>{
         axios.post("/taglinklist",{tag:"top"}).then(res=>this.setState({linkList:res.data}));
     }
 
+    handleSearch=(e) =>{
+        if(e.keyCode===13){
+            this.search();
+        }  
+    }
     handleScroll=() =>{
     	 const top =
              (document.documentElement && document.documentElement.scrollTop) ||

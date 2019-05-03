@@ -26,4 +26,8 @@ public class VisitController {
 	
 		return vd.visitCount();
 	}
+	@GetMapping("browserListCheck")
+	public boolean browserListCheck() {
+		return true;
+	}
 }

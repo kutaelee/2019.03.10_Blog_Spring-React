@@ -32,10 +32,10 @@ hr{
 	transform: rotateZ(5deg);
 	transition:0.3s;
 }
-.Content-list-item h4{
-	font-size:1.1vw;
+.Content-list-item a{
+	font-size:85%;
 	letter-spacing: 1px;
-    word-break: break-word;
+	word-break: break-word;
 }
 .Content-list-item img{
 	width:100%;
@@ -50,20 +50,20 @@ hr{
 	padding: 0px 10%;
     word-break: break-word;
 }
-.Content-title h4{
+.Content-title a{
     height: auto;
     position: relative;
 	display: grid;
-	font-size:90%;
+	font-weight: 900;
 }
 h5{
-	font-family: 'NanumSquareRound';
+	font-family: 'Nanum Barun Gothic';
 	letter-spacing:1px;
 	color: rgba(0, 0, 0,.7);
 	font-size:80%;
 }
 @media(max-width:1280px){
-	.Content-list-item h4{
+	.Content-list-item a{
 		font-size:.8vw;
 	}
 	.Content-list-item p{
@@ -76,7 +76,7 @@ h5{
 		width: 85%;
 		margin-left: 2%;
 	}
-	.Content-title h4{
+	.Content-title a{
 		font-size:4vw;
 	}
 	.Content-list-item{

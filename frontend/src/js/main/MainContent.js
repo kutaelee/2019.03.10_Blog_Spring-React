@@ -41,6 +41,9 @@ class Content extends Component{
 	selectDoc=(parentSeq,seq)=>{
 		window.location.href="/document/"+parentSeq+"/"+seq;
 	}
+	address=(parentSeq,seq)=>{
+		return "/document/"+parentSeq+"/"+seq;
+	}
 	 render() {
 	        return (
 	        		<div className="Content">
@@ -53,10 +56,11 @@ class Content extends Component{
 						(item)=>
 						<div className="Content-list-item" onClick={()=>this.selectDoc(item.document_parent_seq,item.document_seq)} key={item.document_seq}>						
 							<img src={item.img} alt={item.document_title}></img>
+							
 							<p>{this.dateFormat(item.document_regdate)}</p>		
 							<h5>{this.subjectNameFormat(item.document_parent_seq)}</h5>	
 							<div className="Content-title">
-							<h4>{this.titleFormat(item.document_title)}</h4>
+							<a href={this.address(item.document_parent_seq,item.document_seq)}>{this.titleFormat(item.document_title)}</a>
 							</div>		
 						</div>
 						)} </div> : "최신글 불러오는중.."}

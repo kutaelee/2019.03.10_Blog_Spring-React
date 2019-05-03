@@ -8,7 +8,7 @@ import Navi from './Navi';
 class Subject extends Component{
 	state ={
 		menuPostion:null,
-		subjectList:[{subject_name:"a",subject_seq:"1"}],
+		subjectList:[{subject_name:"a",subject_seq:"1",address:""}],
 		mobile:false
 	};
 
@@ -105,6 +105,7 @@ class Subject extends Component{
 		//주제의 첫글의 고유번호 가져옴	uri만들어서 전달 seq=서브젝트 고유번호 res.data=문서고유번호
 		axios.post('/latelyseq',{subject_seq:seq}).then(res => window.location = "/document/"+seq+"/"+res.data);
 	}
+
 	ModifySubjectPage(){
 		window.location="/subjectlist";
 	}
@@ -141,7 +142,8 @@ class Subject extends Component{
 				{
 					this.state.subjectList.map(
 						(item)=><li className="Subject-list" key={item.subject_seq}>
-						<p className="Subject-name" value={item.subject_seq} onClick={()=>this.getDocuemntPage(item.subject_seq)} style={{color:this.selectSubject(item.subject_seq)}}>{item.subject_name}</p> 
+						<a className="Subject-name" href={item.address} onClick={()=>this.getDocuemntPage(item.subject_seq)} style={{color:this.selectSubject(item.subject_seq)}}>{item.subject_name}</a>
+						{/* <p className="Subject-name" value={item.subject_seq} onClick={()=>this.getDocuemntPage(item.subject_seq)} style={{color:this.selectSubject(item.subject_seq)}}>{item.subject_name}</p>  */}
 						</li>
 					) 
 				} </ul> : <p>주제를 불러오는중..</p>}

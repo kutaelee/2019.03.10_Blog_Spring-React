@@ -14,13 +14,25 @@ class LoginBox extends Component {
             this.setState({top:150});
         }
         this.loginSessionCheck();
-      
+        document.getElementById('Login-id').addEventListener("keydown",this.handleKeyDown);
+        document.getElementById('Login-pw').addEventListener("keydown",this.handleKeyDown);
     }
     componentWillUnmount(){
         if(this.widthCheck()){
           window.removeEventListener("scroll", this.handleScroll);
         }
+        document.getElementById('Login-id').removeEventListener("keydown",this.handleKeyDown);
+        document.getElementById('Login-pw').removeEventListener("keydown",this.handleKeyDown);
     }
+
+    handleKeyDown=(e) =>{
+        if(e.keyCode===13){
+            if(this.emptyCheck()){
+                this.login();
+            }
+        }  
+    }
+
     widthCheck=()=>{
         if(document.body.clientWidth>600)
             return true;
@@ -48,7 +60,21 @@ class LoginBox extends Component {
         }
 		
     }
-
+    emptyCheck(){
+        const id=document.getElementById('Login-id');
+        const pw=document.getElementById('Login-pw');
+        if(!id.value||!pw.value){
+            if(!id.value){
+                id.focus();
+                return false;
+            }else{
+                pw.focus();
+                return false;
+            }        
+        }else{
+            return true;
+        }
+    }
     login=()=>{
        const id=document.getElementById('Login-id').value;
        const pw=document.getElementById('Login-pw').value;

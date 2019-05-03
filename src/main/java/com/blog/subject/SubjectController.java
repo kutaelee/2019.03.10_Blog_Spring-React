@@ -21,13 +21,16 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
+import com.blog.document.DocumentDao;
+
 @RestController
 public class SubjectController {
 	@Autowired
 	SubjectDao sd;
 	@Autowired
 	SubjectService ss;
-
+	@Autowired
+	DocumentDao dd;
 	@GetMapping("lastsubjectseq")
 	public @ResponseBody Integer lastSubjectSeq() {
 		// 추가할 주제의 고유번호
@@ -50,7 +53,16 @@ public class SubjectController {
 
 	@GetMapping("subjectlist")
 	public List<HashMap<String, Object>> subjectlist() {
-		return sd.subjectlist();
+		List<HashMap<String, Object>> subjectlist=sd.subjectlist();
+		StringBuffer address=new StringBuffer();
+		for(int i=0;i<subjectlist.size();i++) {
+			address.append("http://developerblog.shop/document/")
+			.append(subjectlist.get(i).get("subject_seq").toString())
+			.append("/").append(dd.latelySeq(subjectlist.get(i).get("subject_seq").toString()));
+			subjectlist.get(i).put("address",address.toString());
+			address.replace(0, address.length(), "");
+		}
+		return subjectlist;
 	}
 
 	@PostMapping("subjectinfo")
