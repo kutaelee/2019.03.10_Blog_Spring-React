@@ -50,4 +50,11 @@ public class DocumentDao {
 	public String searchCount(String keyword) {
 		return sqlsession.selectOne("searchCount",keyword);
 	}
+
+	public HashMap<String,Object> prevDocument(HashMap<String, Object> map) {
+		return sqlsession.selectOne("prevDocument",map);
+	}
+	public HashMap<String,Object> nextDocument(HashMap<String, Object> map) {
+		return sqlsession.selectOne("nextDocument",map);
+	}
 }

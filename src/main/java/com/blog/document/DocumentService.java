@@ -196,12 +196,14 @@ public class DocumentService {
 				 realPath.append(servletContext.getRealPath(dir.toString()));
 				 File contentFoloder = new File(realPath.toString());
 				 File[] contentFoloderList = contentFoloder.listFiles();
+
 				 if(contentFoloderList.length>0) {
 					 imgBuffer.append(dir.toString()).append("/").append(contentFoloderList[0].getName());
 					 list.get(i).put("img",imgBuffer.toString());
 				 }else {			
 					list.get(i).put("img",sd.subjectinfo(list.get(i).get("document_parent_seq").toString()).get("subject_dir"));
 				 }
+				 
 				 realPath.delete(0, realPath.length());
 				 dir.delete(0, dir.length());
 				 imgBuffer.delete(0, imgBuffer.length());

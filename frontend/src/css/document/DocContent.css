@@ -6,7 +6,7 @@
     margin-top: 1%;
     box-shadow: 1px 1px 10px grey;
     padding: 2% 5% 2% 5%;
-	min-height: 40vh;
+	min-height: 35vh;
 	margin-bottom:2%;
 }
 .DocContent-title{
@@ -274,6 +274,37 @@ code{
 	display: block;
 	white-space: pre-line;
 }
+.Other-button-div{
+	margin-top: 8%;
+}
+.Other-button-div a{
+	font-size:0.7vw;
+	text-decoration: none;
+	color:blue;
+	font-weight: 1000;
+}
+
+.Other-button-div a:hover{
+	color:rgba(240, 47, 70,1);
+}
+.Other-button-div b{
+	font-size:0.9vw;
+	color:black;
+	letter-spacing: 1px;
+	font-weight: 100;
+}
+.Prev-title{
+	margin-left:10px;
+}
+.Next-title{
+	margin-right:10px;
+}
+.Prev-btn{
+	float: left;
+}
+.Next-btn{
+	float: right;
+}
 @media(max-width:1280px){
 	.Doc-button-div{
 		margin-top:27vh;
@@ -419,5 +450,11 @@ code{
 		margin-top: 40vh;
 		margin-bottom: 30vh;
 		position: relative;
+	}
+	.Other-button-div a{
+		font-size:2vw;
+	}
+	.Other-button-div b{
+		font-size:2vw;
 	}
 }

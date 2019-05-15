@@ -28,12 +28,18 @@
  		select * from document order by document_seq desc limit 0,9
  	</select>
  	<select id="sameSubjectDocumentList" parameterType="hashMap" resultType="hashMap">
- 		select * from document where document_parent_seq=#{parentSeq} and document_seq not in(#{seq}) order by document_seq desc 
+ 		select * from document where document_parent_seq=#{parentSeq} order by document_seq desc 
  	</select>
  	<select id="searchDocument" parameterType="hashMap" resultType="hashMap">
  		select document_seq,document_parent_seq,document_regdate,document_title from document where document_title like CONCAT('%', #{keyword}, '%') or document_content like CONCAT('%', #{keyword}, '%') limit #{index},10 
  	</select>
  	 <select id="searchCount" parameterType="string" resultType="string">
  		select count(*) from document where document_title like CONCAT('%', #{keyword}, '%') or document_content like CONCAT('%', #{keyword}, '%') 
+ 	</select>
+ 	<select id="prevDocument" parameterType="hashMap" resultType="hashMap">
+ 		 <![CDATA[ select document_title,document_seq,document_parent_seq from document where document_parent_seq=#{parent_seq} and document_seq > #{seq} limit 0,1 ]]>
+ 	</select>
+ 	 <select id="nextDocument" parameterType="hashMap" resultType="hashMap">
+ 		 <![CDATA[  select document_title,document_seq,document_parent_seq from document where document_parent_seq=#{parent_seq} and document_seq < #{seq} order by document_seq desc limit 0,1 ]]>
  	</select>
 </mapper>

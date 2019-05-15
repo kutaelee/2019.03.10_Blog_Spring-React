@@ -16,12 +16,17 @@ class DocContent extends Component{
 				curPageNum:1,
 				commentCount:0,
 				login:false,
-				margin:0
-			
+				margin:0,
+				prevDocument:{document_title:"",document_seq:"",document_parent_seq:""},
+				nextDocument:{document_title:"",document_seq:"",document_parent_seq:""},
+				prevLocation:"",
+				nextLocation:""
 		};
 	 componentDidMount() {
 		this.getDocument();
 		this.loginSessionCheck();
+		this.prevDocument();
+		this.nextDocument();
 	 }
 
 	 documentWritePage=()=>{
@@ -188,6 +193,39 @@ class DocContent extends Component{
 				}).catch(e=>alert("글 삭제 중 문제발생!"));
 			}
 		}
+		prevDocument=()=>{
+			axios.post('/prevDocument',{parent_seq:path[2],seq:path[3]}).then(res=>{
+				this.setState({prevDocument:res.data});
+				this.setState({prevLocation:"/document/"+res.data.document_parent_seq+"/"+res.data.document_seq});
+			});
+		}
+		nextDocument=()=>{
+			axios.post('/nextDocument',{parent_seq:path[2],seq:path[3]}).then(res=>{
+				this.setState({nextDocument:res.data});
+				this.setState({nextLocation:"/document/"+res.data.document_parent_seq+"/"+res.data.document_seq});
+			});
+		}
+		titleFormat(title){
+			let len;
+			if(this.state.prevDocument.document_title && this.state.nextDocument.document_title){
+				if(this.state.prevDocument.document_title.length<=this.state.nextDocument.document_title.length){
+					len=this.state.prevDocument.document_title.length;					
+				}else{
+					len=this.state.nextDocument.document_title.length;
+				}
+		
+			}else{
+				len=title.length;
+			}
+			if(len<15){
+				len=15;
+			}
+			if(title.length>len){
+					return title.substring(0,len)+"\n ...";
+			}
+			console.log(title)
+			return title;
+}
 	 render() {
 	        return (
 				<div>
@@ -208,6 +246,12 @@ class DocContent extends Component{
 					<button className="Doc-delete-btn" onClick={()=>this.documentDelete(this.state.document.document_seq,this.state.document.document_dir)}>삭제</button>
 						</div>
 					: ""}
+					<div className="Other-button-div">
+					{this.state.prevDocument.document_title ?
+					<a className="Prev-btn" href={this.state.prevLocation}> &lt; Prev  <b className="Prev-title">{this.titleFormat(this.state.prevDocument.document_title)}</b> </a> :""}
+				 	{this.state.nextDocument.document_title ?
+				 	<a className="Next-btn" href={this.state.nextLocation}><b className="Next-title">{this.titleFormat(this.state.nextDocument.document_title)}</b> Next &gt;</a> :""}
+					</div>
 					</div>
 
 					<div className="Tap">

@@ -15,11 +15,13 @@ class OtherDocumentList extends Component{
             otherDocumentList:[{document_seq:'',document_title:'',document_parent_seq:'',img:'',document_regdate:''}],
             margin:0,
             listSw:false,
-            listOption:'리스트 형식으로 보기'
+            listOption:'리스트 형식으로 보기',
+            curDocumentNum:0
         }
     }
     componentDidMount(){
         this.setState({margin:this.props.margin});
+        this.setState({curDocumentNum:path[3]*1});
         this.sameSubjectDocument();
         this.subjectInfo();
     }
@@ -76,13 +78,14 @@ class OtherDocumentList extends Component{
               {this.state.listSw ? "" :
                   this.state.otherDocumentList.map(	
                         (item)=>
-                <span className="Other-list" onClick={()=>this.moveOtherPage(item.document_parent_seq,item.document_seq)} key={item.document_seq}>
+                        
+                <span className= "Other-list" id={this.state.curDocumentNum===item.document_seq ? "curDocument" : ""} onClick= {this.state.curDocumentNum===item.document_seq ? ()=>alert("현재 선택된 글 입니다") : ()=>this.moveOtherPage(item.document_parent_seq,item.document_seq) } key={item.document_seq}> 
                     <img src={item.img} alt={item.document_title} />
                     <p>{this.dateFormat(item.document_regdate)}</p>
                     <div className="Other-title">
                     <b>{this.titleFormat(item.document_title)} </b>
                     </div>
-                </span>
+                </span>  
           
                 )  
               }

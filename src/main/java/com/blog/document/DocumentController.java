@@ -15,6 +15,7 @@ import org.springframework.util.ObjectUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.blog.subject.SubjectController;
@@ -132,5 +133,14 @@ public class DocumentController {
 	@PostMapping("searchcount")
 	public String searchCount(@RequestBody HashMap<String, Object> map) {
 		return dd.searchCount((String) map.get("keyword"));
+	}
+	
+	@PostMapping("prevDocument")
+	public HashMap<String,Object> prevDocument(@RequestBody HashMap<String, Object> map ) {
+		return dd.prevDocument(map);
+	}
+	@PostMapping("nextDocument")
+	public HashMap<String,Object> nextDocument(@RequestBody HashMap<String, Object> map ) {
+		return dd.nextDocument(map);
 	}
 }

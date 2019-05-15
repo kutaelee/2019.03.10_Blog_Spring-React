@@ -22,6 +22,10 @@
     margin-right: 26px;
     margin-top: 20px;
 }
+#curDocument{
+    border: 5px outset tomato;
+    cursor: unset;
+}
 .Other-list-div
 {
     width: 9999px;
