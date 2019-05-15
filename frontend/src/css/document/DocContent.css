@@ -154,7 +154,7 @@ hr{
 	font-size: 17px;
 	font-family: 'Roboto';
 	word-break: break-word;
-	white-space:pre
+	white-space:pre-line;
 }
 .Comment-edit{
 	margin-left:2%;

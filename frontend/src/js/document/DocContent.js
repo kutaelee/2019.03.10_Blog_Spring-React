@@ -217,8 +217,8 @@ class DocContent extends Component{
 			}else{
 				len=title.length;
 			}
-			if(len<15){
-				len=15;
+			if(len<30){
+				len=30;
 			}
 			if(title.length>len){
 					return title.substring(0,len)+"\n ...";

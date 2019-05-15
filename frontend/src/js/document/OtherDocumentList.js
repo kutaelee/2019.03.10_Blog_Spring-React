@@ -16,7 +16,9 @@ class OtherDocumentList extends Component{
             margin:0,
             listSw:false,
             listOption:'리스트 형식으로 보기',
-            curDocumentNum:0
+            curDocumentNum:0,
+            transVal:196,
+            fristTransVal:262
         }
     }
     componentDidMount(){
@@ -24,6 +26,9 @@ class OtherDocumentList extends Component{
         this.setState({curDocumentNum:path[3]*1});
         this.sameSubjectDocument();
         this.subjectInfo();
+        if(document.body.clientWidth<600){
+            this.setState({transVal:165,fristTransVal:250});
+        }
     }
     dateFormat(regdate){
 		return new moment(regdate).startOf().fromNow();
@@ -35,20 +40,21 @@ class OtherDocumentList extends Component{
         axios.post('/samesubjectdocumentlist',{parentSeq:path[2],seq:path[3]}).then(res=>this.setState({otherDocumentList:res.data}));
     }
     leftSlide(margin){
+       
         if(margin<0){
-            if(margin===-200){
+            if(margin===-this.transVal){
                 this.setState({margin:0});
             }else{
-                this.setState({margin:this.state.margin+190});
+                this.setState({margin:this.state.margin+this.state.transVal});
             }
         }
     }
     rightSlide(margin){
-        if(margin>=-190*(this.state.otherDocumentList.length-2) && this.state.otherDocumentList.length>2){
+        if(margin>=-this.state.transVal*(this.state.otherDocumentList.length-1) && this.state.otherDocumentList.length>1){
             if(margin===0){
-                this.setState({margin:this.state.margin-200});
+                this.setState({margin:-this.state.fristTransVal});
             }else{
-                this.setState({margin:this.state.margin-190});
+                this.setState({margin:this.state.margin-this.state.transVal});
             }
         }
     }
