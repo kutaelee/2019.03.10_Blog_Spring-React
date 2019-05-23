@@ -4,7 +4,7 @@
 
 > Spring과 react를 결합해서 만들었습니다.
 
-> [사이트](http://developerblog.shop/)
+> [사이트방문하기](http://developerblog.shop/)
 
 ---
 ### 개발환경
