@@ -143,7 +143,6 @@ class Subject extends Component{
 					this.state.subjectList.map(
 						(item)=><li className="Subject-list" key={item.subject_seq}>
 						<a className="Subject-name" href={item.address} onClick={()=>this.getDocuemntPage(item.subject_seq)} style={{color:this.selectSubject(item.subject_seq)}}>{item.subject_name}</a>
-						{/* <p className="Subject-name" value={item.subject_seq} onClick={()=>this.getDocuemntPage(item.subject_seq)} style={{color:this.selectSubject(item.subject_seq)}}>{item.subject_name}</p>  */}
 						</li>
 					) 
 				} </ul> : <p>주제를 불러오는중..</p>}
@@ -154,7 +153,6 @@ class Subject extends Component{
 				<button className="Subject-modified-btn" onClick={this.ModifySubjectPage}>수정</button>
 				</div>
 					: ""}
-				{this.state.mobile ? "" : <Navi></Navi>}
 				</div>
 				);
 	};

@@ -1,5 +1,7 @@
 import React,{Component} from 'react';
 import * as Scroll from 'react-scroll';
+import LowArrow from '../img/arrow-204-48.jpg';
+import HeighArrow from '../img/arrow-141-48.jpg';
 import '../css/Navi.css';
 class Navi extends Component{
 	state ={
@@ -15,11 +17,9 @@ class Navi extends Component{
     render(){
         
         return (
-            <div className="Navi">
-                <h4>Navigation</h4>
-               <button className="ScrollToTop" onClick={this.scrollTop}>Top</button>
-               <button className="ScrollToBottom" onClick={this.scrollBottom}>Bottom</button>
-       
+            <div className="Navi">      
+                <img src={HeighArrow} className="ScrollToTop" onClick={this.scrollTop}></img><br/>
+                <img src={LowArrow} className="ScrollToBottom" onClick={this.scrollBottom}></img>
              </div>
             );
         };

@@ -5,6 +5,7 @@ import Top from './js/Top';
 import Subject from './js/Subject';
 import Footer from './js/Footer';
 import Empty from './js/Empty';
+import Navi from './js/Navi';
 import LoginBox from './js/LoginBox';
 import ModifyLink from './js/ModifyLink';
 import AddLink from './js/AddLink';
@@ -25,7 +26,7 @@ ReactDOM.render(
         <Route path="/" component={Top} /> 
         <Route path="/" component={LoginBox} /> 
         <Route path="/" component={Subject} />
-
+        <Route path="/" component={Navi} />
         <Switch>
             <Route path="/document/*/writepage" component={DocWritePage}/>
             <Route path="/document/*/*/modifypage" component={DocModifyPage}/>
@@ -39,7 +40,7 @@ ReactDOM.render(
            
         </Switch>   
         <Route path="/" component={Footer} />
-        <Route path="/" component={Empty} />
+        <Route path="/" component={Empty} />   
     </div>
 </BrowserRouter>), document.getElementById('root')
  )
