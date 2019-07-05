@@ -76,7 +76,7 @@ class Subject extends Component{
 
    }
 	pinClick() {
-		if(this.widthCheck()){
+		if(!this.widthCheck()){
 		const topOffset=document.querySelector('.Top').offsetTop;
 		if(!this.state.pinSw){
 			this.setState(() =>({
