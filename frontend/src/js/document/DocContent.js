@@ -236,6 +236,7 @@ class DocContent extends Component{
 					{this.state.login ? <button onClick={this.documentWritePage}>새글작성</button> : "" }</div>
 	        		<div className="DocContent">
 	        		<h1 className="DocContent-title" dangerouslySetInnerHTML={ {__html: this.state.document.document_title} }></h1>	
+							<title>{this.state.document.document_title}</title>
 	        		<hr/>
 					<p className="DocContent-regdate">{this.dateFormat(this.state.document.document_regdate)}</p>
 					

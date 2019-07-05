@@ -7,7 +7,8 @@ import axios from 'axios';
 class Content extends Component{
 	 state = {
 		 latelyDocumentList:[{document_seq:'',document_title:'',document_parent_seq:'',img:'',document_regdate:''}],
-		 subjectList:[{subject_name:'',subject_seq:''}]
+		 subjectList:[{subject_name:'',subject_seq:''}],
+		 title:'규태의 블로그'
 		};
 
 	 componentDidMount(){
@@ -46,7 +47,9 @@ class Content extends Component{
 	}
 	 render() {
 	        return (
+			
 	        		<div className="Content">
+						<title>{this.state.title}</title>
 	        			<h1 className="Content-title">최근 등록한 글</h1>
 	        			<hr/>
 						
@@ -61,6 +64,7 @@ class Content extends Component{
 							<h5>{this.subjectNameFormat(item.document_parent_seq)}</h5>	
 							<div className="Content-title">
 							<a href={this.address(item.document_parent_seq,item.document_seq)}>{this.titleFormat(item.document_title)}</a>
+						
 							</div>		
 						</div>
 						)} </div> : "최신글 불러오는중.."}
