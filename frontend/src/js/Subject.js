@@ -28,14 +28,14 @@ class Subject extends Component{
 		this.loginSessionCheck();
 		this.getSubject();
 		if(this.widthCheck()){
-			window.addEventListener("scroll", this.handleScroll);
-		}else{
 			this.setState({mobile:true});
 			document.querySelector('.Subject-body').style.display="none";
+		}else{
+			window.addEventListener("scroll", this.handleScroll);
 		}
 	}
     componentWillUnmount(){		
-		if(this.widthCheck()){
+		if(!this.widthCheck()){
 		window.removeEventListener("scroll", this.handleScroll);
 		}
 	}
@@ -50,10 +50,10 @@ class Subject extends Component{
     }
 	}
   widthCheck=()=>{
-		if(document.body.clientWidth>600)
-				return true;
+		if(document.body.clientWidth<600)
+			return true;
 		else
-				return false;   
+			return false;   
 	}
 	handleScroll=() =>{
 		if(!this.state.pinSw){

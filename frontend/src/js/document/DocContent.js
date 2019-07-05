@@ -20,15 +20,25 @@ class DocContent extends Component{
 				prevDocument:{document_title:"",document_seq:"",document_parent_seq:""},
 				nextDocument:{document_title:"",document_seq:"",document_parent_seq:""},
 				prevLocation:"",
-				nextLocation:""
+				nextLocation:"",
+				resizeButtonName:"크게보기",
+				mobile:false
 		};
 	 componentDidMount() {
 		this.getDocument();
 		this.loginSessionCheck();
 		this.prevDocument();
 		this.nextDocument();
+		if(this.widthCheck()){
+			this.setState({mobile:true});
+		}
 	 }
-
+	 widthCheck=()=>{
+		if(document.body.clientWidth<600)
+			return true;
+		else
+			return false;   
+	}
 	 documentWritePage=()=>{
 		
 		window.location.href="/document/"+path[2]+"/writepage";
@@ -223,9 +233,30 @@ class DocContent extends Component{
 			if(title.length>len){
 					return title.substring(0,len)+"\n ...";
 			}
-			console.log(title)
 			return title;
-}
+		}
+		resizeDocument=()=>{
+			if(this.state.resizeButtonName==="크게보기"){		
+				this.setState({resizeButtonName:"원래대로"});
+				let x=document.querySelector(".DocContent");
+				let y=document.querySelector(".Login-head");
+				y.style.display="none";
+				x.style.width="60%";
+				x.style.marginLeft="8%";
+				x.style.transition="0.5s";
+			
+			}
+			if(this.state.resizeButtonName==="원래대로"){
+				this.setState({resizeButtonName:"크게보기"});
+				let x=document.querySelector(".DocContent");
+				let y=document.querySelector(".Login-head");
+				y.style.display="block";
+				x.style.width="40%";
+				x.style.marginLeft="24%";
+				x.style.transition="0.5s";
+			}
+			
+		}
 	 render() {
 	        return (
 				<div>
@@ -233,6 +264,7 @@ class DocContent extends Component{
 					{this.state.document.document_title ? 
 					<div>
 					<div className="Doc-button-div">
+					{this.state.mobile ? "" :<button onClick={this.resizeDocument}>{this.state.resizeButtonName}</button> }
 					{this.state.login ? <button onClick={this.documentWritePage}>새글작성</button> : "" }</div>
 	        		<div className="DocContent">
 	        		<h1 className="DocContent-title" dangerouslySetInnerHTML={ {__html: this.state.document.document_title} }></h1>	
