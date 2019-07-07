@@ -156,6 +156,11 @@ hr{
 	word-break: break-word;
 	white-space:pre-line;
 }
+.Comment-content a{
+	font-size:16px;
+	color:blue;
+	text-decoration:underline;
+}
 .Comment-edit{
 	margin-left:2%;
 }

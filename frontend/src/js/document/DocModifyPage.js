@@ -74,7 +74,8 @@ class DocModifyPage extends Component{
             alert("제목은 필수 입니다.");
         }else{
             let path=window.location.pathname.split('/');
-            const content = toastEditor.getHtml();
+            let content = toastEditor.getHtml().split("&lt;").join("<");
+            content=content.split("&gt;").join(">");
             axios.post('/documentmodify',{content:content,title:title,dir:dir,seq:seq})
             .then(res => {
                 if(res.data){

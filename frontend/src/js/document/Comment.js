@@ -51,7 +51,7 @@ class Comment extends Component{
         }
     }).catch(e=>alert("세션체크 중 문제발생!"));
   }
-
+ 
  dateFormat(regdate){
 		return new moment(regdate).startOf().fromNow();
     }
@@ -168,7 +168,13 @@ class Comment extends Component{
         this.setState({allSw:true});
         this.setState({deleteSw:seq});
     }
-
+    escapeComment=(content)=>{
+        let expUrl =/(((http(s)?:\/\/)\S+(\.[^(\n|\t|\s,)]+)+)|((http(s)?:\/\/)?(([a-zA-z\-_]+[0-9]*)|([0-9]*[a-zA-z\-_]+)){2,}(\.[^(\n|\t|\s,)]+)+))+/gi;
+        content=content.split("<").join("&lt;");
+        content=content.split(">;").join("&gt;");
+        content=content.replace(expUrl, '<a href="$&" target="_blank">$&</a>');
+        return content;
+    }
 render(){
     
     return(
@@ -210,7 +216,7 @@ render(){
                         <textarea className='Modify-content' defaultValue={item.comment_content} maxLength='250'></textarea>
                         <button className="Comment-Modify-btn" onClick={()=>this.commentModify(item.comment_seq)}>수정</button>
            
-                        </div> :  <p className="Comment-content">{item.comment_content} </p> }          
+                        </div> :  <p className="Comment-content" dangerouslySetInnerHTML={ {__html: this.escapeComment(item.comment_content) } }/>  }          
                         </div>
 					) 
 			}

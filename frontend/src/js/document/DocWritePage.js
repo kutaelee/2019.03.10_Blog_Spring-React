@@ -53,7 +53,9 @@ class DocWritePage extends Component{
         const text=document.querySelectorAll(".tui-editor-contents");
         this.setState({textLength:text[1].innerText.length});
     }
+
     saveArticle(){
+    
         const text=document.querySelectorAll(".tui-editor-contents");
         const title= document.querySelector('.title').value;
         if(text[1].innerText.length>this.state.textMaxLength){
@@ -61,8 +63,9 @@ class DocWritePage extends Component{
         }else if(title.length<=0){
             alert("제목은 필수 입니다.");
         }else{
-            let path=window.location.pathname.split('/');
-            const content = toastEditor.getHtml();
+            let path=window.location.pathname.split('/');       
+            let content = toastEditor.getHtml().split("&lt;").join("<");
+            content=content.split("&gt;").join(">");
             axios.post('/documentwrite',{content:content,title:title,parentSeq:path[2]})
             .then(res => {
                 if(res.data!=null){
