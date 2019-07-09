@@ -29,7 +29,7 @@ class Subject extends Component{
 		this.getSubject();
 		if(this.widthCheck()){
 			this.setState({mobile:true});
-			document.querySelector('.Subject-body').style.display="none";
+			//document.querySelector('.Subject-body').style.display="none"; 주석 시 메뉴 기본으로 열림 주석 해제시  메뉴 기본으로 닫힘
 		}else{
 			window.addEventListener("scroll", this.handleScroll);
 		}
@@ -115,25 +115,24 @@ class Subject extends Component{
                 this.setState({login:true});
         }).catch(e=>alert("세션체크 중 문제발생!"));
 		}
-		subjectToggle=()=>{
+	subjectToggle=()=>{
 			let btn=document.querySelector('.Subject-toggle-btn');
 			if(btn){
-				if(document.querySelector('.Subject-body').style.display==='block'){
-					document.querySelector('.Subject-body').style.display='none';
-					btn.innerText='▼';
-			}else{
-					document.querySelector('.Subject-body').style.display='block';
-					btn.innerText='▲';
-				}
+					if(document.querySelector('.Subject-body').style.display==='none'){					
+						document.querySelector('.Subject-body').style.display='block';
+						btn.innerText='▲';		
+					}else{			
+						document.querySelector('.Subject-body').style.display='none';
+						btn.innerText='▼';
+					}
 			}
-		
 	}
 	render(){
 		return (
 				<div className="Subject" style={{position:this.state.menuPostion,top:this.state.menuTop,transition:"0.5s"}}>
 		
 				<header className="Subject-header" onClick={()=>this.subjectToggle()}>
-				{this.state.mobile ? <button className="Subject-toggle-btn">▼</button> :
+				{this.state.mobile ? <button className="Subject-toggle-btn">▲</button> :
 				this.state.pinSw ? <img src={ActivePin} className="Active-pin" onClick={this.pinClick} alt="chock-pin"></img>  :<img src={pin} className="Subject-pin" onClick={this.pinClick} alt="Active-pin"></img>
 				}	<h4 className="Subject-title">주제</h4>
 				</header>

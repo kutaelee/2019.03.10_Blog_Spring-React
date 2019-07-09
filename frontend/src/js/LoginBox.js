@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import '../css/LoginBox.css';
 import axios from 'axios';
+const path=window.location.pathname.split('/');
 
 class LoginBox extends Component {
     state={
@@ -109,10 +110,17 @@ class LoginBox extends Component {
     addLink=()=>{
         window.location.href="/addLink";
     }
+    adminCheck=()=>{
+        if(path[1]==="admin"){
+            return true;
+        }else{
+            return false;
+        }
+    }
     render() {
-        return (  
+        return (
             <div className="LoginBox" style={{top:this.state.top,transition:"0.5s"}}>
-          
+           
             {this.state.login ? 
             <div className="Logout-body">
                  
@@ -122,17 +130,22 @@ class LoginBox extends Component {
             <button onClick={this.logout}>로그아웃</button> 
   
             </div>:
-            <div>
-           <h4 className="Login-head" onClick={this.loginToggle}>로그인<b>▼</b></h4> 
+           
+           <div>
+               {this.adminCheck() ?   
+           <h4 className="Login-head" onClick={this.loginToggle}>로그인<b>▼</b></h4> : ""}
               <div className="Login-body">
               <label htmlFor="Login-id">아이디</label><br/> <input type="text" id="Login-id" placeholder="ID" maxLength="20"></input><br/>
               <label htmlFor="Login-pw">비밀번호</label> <br/><input type="password" id="Login-pw" placeholder="●●●●" maxLength="20"></input><br/>
             <button className="Login-btn" onClick={this.login}>로그인</button>
             </div> 
+          
             </div>
-            } 
-               
-            </div>
+              
+           } 
+         
+            </div> 
+          
         );
     }
 }

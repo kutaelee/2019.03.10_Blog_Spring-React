@@ -5,13 +5,15 @@ import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
+import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.text.StringEscapeUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.ObjectUtils;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
-import org.apache.commons.lang3.StringUtils;
-import org.apache.commons.text.StringEscapeUtils;
+
+import com.blog.member.MemberDao;
 
 @RestController
 public class CommentController {
@@ -19,7 +21,9 @@ public class CommentController {
 	CommentDao cd;
 	@Autowired
 	CommentService cs;
-
+	@Autowired
+	MemberDao md;
+	
 	@PostMapping("commentList")
 	public List<HashMap<String, Object>> commentList(@RequestBody HashMap<String, Object> map) {
 		if (!ObjectUtils.isEmpty(map)) {
@@ -54,7 +58,7 @@ public class CommentController {
 	public boolean commentWrite(@RequestBody HashMap<String, String> map, HttpSession session) {
 		if (session.getAttribute("login") != null) {
 			map.put("name", "관리자");
-			map.put("pw", "1234");
+			map.put("pw", md.userInfo("admin"));
 		}
 		for (String key : map.keySet()) {
 			if (!StringUtils.isEmpty(map.get(key)) && !StringUtils.isBlank(map.get(key))) {
@@ -74,7 +78,7 @@ public class CommentController {
 		//pw는 사용하지않으나 not null 제약조건 때문에 임의의 값 
 		if (session.getAttribute("login") != null) {
 			map.put("name", "관리자");
-			map.put("pw", "1234");
+			map.put("pw", md.userInfo("admin"));
 		}
 		for (String key : map.keySet()) {
 			if (!StringUtils.isEmpty(map.get(key)) && !StringUtils.isBlank(map.get(key))) {
