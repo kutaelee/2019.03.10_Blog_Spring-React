@@ -16,7 +16,7 @@ class DocModifyPage extends Component{
     state={
         textLength:0,
         doc:{document_title:'',document_content:'',document_seq:'',docuemnt_dir:'',document_parent_seq:''},
-        textMaxLength:2500
+        textMaxLength:10000
     }
     componentDidMount(){
         this.loginSessionCheck();
@@ -69,7 +69,7 @@ class DocModifyPage extends Component{
         const text=document.querySelectorAll(".tui-editor-contents");
         const title= document.querySelector('.title').value;
         if(text[1].innerText.length>this.state.textMaxLength){
-            alert("글자 수 제한은 2500자 입니다.");
+            alert("글자 수 제한은 10000자 입니다.");
         }else if(title.length<=0){
             alert("제목은 필수 입니다.");
         }else{

@@ -20,6 +20,8 @@ class OtherDocumentList extends Component{
             transVal:196,
             fristTransVal:262
         }
+        this.handleButtonPress = this.handleButtonPress.bind(this)
+        this.handleButtonRelease = this.handleButtonRelease.bind(this)
     }
     componentDidMount(){
         this.setState({margin:this.props.margin});
@@ -30,6 +32,20 @@ class OtherDocumentList extends Component{
             this.setState({transVal:165,fristTransVal:250});
         }
     }
+    handleButtonPress(name) {
+        console.log(name)
+       if(name==="Left-btn"){
+        this.buttonPressTimer = setInterval(() => this.leftSlide(this.state.margin), 100);
+       }
+       if(name==="Right-btn"){
+        this.buttonPressTimer = setInterval(() => this.rightSlide(this.state.margin),100);
+       }
+        
+    }
+    
+      handleButtonRelease () {
+        clearTimeout(this.buttonPressTimer);
+      }
     dateFormat(regdate){
 		return new moment(regdate).startOf().fromNow();
     }
@@ -67,16 +83,30 @@ class OtherDocumentList extends Component{
     moveOtherPage(parentSeq,documentSeq){
         window.location.href="/document/"+parentSeq+"/"+documentSeq
     }
+
     render(){
         return(
+        
             <div className="OtherDocumentList">
+    
             <div className="Other-title-div"> <h4>{this.state.subjectName} 주제에 등록된 다른 글</h4> </div>
              {this.state.otherDocumentList[0] ?
              <div>
-                <div className="Left-button-div">
-                <button className="Left-btn"  onClick={()=>this.leftSlide(this.state.margin)}>◀</button>
+                <div className="Left-button-div"
+                  onTouchStart={()=>this.handleButtonPress("Left-btn")} 
+                  onTouchEnd={this.handleButtonRelease} 
+                  onMouseDown={()=>this.handleButtonPress("Left-btn")} 
+                  onMouseUp={this.handleButtonRelease} 
+                  onMouseLeave={this.handleButtonRelease} >
+                <button className="Left-btn" onClick={()=>this.leftSlide(this.state.margin)}>◀</button>
+
                 </div>
-                <div className="Right-button-div">
+                <div className="Right-button-div"                
+                onTouchStart={()=>this.handleButtonPress("Right-btn")} 
+                onTouchEnd={this.handleButtonRelease} 
+                onMouseDown={()=>this.handleButtonPress("Right-btn")} 
+                onMouseUp={this.handleButtonRelease} 
+                onMouseLeave={this.handleButtonRelease}>
                 <button className="Right-btn" onClick={()=>this.rightSlide(this.state.margin)}>▶</button>
                 </div>
                
@@ -98,8 +128,10 @@ class OtherDocumentList extends Component{
              
               </div> </div>:<h1>주제에 등록된 다른 글이 없습니다.</h1>
                     }
+
             </div>
         );
     };
 }
+
 export default OtherDocumentList;

@@ -23,10 +23,12 @@ import * as serviceWorker from './serviceWorker';
 ReactDOM.render(
 (<BrowserRouter>
     <div>
+   
         <Route path="/" component={Top} /> 
         <Route path="/" component={LoginBox} /> 
         <Route path="/" component={Subject} />
         <Route path="/" component={Navi} />
+  
         <Switch>
             <Route path="/document/*/writepage" component={DocWritePage}/>
             <Route path="/document/*/*/modifypage" component={DocModifyPage}/>
@@ -37,7 +39,7 @@ ReactDOM.render(
             <Route path="/modifylink" component={ModifyLink}/>
             <Route path="/addlink" component={AddLink}/>
             <Route path="/" component={MainContent} />
-           
+            
         </Switch>   
         <Route path="/" component={Footer} />
         <Route path="/" component={Empty} />   

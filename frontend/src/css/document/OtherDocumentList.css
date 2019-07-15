@@ -89,6 +89,9 @@
     .OtherDocumentList{
         height: 50vh;
     }
+    .OtherDocumentList button{
+        padding:8px;
+    }
     .Other-list{
         height: 30vh;
         width:110px;
@@ -119,6 +122,7 @@
         margin-left: 40%;
         position: absolute;
     }
+
     .Other-title-div h4{
         font-size:1.2vw;
     }

@@ -239,8 +239,7 @@ class DocContent extends Component{
 			if(this.state.resizeButtonName==="크게보기"){		
 				this.setState({resizeButtonName:"원래대로"});
 				let x=document.querySelector(".DocContent");
-				let y=document.querySelector(".Login-head");
-				y.style.display="none";
+				let y=document.querySelector(".Login-head");			
 				x.style.width="60%";
 				x.style.marginLeft="8%";
 				x.style.transition="0.5s";
@@ -250,9 +249,8 @@ class DocContent extends Component{
 				this.setState({resizeButtonName:"크게보기"});
 				let x=document.querySelector(".DocContent");
 				let y=document.querySelector(".Login-head");
-				y.style.display="block";
-				x.style.width="40%";
-				x.style.marginLeft="24%";
+				x.style.width="45%";
+				x.style.marginLeft="20%";
 				x.style.transition="0.5s";
 			}
 			

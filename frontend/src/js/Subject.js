@@ -134,7 +134,7 @@ class Subject extends Component{
 				<header className="Subject-header" onClick={()=>this.subjectToggle()}>
 				{this.state.mobile ? <button className="Subject-toggle-btn">▲</button> :
 				this.state.pinSw ? <img src={ActivePin} className="Active-pin" onClick={this.pinClick} alt="chock-pin"></img>  :<img src={pin} className="Subject-pin" onClick={this.pinClick} alt="Active-pin"></img>
-				}	<h4 className="Subject-title">주제</h4>
+				}	<h4 className="Subject-title">Kategorie</h4>
 				</header>
 				<div className="Subject-body">
 				{this.state.subjectList ? <ul className="Subject-ul">
