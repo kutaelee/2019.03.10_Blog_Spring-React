@@ -7,6 +7,26 @@
       name="viewport"
       content="width=device-width, initial-scale=1, shrink-to-fit=no"
     />
+    <script>
+      window.onload=function (){
+              let obj=document.querySelector(".DocContent-title");
+              if(obj){
+                      document.getElementById("title").text=obj.textContent;
+                      document.getElementById("og_title").content=obj.textContent;
+              }else{
+                      document.getElementById("title").text="규태의 블로그";
+                      document.getElementById("og_title").content="규태의 블로그";
+              }
+}
+
+      </script>
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.8/styles/atom-one-light.min.css">
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.8/highlight.min.js"></script>
+<script
+ charset="UTF-8"
+ src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/kotlin.min.js"></script>
+ <script>hljs.initHighlightingOnLoad();</script>
+    <title id="title"></title>
     <link rel="canonical" href="http://developerblog.shop/">
     <meta name="description" content="웹 개발에 관련된 정보를 기록하는 개인블로그">
     <meta name="keywords" content="개발,개발자 블로그,자바,코틀린,리액트,리눅스">

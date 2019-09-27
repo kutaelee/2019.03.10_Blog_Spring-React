@@ -33,7 +33,6 @@ class OtherDocumentList extends Component{
         }
     }
     handleButtonPress(name) {
-        console.log(name)
        if(name==="Left-btn"){
         this.buttonPressTimer = setInterval(() => this.leftSlide(this.state.margin), 100);
        }

@@ -5,6 +5,8 @@ import OtherDocumentList from './OtherDocumentList';
 import 'moment/locale/ko';
 import '../../css/document/DocContent.css';
 import axios from 'axios';
+import hljs from "highlight.js";
+import "highlight.js/styles/github.css";
 
 const path=window.location.pathname.split('/');
 class DocContent extends Component{
@@ -32,7 +34,16 @@ class DocContent extends Component{
 		if(this.widthCheck()){
 			this.setState({mobile:true});
 		}
+		this.updateCodeSyntaxHighlighting();
 	 }
+	 componentDidUpdate() {
+		this.updateCodeSyntaxHighlighting();
+	 }
+	updateCodeSyntaxHighlighting = () => {
+    document.querySelectorAll("pre code").forEach(block => {
+      hljs.highlightBlock(block);
+    });
+  };
 	 widthCheck=()=>{
 		if(document.body.clientWidth<600)
 			return true;
