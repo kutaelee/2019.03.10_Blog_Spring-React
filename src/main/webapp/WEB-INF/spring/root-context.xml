@@ -8,42 +8,68 @@
 		http://mybatis.org/schema/mybatis-spring http://mybatis.org/schema/mybatis-spring-1.2.xsd
 		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
 		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.3.xsd">
-	
+
 	<!-- Resource Mapping -->
-	<bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
-        <property name="location" value="/WEB-INF/config/db.properties"/>
-        <property name="fileEncoding" value="UTF-8" />
-    </bean>
+	<bean
+		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="location"
+			value="/WEB-INF/config/db.properties" />
+		<property name="fileEncoding" value="UTF-8" />
+	</bean>
 
 	<!-- DB -->
-		   <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
-        <property name="driverClassName" value="${db.driver}"/>
-        <property name="url" value="${db.url}"/>
-        <property name="username" value="${db.username}"/>
-        <property name="password" value="${db.password}"/>
-    </bean>
-    
-     <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
-        <property name="dataSource" ref="dataSource"></property>
-    	<property name="mapperLocations" value="classpath:/mappers/**/*Mapper.xml"></property>
-    </bean>
-    
-    <bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate" destroy-method="clearCache">
-	<constructor-arg name="sqlSessionFactory" ref="sqlSessionFactory"></constructor-arg>	
-	</bean>  
-	
-	<!-- Security 댓글,로그인에서 사용-->
-	<bean id="bcryptPasswordEncoder" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder" />
-	
-	<!-- Transaction -->
-	<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
-	<property name="dataSource" ref="dataSource"></property>
+	<bean id="dataSource"
+		class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
+		<property name="driverClassName" value="${db.driver}" />
+		<property name="url" value="${db.url}" />
+		<property name="username" value="${db.username}" />
+		<property name="password" value="${db.password}" />
+		<property name="initialSize" value="100" />
+		<property name="maxActive" value="150" />
+		<property name="maxWait" value="10000" />
+		<property name="maxIdle" value="30" />
+		<property name="minIdle" value="20" />
+		<property name="testOnBorrow" value="true" />
+		<property name="testOnReturn" value="true" />
+		<property name="validationQuery" value="select 1 from dual" />
+		<property name="testWhileIdle" value="true" />
+		<property name="timeBetweenEvictionRunsMillis" value="130000" />
+		<property name="minEvictableIdleTimeMillis" value="120000" />
+		<property name="numTestsPerEvictionRun" value="20" />
+		<property name="removeAbandonedTimeout" value="30" />
+		<property name="removeAbandoned" value="true" />
+		<property name="logAbandoned" value="false" />
 	</bean>
-	<tx:annotation-driven/> 
-	
-	 <!-- file Upload 주제 수정에서 사용-->
-    <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
-        <!-- max upload size in bytes -->
-        <property name="maxUploadSize" value="10485760" /> <!-- 10MB -->
-    </bean>
+
+	<bean id="sqlSessionFactory"
+		class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="dataSource" ref="dataSource"></property>
+		<property name="mapperLocations"
+			value="classpath:/mappers/**/*Mapper.xml"></property>
+	</bean>
+
+	<bean id="sqlSession"
+		class="org.mybatis.spring.SqlSessionTemplate"
+		destroy-method="clearCache">
+		<constructor-arg name="sqlSessionFactory"
+			ref="sqlSessionFactory"></constructor-arg>
+	</bean>
+
+	<!-- Security 댓글,로그인에서 사용 -->
+	<bean id="bcryptPasswordEncoder"
+		class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder" />
+
+	<!-- Transaction -->
+	<bean id="transactionManager"
+		class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="dataSource"></property>
+	</bean>
+	<tx:annotation-driven />
+
+	<!-- file Upload 주제 수정에서 사용 -->
+	<bean id="multipartResolver"
+		class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<!-- max upload size in bytes -->
+		<property name="maxUploadSize" value="10485760" /> <!-- 10MB -->
+	</bean>
 </beans>
