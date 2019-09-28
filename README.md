@@ -63,17 +63,17 @@
   * 배포 후 정상적으로 몇달간 유지하던 중 구글에 노출되고 블로그에 접속자가 생기자 톰캣이 다운되는 문제가 발생
   * 인스턴스가 가장 낮은단계라 auto scale 기능이 제공되지 않아서 한단계 높은 사양의 인스턴스를 새로 생성
   * 새로운 인스턴스에 필요한 모듈과 백업해놓은 dump파일을 다운받아 설치하고 도메인 dns 수정하여 해결 
-* npm에서 새로운 모듈을 install 하던 중 no such lodash.js 등 여러 모듈들을 찾을 수 없다는 에러 메세지 발생
+* npm에서 새로운 모듈을 install 하던 중 no such lodash.js 등 여러 모듈들을 찾을 수 없다는 에러 메세지 발생 (2019.09.28)
   * node.js를 중지시켰으나 작동하지 않아 서버를 재부팅 -> npm cache clean -> node_modules,package-lock.json 삭제 -> npm install 진행
   * 하지만 계속해서 error가 발생하였고 package.json 백업본으로 교체 후 npm install -f 로 해결
-* mysql + tomcat의 경우 8시간 이상 접속이 없을 시 커넥션이 끊기는 현상이 있음
+* mysql + tomcat의 경우 8시간 이상 접속이 없을 시 커넥션이 끊기는 현상이 있음 (2019.09.29)
   * 새로고침 한번이면 해결되지만 최초접속자는 DB정보를 제대로 가져오지 못함
   * DBCP Datasource 설정을 통해 문제 해결
-* 최신글 NullpointerException 문제
+* 최신글 NullpointerException 문제 (2019.09.29)
   * 리소스 폴더의 권한 문제였고 chown으로 톰캣유저에게 권한을 줌으로 써 해결
 
 ---
-### 추가된 DBCP 설정
+### 추가된 DBCP 설정 (2019.09.29)
 
 정의한 값
 
