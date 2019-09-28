@@ -66,4 +66,42 @@
 * npm에서 새로운 모듈을 install 하던 중 no such lodash.js 등 여러 모듈들을 찾을 수 없다는 에러 메세지 발생
   * node.js를 중지시켰으나 작동하지 않아 서버를 재부팅 -> npm cache clean -> node_modules,package-lock.json 삭제 -> npm install 진행
   * 하지만 계속해서 error가 발생하였고 package.json 백업본으로 교체 후 npm install -f 로 해결
+* mysql + tomcat의 경우 8시간 이상 접속이 없을 시 커넥션이 끊기는 현상이 있음
+  * 새로고침 한번이면 해결되지만 최초접속자는 DB정보를 제대로 가져오지 못함
+  * DBCP Datasource 설정을 통해 문제 해결
+* 최신글 NullpointerException 문제
+  * 리소스 폴더의 권한 문제였고 chown으로 톰캣유저에게 권한을 줌으로 써 해결
+
+---
+### 추가된 DBCP 설정
+
+정의한 값
+
+1. initialSize : 풀의 초기 커넥션 갯수
+
+2. maxActive : 최대 커넥션 갯수
+3. maxWait : 커넥션이 존재하지 않을 때, 커넥션을 얻기까지 대기하는 최대 대기시간
+4. maxIdle : Idle상태에 풀이 소유한 최대 커넥션 갯수
+5. testOnBorrow : 풀에서 커넥션을 가져올시 커넥션의 유효성 검사
+6. testOnReturn : 풀에 커넥션을 리턴할 때 커넥션의 유효성 검사
+7. validationQuery : validate Query
+8. testWhileIdle : Idle상태에 커넥션의 유효성 검사
+9. timeBetweenEvictionRunsMillis : 설정된 주기를 통해 Evict(유효하지 않는 커넥션/정의된 시간이 만료된 커넥션을 풀에서 제거) 쓰레드를 수행
+10. minEvictableIdleTimeMiilis : Evict 쓰레드를 수행시, 만료여부를 체크할 시간을 정의
+11. numTestsPerEvictionRun : Evict 쓰레드를 수행시 수행할 커넥션의 갯수
+12. removeAbandonedTimeout : 유효하지 않은 커넥션의 삭제시의 타임아웃
+13. removeAbandoned : 유효하지 않는 커넥션의 제거 여부
+14. logAbandoned : 유효하지 않는 커넥션을 생성한 코드 위치 로그생성 여부
+
+정의하지 않은 값
+1. defaultAutoCommit : 생성된 커넥션의 기본 auto commit 여부
+2. defaultReadOnly : 생성된 커넥션의 기본 read-only 여부
+3. defaultTransactionIsolation : 생성된 커넥션의 기본 트랜잭션 격리 수준
+4. defaultCatalog : 생성된 커넥션의 기본 카탈로그
+5. connectionInitSqls : ?
+6. poolPreparedStatements : Prepared Statements 사용 여부
+7. maxOpenPreparedStatements : Prepared Statements 최대 Open 갯수
+8. accessToUnderlyingConnectionAllowed : ?
+9. minIdle : Idle상태에 풀이 소유한 최소 커넥션 갯수
+
 ---
